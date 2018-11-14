@@ -3,3 +3,9 @@ C:\Proyectos\Motel\Source\Application\Business.Common\bin\Debug\DS.Motel.Busines
 C:\Proyectos\Motel\Source\Application\Business.Common\obj\Debug\Business.Common.csproj.CoreCompileInputs.cache
 C:\Proyectos\Motel\Source\Application\Business.Common\obj\Debug\DS.Motel.Business.Common.dll
 C:\Proyectos\Motel\Source\Application\Business.Common\obj\Debug\DS.Motel.Business.Common.pdb
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Common\bin\Debug\DS.Motel.Business.Common.dll
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Common\bin\Debug\DS.Motel.Business.Common.pdb
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Common\obj\Debug\Business.Common.csprojAssemblyReference.cache
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Common\obj\Debug\Business.Common.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Common\obj\Debug\DS.Motel.Business.Common.dll
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Common\obj\Debug\DS.Motel.Business.Common.pdb

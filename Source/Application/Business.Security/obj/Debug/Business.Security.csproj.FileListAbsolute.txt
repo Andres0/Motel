@@ -9,3 +9,14 @@ C:\Proyectos\Motel\Source\Application\Business.Security\obj\Debug\Business.Secur
 C:\Proyectos\Motel\Source\Application\Business.Security\obj\Debug\Business.Security.csproj.CopyComplete
 C:\Proyectos\Motel\Source\Application\Business.Security\obj\Debug\DS.Motel.Business.Security.dll
 C:\Proyectos\Motel\Source\Application\Business.Security\obj\Debug\DS.Motel.Business.Security.pdb
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Business.Security.dll
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Business.Security.pdb
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Business.Security.Entities.dll
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Business.Security.Repositories.dll
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Business.Security.Entities.pdb
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Business.Security.Repositories.pdb
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\obj\Debug\Business.Security.csprojAssemblyReference.cache
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\obj\Debug\Business.Security.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\obj\Debug\Business.Security.csproj.CopyComplete
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\obj\Debug\DS.Motel.Business.Security.dll
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\obj\Debug\DS.Motel.Business.Security.pdb

@@ -224,9 +224,16 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+<<<<<<< HEAD
+=======
+    <Content Include="Views\Home\Login.cshtml" />
+>>>>>>> pedro
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Items\Controllers\" />
+    <Folder Include="Areas\Items\Models\" />
+    <Folder Include="Areas\Items\Views\Shared\" />
     <Folder Include="Areas\Security\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
