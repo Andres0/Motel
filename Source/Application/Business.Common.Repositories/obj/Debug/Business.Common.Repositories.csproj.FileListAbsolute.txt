@@ -1,0 +1,5 @@
+C:\Proyectos\Motel\Source\Application\Business.Common.Repositories\bin\Debug\DS.Motel.Business.Common.Repositories.dll
+C:\Proyectos\Motel\Source\Application\Business.Common.Repositories\bin\Debug\DS.Motel.Business.Common.Repositories.pdb
+C:\Proyectos\Motel\Source\Application\Business.Common.Repositories\obj\Debug\Business.Common.Repositories.csproj.CoreCompileInputs.cache
+C:\Proyectos\Motel\Source\Application\Business.Common.Repositories\obj\Debug\DS.Motel.Business.Common.Repositories.dll
+C:\Proyectos\Motel\Source\Application\Business.Common.Repositories\obj\Debug\DS.Motel.Business.Common.Repositories.pdb

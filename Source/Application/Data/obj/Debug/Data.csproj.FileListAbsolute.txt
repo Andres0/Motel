@@ -1,0 +1,12 @@
+C:\Proyectos\Motel\Source\Application\Data\bin\Debug\DS.Motel.Data.dll
+C:\Proyectos\Motel\Source\Application\Data\bin\Debug\DS.Motel.Data.pdb
+C:\Proyectos\Motel\Source\Application\Data\obj\Debug\Data.csprojAssemblyReference.cache
+C:\Proyectos\Motel\Source\Application\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
+C:\Proyectos\Motel\Source\Application\Data\obj\Debug\DS.Motel.Data.dll
+C:\Proyectos\Motel\Source\Application\Data\obj\Debug\DS.Motel.Data.pdb
+C:\Proyectos\Motel\Source\Application\Data\bin\Debug\DS.Motel.Data.dll.config
+C:\Proyectos\Motel\Source\Application\Data\bin\Debug\EntityFramework.dll
+C:\Proyectos\Motel\Source\Application\Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Proyectos\Motel\Source\Application\Data\bin\Debug\EntityFramework.xml
+C:\Proyectos\Motel\Source\Application\Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Proyectos\Motel\Source\Application\Data\obj\Debug\Data.csproj.CopyComplete

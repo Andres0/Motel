@@ -1,0 +1,6 @@
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure\bin\Debug\DS.Motel.Business.Infrastructure.dll
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure\bin\Debug\DS.Motel.Business.Infrastructure.pdb
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure\obj\Debug\Business.Infrastructure.csprojAssemblyReference.cache
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure\obj\Debug\Business.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure\obj\Debug\DS.Motel.Business.Infrastructure.dll
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure\obj\Debug\DS.Motel.Business.Infrastructure.pdb

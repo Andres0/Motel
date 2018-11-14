@@ -1,0 +1,9 @@
+C:\Proyectos\Motel\Source\Application\Business.Security.Repositories\bin\Debug\DS.Motel.Business.Security.Repositories.dll
+C:\Proyectos\Motel\Source\Application\Business.Security.Repositories\bin\Debug\DS.Motel.Business.Security.Repositories.pdb
+C:\Proyectos\Motel\Source\Application\Business.Security.Repositories\bin\Debug\DS.Motel.Business.Security.Entities.dll
+C:\Proyectos\Motel\Source\Application\Business.Security.Repositories\bin\Debug\DS.Motel.Business.Security.Entities.pdb
+C:\Proyectos\Motel\Source\Application\Business.Security.Repositories\obj\Debug\Business.Security.Repositories.csprojAssemblyReference.cache
+C:\Proyectos\Motel\Source\Application\Business.Security.Repositories\obj\Debug\Business.Security.Repositories.csproj.CoreCompileInputs.cache
+C:\Proyectos\Motel\Source\Application\Business.Security.Repositories\obj\Debug\Business.Security.Repositories.csproj.CopyComplete
+C:\Proyectos\Motel\Source\Application\Business.Security.Repositories\obj\Debug\DS.Motel.Business.Security.Repositories.dll
+C:\Proyectos\Motel\Source\Application\Business.Security.Repositories\obj\Debug\DS.Motel.Business.Security.Repositories.pdb

@@ -1,0 +1,5 @@
+C:\Proyectos\Motel\Source\Application\Business.AddressBook\bin\Debug\DS.Motel.Business.AddressBook.dll
+C:\Proyectos\Motel\Source\Application\Business.AddressBook\bin\Debug\DS.Motel.Business.AddressBook.pdb
+C:\Proyectos\Motel\Source\Application\Business.AddressBook\obj\Debug\Business.AddressBook.csproj.CoreCompileInputs.cache
+C:\Proyectos\Motel\Source\Application\Business.AddressBook\obj\Debug\DS.Motel.Business.AddressBook.dll
+C:\Proyectos\Motel\Source\Application\Business.AddressBook\obj\Debug\DS.Motel.Business.AddressBook.pdb
