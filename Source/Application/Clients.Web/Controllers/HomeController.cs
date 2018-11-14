@@ -13,5 +13,9 @@ namespace DS.Motel.Clients.Web.Controllers
         {
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
     }
 }

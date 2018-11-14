@@ -223,9 +223,14 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Items\Controllers\" />
+    <Folder Include="Areas\Items\Models\" />
+    <Folder Include="Areas\Items\Views\Shared\" />
     <Folder Include="Areas\Security\Models\" />
     <Folder Include="Models\" />
   </ItemGroup>
