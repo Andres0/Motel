@@ -18,10 +18,22 @@ namespace DS.Motel.Business.Security
         #endregion
 
 
+
+
+
+
+        #region Constructors
+
         public UserManager(UserRepository userRepository)
         {
             _userRepository = userRepository;
         }
+
+        #endregion
+
+
+
+
 
 
         #region Others

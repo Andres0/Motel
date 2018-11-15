@@ -12,6 +12,7 @@ namespace DS.Motel.Data
     {
         #region Fields & Properties
 
+        public DbSet<DS.Motel.Business.Security.Entities.UserType_SEC> Security_UserType { get; set; }
         public DbSet<DS.Motel.Business.Security.Entities.User_SEC> Security_User { get; set; }
 
         #endregion
@@ -38,6 +39,7 @@ namespace DS.Motel.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new Configurations.Security.UserTypeConfiguration());
             modelBuilder.Configurations.Add(new Configurations.Security.UserConfiguration());
         }
 

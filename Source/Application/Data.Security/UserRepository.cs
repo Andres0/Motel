@@ -19,11 +19,6 @@ namespace DS.Motel.Data.Security
 
 
 
-        public UserRepository()
-        {
-        }
-
-
 
 
         #region Queries

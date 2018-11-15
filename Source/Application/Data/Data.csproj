@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\Security\UserConfiguration.cs" />
+    <Compile Include="Configurations\Security\UserTypeConfiguration.cs" />
     <Compile Include="DsConfiguration.cs" />
     <Compile Include="DsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

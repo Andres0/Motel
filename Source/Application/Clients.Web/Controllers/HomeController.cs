@@ -52,6 +52,8 @@ namespace DS.Motel.Clients.Web.Controllers
 
             return View();
         }
+
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();

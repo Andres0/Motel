@@ -188,7 +188,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcConfig.cs" />
-    <Compile Include="Areas\Security\Controllers\LoginController.cs" />
+    <Compile Include="Areas\AddressBook\AddressBookAreaRegistration.cs" />
+    <Compile Include="Areas\AddressBook\Controllers\UserController.cs" />
+    <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -7003,7 +7005,6 @@
     <Content Include="Areas\Security\Views\web.config" />
     <Content Include="Areas\Security\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Security\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Security\Views\Login\Index.cshtml" />
     <Content Include="Content\menu\bower_components\bootstrap-colorpicker\.bower.json" />
     <Content Include="Content\menu\bower_components\bootstrap-colorpicker\bower.json" />
     <Content Include="Content\menu\bower_components\bootstrap-colorpicker\CONTRIBUTING.md" />
@@ -7650,6 +7651,8 @@
     <Content Include="Content\menu\dist\css\adminlte.min.css.map" />
     <Content Include="Content\menu\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\menu\plugins\input-mask\phone-codes\phone-codes.json" />
+    <Content Include="Areas\AddressBook\Views\web.config" />
+    <Content Include="Areas\Security\Views\UserType\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -7680,6 +7683,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\AddressBook\Models\" />
+    <Folder Include="Areas\AddressBook\Views\Shared\" />
+    <Folder Include="Areas\AddressBook\Views\User\" />
     <Folder Include="Areas\Items\Controllers\" />
     <Folder Include="Areas\Items\Models\" />
     <Folder Include="Areas\Items\Views\Shared\" />

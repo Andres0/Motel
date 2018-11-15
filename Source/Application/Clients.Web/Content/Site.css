@@ -82,9 +82,7 @@ h4 {
     color: white !important;
 }
 
-.wrapper {
-    text-align: center;
-}
+.wrapper { /*text-align: center;*/ }
 
 .footer p {
     font-size: 28px;
