@@ -16,6 +16,7 @@ namespace DS.Motel.Clients.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            UnityMvcConfig.InitializeContainerForMVC();
         }
     }
 }

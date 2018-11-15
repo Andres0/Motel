@@ -20,3 +20,11 @@ C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Bus
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\obj\Debug\Business.Security.csproj.CopyComplete
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\obj\Debug\DS.Motel.Business.Security.dll
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\obj\Debug\DS.Motel.Business.Security.pdb
+C:\Proyectos\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.Security.dll
+C:\Proyectos\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.Security.pdb
+C:\Proyectos\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.dll
+C:\Proyectos\Motel\Source\Application\Business.Security\bin\Debug\EntityFramework.dll
+C:\Proyectos\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.pdb
+C:\Proyectos\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.dll.config
+C:\Proyectos\Motel\Source\Application\Business.Security\bin\Debug\EntityFramework.xml
+C:\Proyectos\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.Security.dll.config

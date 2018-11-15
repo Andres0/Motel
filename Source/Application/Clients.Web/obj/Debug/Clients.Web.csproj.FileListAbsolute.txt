@@ -294,3 +294,11 @@ C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Cli
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.CopyComplete
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.dll
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.pdb
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\DS.Motel.Business.AddressBook.Repositories.dll
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\DS.Motel.Data.Security.dll
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\Unity.Mvc5.dll
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\DS.Motel.Business.AddressBook.Repositories.pdb
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\DS.Motel.Data.Security.pdb
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\DS.Motel.Data.Security.dll.config
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\EntityFramework.SqlServer.dll
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\EntityFramework.SqlServer.xml

@@ -22,3 +22,5 @@ C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Dat
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Data\obj\Debug\Data.csproj.CopyComplete
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Data\obj\Debug\DS.Motel.Data.dll
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Data\obj\Debug\DS.Motel.Data.pdb
+C:\Proyectos\Motel\Source\Application\Data\bin\Debug\DS.Motel.Business.Security.Entities.dll
+C:\Proyectos\Motel\Source\Application\Data\bin\Debug\DS.Motel.Business.Security.Entities.pdb

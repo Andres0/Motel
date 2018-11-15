@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DS.Motel.Business.Security.Entities;
 using DS.Motel.Business.Security.Repositories;
+using DS.Motel.Data.Security;
 
 namespace DS.Motel.Business.Security
 {
@@ -12,9 +13,23 @@ namespace DS.Motel.Business.Security
     {
         #region Fields & Properties
 
+        UserRepository _userRepository { get; set; }
+
+        #endregion
+
+
+        public UserManager(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+
+        #region Others
+
         public User_SEC GetUserByUsernameAndPassword(string username, string password)
         {
-            return null;
+
+            return _userRepository.GetUserByUsernameAndPassword(username, password);
         }
 
         #endregion
