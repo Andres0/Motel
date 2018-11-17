@@ -1,0 +1,68 @@
+﻿@model DS.Motel.Clients.Web.Areas.Security.Models.UserType.SummaryViewModel
+@{
+    ViewBag.Title = "Summary";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnEdit").click(function () {
+            $("#divContentRight").load('@Url.Action("Edit", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeId');
+        });
+
+    });
+
+</script>
+
+@if (Model.UserTypeId == null)
+{
+    <div class="box-header with-border">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-success invisible">Guardar</button>
+            </div>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="form-group">
+            <p class="text-danger text-center">No hay resultados</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="box-header with-border">
+        <div class="row">
+            <div class="col-md-12">
+                <button id="btnDelete" type="button" class="btn bg-navy btn-flat pull-right" style="margin-left:10px;" data-toggle="modal" data-target="#divDeletePopup">Borrar</button>
+                <button id="btnEdit" type="button" class="btn btn-success pull-right" >Editar</button>
+            </div>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="form-group">
+            <label>Nombre</label>
+            <p>@Model.Name</p>
+        </div>
+    </div>
+
+
+
+    <!-- Delete -->
+    <div class="modal fade" id="divDeletePopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle">Borrar Tipo de Usuario</h2>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro que desea borrar?</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="" type="button" class="btn btn-primary">Si</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

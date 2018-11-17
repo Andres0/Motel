@@ -21,11 +21,37 @@ namespace DS.Motel.Data.Security
 
 
 
+        #region Manipulation
+        public void Add(UserType_SEC userType, bool commit)
+        {
+            _context.Security_UserType.Add(userType);
+            _context.SaveChanges();
+        }
+
+        public void Edit(UserType_SEC userType, bool commit)
+        {
+            _context.Security_UserType.Attach(userType);
+            _context.Entry(userType).State = System.Data.Entity.EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        #endregion
+
+
+
+
+
+
         #region Queries
 
         public IQueryable<UserType_SEC> GetAll()
         {
             return _context.Security_UserType;
+        }
+
+        public UserType_SEC GetSingle(Guid? userTypeId)
+        {
+            return _context.Security_UserType.SingleOrDefault(s => s.UserTypeId == userTypeId);
         }
 
         #endregion

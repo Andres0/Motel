@@ -1,12 +1,3 @@
-C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.AddressBook.Entities.dll
-C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.AddressBook.Entities.pdb
-C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.Common.Entities.dll
-C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.Common.Entities.pdb
-C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\Business.AddressBook.Entities.csprojAssemblyReference.cache
-C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\Business.AddressBook.Entities.csproj.CoreCompileInputs.cache
-C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\Business.AddressBook.Entities.csproj.CopyComplete
-C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\DS.Motel.Business.AddressBook.Entities.dll
-C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\DS.Motel.Business.AddressBook.Entities.pdb
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.AddressBook.Entities.dll
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.AddressBook.Entities.pdb
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.Common.Entities.dll
@@ -16,3 +7,12 @@ C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Bus
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\Business.AddressBook.Entities.csproj.CopyComplete
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\DS.Motel.Business.AddressBook.Entities.dll
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\DS.Motel.Business.AddressBook.Entities.pdb
+C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.AddressBook.Entities.dll
+C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.AddressBook.Entities.pdb
+C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.Common.Entities.dll
+C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\bin\Debug\DS.Motel.Business.Common.Entities.pdb
+C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\Business.AddressBook.Entities.csprojAssemblyReference.cache
+C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\Business.AddressBook.Entities.csproj.CoreCompileInputs.cache
+C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\Business.AddressBook.Entities.csproj.CopyComplete
+C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\DS.Motel.Business.AddressBook.Entities.dll
+C:\Proyectos\Motel\Source\Application\Business.AddressBook.Entities\obj\Debug\DS.Motel.Business.AddressBook.Entities.pdb
