@@ -36,11 +36,62 @@ namespace DS.Motel.Business.Security
 
 
 
+        #region Validation
+
+
+
+        #endregion
+        
+        
+        
+        
+        
+        
+        #region Manipulation
+
+        public void Add(UserType_SEC userType, bool commit)
+        {
+            try
+            {
+                _userTypeRepository.Add(userType, commit);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public void Edit(UserType_SEC userType, bool commit)
+        {
+            try
+            {
+                //Get original entity
+                UserType_SEC userTypeToUpdate = _userTypeRepository.GetSingle(userType.UserTypeId);
+                userTypeToUpdate.Name = userType.Name;
+
+                _userTypeRepository.Edit(userTypeToUpdate, commit);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        #endregion
+
+
+
+
+
+
         #region Queries
 
         public IQueryable<UserType_SEC> GetAll()
         {
             return _userTypeRepository.GetAll();
+        }
+
+        public UserType_SEC GetSingle(Guid? userTypeId)
+        {
+            return _userTypeRepository.GetSingle(userTypeId);
         }
 
         #endregion

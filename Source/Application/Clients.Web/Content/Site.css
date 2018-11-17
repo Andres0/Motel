@@ -57,26 +57,10 @@ textarea {
     box-shadow: 0 1px 0 #cfcfcf;
 }
 
-.form-control {
-    background: transparent !important;
-    color: white !important;
-    font-size: 18px !important;
-}
-
-h1 {
-    color: white !important;
-}
-
-h4 {
-    border: 0 solid #fff;
-    border-bottom-width: 1px;
-    padding-bottom: 10px;
-    text-align: center;
-}
-
-.form-control {
-    border-radius: 10px;
-}
+/*.form-control { background: transparent !important; color: white !important; font-size: 18px !important; }
+h1 { color: white !important; }
+h4 { border: 0 solid #fff; border-bottom-width: 1px; padding-bottom: 10px; text-align: center; }
+.form-control { border-radius: 10px; }*/
 
 .text-white {
     color: white !important;
@@ -93,3 +77,6 @@ h4 {
     height: 40px;
     color: white;
 }
+
+.content_summary { border-radius:4px; background:#ffffff; border:1px solid #cccccc; min-height:247px; padding:25px; }
+.field-validation-error { color: red; }

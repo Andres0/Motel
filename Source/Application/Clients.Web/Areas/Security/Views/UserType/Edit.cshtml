@@ -1,0 +1,54 @@
+﻿@model DS.Motel.Clients.Web.Areas.Security.Models.UserType.EditViewModel
+@{
+    ViewBag.Title = "Add";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#Name").focus();
+
+        $("#btnCancel").click(function () {
+            $("#divToolBarUserType").css("visibility", "visible");
+            $("#divContentRight").load('@Url.Action("Summary", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
+        });
+    });
+
+    function callOnBegin() {
+        $("#btnSave").text("Guardando...");
+    }
+
+    function returnToSummary() {
+        if (model.returnToSummary == @DS.Motel.Clients.Web.Models.EnumActionResult.Saved) {
+            $("#divToolBarUserType").css("visibility", "visible");
+            $("#divContentLeft").load('@Url.Action("Navigator", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
+            $("#divContentRight").load('@Url.Action("Summary", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
+        }
+    }
+
+</script>
+
+<div id="divEditUserType">
+    @using (@Ajax.BeginForm("Edit", "UserType", new { area = "Security" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divEditUserType", OnSuccess = "returnToSummary", OnBegin = "callOnBegin" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.UserTypeIdSummary)
+
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnCancel" type="button" class="btn bg-navy btn-flat pull-right" style="margin-left:10px;">Cancelar</button>
+                    <button id="btnSave" type="submit" class="btn btn-success pull-right">Guardar</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="form-group">
+                <label for="Name">Nombre</label>
+                @Html.TextBoxFor(m => m.Name, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+        </div>
+    }
+</div>

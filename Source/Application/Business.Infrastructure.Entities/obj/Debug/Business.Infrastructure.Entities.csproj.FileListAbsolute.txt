@@ -1,12 +1,11 @@
-C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\bin\Debug\DS.Motel.Business.Infrastructure.Entities.dll
-C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\bin\Debug\DS.Motel.Business.Infrastructure.Entities.pdb
-C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\Business.Infrastructure.Entities.csprojAssemblyReference.cache
-C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\Business.Infrastructure.Entities.csproj.CoreCompileInputs.cache
-C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\DS.Motel.Business.Infrastructure.Entities.dll
-C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\DS.Motel.Business.Infrastructure.Entities.pdb
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Infrastructure.Entities\bin\Debug\DS.Motel.Business.Infrastructure.Entities.dll
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Infrastructure.Entities\bin\Debug\DS.Motel.Business.Infrastructure.Entities.pdb
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\Business.Infrastructure.Entities.csprojAssemblyReference.cache
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\Business.Infrastructure.Entities.csproj.CoreCompileInputs.cache
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\DS.Motel.Business.Infrastructure.Entities.dll
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\DS.Motel.Business.Infrastructure.Entities.pdb
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\bin\Debug\DS.Motel.Business.Infrastructure.Entities.dll
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\bin\Debug\DS.Motel.Business.Infrastructure.Entities.pdb
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\Business.Infrastructure.Entities.csproj.CoreCompileInputs.cache
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\DS.Motel.Business.Infrastructure.Entities.dll
+C:\Proyectos\Motel\Source\Application\Business.Infrastructure.Entities\obj\Debug\DS.Motel.Business.Infrastructure.Entities.pdb
