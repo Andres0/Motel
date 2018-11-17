@@ -30,7 +30,8 @@ namespace DS.Motel.Data.Security
 
         public void Edit(UserType_SEC userType, bool commit)
         {
-            //_context.Entry(UserType_SEC).State = System.Data.Entity.EntityState.Modified;
+            _context.Security_UserType.Attach(userType);
+            _context.Entry(userType).State = System.Data.Entity.EntityState.Modified;
             _context.SaveChanges();
         }
 
