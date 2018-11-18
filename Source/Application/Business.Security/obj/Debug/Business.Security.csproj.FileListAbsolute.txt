@@ -28,3 +28,11 @@ C:\Proyectos\Motel\Source\Application\Business.Security\obj\Debug\Business.Secur
 C:\Proyectos\Motel\Source\Application\Business.Security\obj\Debug\Business.Security.csproj.CopyComplete
 C:\Proyectos\Motel\Source\Application\Business.Security\obj\Debug\DS.Motel.Business.Security.dll
 C:\Proyectos\Motel\Source\Application\Business.Security\obj\Debug\DS.Motel.Business.Security.pdb
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.Security.dll
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.dll
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\EntityFramework.dll
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.Security.pdb
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.Security.dll.config
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.pdb
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\DS.Motel.Data.dll.config
+C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Security\bin\Debug\EntityFramework.xml

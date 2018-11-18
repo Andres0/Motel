@@ -150,7 +150,6 @@ namespace DS.Motel.Clients.Web.Areas.Security.Controllers
             if (ModelState.IsValid)
             {
                 UserType_SEC userType = new UserType_SEC();
-                userType.UserTypeId = model.UserTypeIdSummary;
                 userType.Name = model.Name;
 
                 try
