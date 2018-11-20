@@ -9,3 +9,4 @@ C:\Proyectos\Motel\Source\Application\Business.Security.Entities\bin\Debug\DS.Mo
 C:\Proyectos\Motel\Source\Application\Business.Security.Entities\obj\Debug\Business.Security.Entities.csproj.CoreCompileInputs.cache
 C:\Proyectos\Motel\Source\Application\Business.Security.Entities\obj\Debug\DS.Motel.Business.Security.Entities.dll
 C:\Proyectos\Motel\Source\Application\Business.Security.Entities\obj\Debug\DS.Motel.Business.Security.Entities.pdb
+C:\Proyectos\Motel\Source\Application\Business.Security.Entities\obj\Debug\Business.Security.Entities.csprojAssemblyReference.cache
