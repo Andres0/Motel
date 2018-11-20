@@ -20,7 +20,7 @@
     }
 
     function returnToSummary() {
-        if (@Model.Result == @DS.Motel.Clients.Web.Models.EnumActionResult.Saved) {
+        if ('@Model.Result' == '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved') {
             $("#divToolBarUserType").css("visibility", "visible");
             $("#divContentLeft").load('@Url.Action("Navigator", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
             $("#divContentRight").load('@Url.Action("Summary", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');

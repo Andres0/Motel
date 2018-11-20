@@ -9,7 +9,9 @@
         $("#btnEdit").click(function () {
             $("#divContentRight").load('@Url.Action("Edit", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeId');
         });
+        $("#btnDeleteConfirm").click(function () {
 
+        });
     });
 
 </script>
@@ -59,7 +61,7 @@ else
                     <p>¿Está seguro que desea borrar?</p>
                 </div>
                 <div class="modal-footer">
-                    <button id="" type="button" class="btn btn-primary">Si</button>
+                    <button id="btnDeleteConfirm" type="button" class="btn btn-primary">Si</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 </div>
             </div>
