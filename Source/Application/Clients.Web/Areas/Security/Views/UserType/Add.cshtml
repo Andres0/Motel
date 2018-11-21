@@ -46,10 +46,57 @@
             </div>
         </div>
         <div class="box-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="Name">Nombre</label>
+                    @Html.TextBoxFor(m => m.Name, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                    @Html.ValidationMessageFor(m => m.Name)
+
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Name">Apellido</label>
+                    @Html.TextBoxFor(m => m.Apellidos, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                    @Html.ValidationMessageFor(m => m.Apellidos)
+
+                </div>
+            </div>
             <div class="form-group">
-                <label for="Name">Nombre</label>
-                @Html.TextBoxFor(m => m.Name, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Name)
+               
+               
+                <label for="Name">Direccion</label>
+                @Html.TextBoxFor(m => m.Direccion, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Direccion)
+                <label for="Name">Telefono</label>
+                @Html.TextBoxFor(m => m.Telefono, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Telefono)
+                <label for="Name">Celular</label>
+                @Html.TextBoxFor(m => m.Celular, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Celular)
+                <label for="Name">Email</label>
+                @Html.TextBoxFor(m => m.Email, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Email)
+                <label for="Name">Tipo de Usuario</label>
+                @Html.TextBoxFor(m => m.TipoUser, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.TipoUser)
+                <label for="Name">Cargo</label>
+                @Html.TextBoxFor(m => m.Cargo, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Cargo)
+                <label for="Name">Estado</label>
+                @Html.TextBoxFor(m => m.Estado, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Estado)
+                <label for="Name">Creado por</label>
+                @Html.TextBoxFor(m => m.CodUserCreator, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.CodUserCreator)
+                <label for="Name">Observaciones</label>
+                @Html.TextBoxFor(m => m.Obervaciones, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Obervaciones)
+                <label for="Name">Login</label>
+                @Html.TextBoxFor(m => m.Login, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Login)
+                <label for="Name">Password</label>
+                @Html.TextBoxFor(m => m.Password, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                @Html.ValidationMessageFor(m => m.Password)
+
             </div>
         </div>
     }

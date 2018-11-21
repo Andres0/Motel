@@ -10,3 +10,9 @@ C:\Proyectos\Motel\Source\Application\Business.Items.Repositories\obj\Debug\Busi
 C:\Proyectos\Motel\Source\Application\Business.Items.Repositories\obj\Debug\DS.Motel.Business.Items.Repositories.dll
 C:\Proyectos\Motel\Source\Application\Business.Items.Repositories\obj\Debug\DS.Motel.Business.Items.Repositories.pdb
 C:\Users\Administrador\Documents\GitHub\Motel-Happy\Motel\Source\Application\Business.Items.Repositories\obj\Debug\Business.Items.Repositories.csprojAssemblyReference.cache
+C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Business.Items.Repositories\bin\Debug\DS.Motel.Business.Items.Repositories.dll
+C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Business.Items.Repositories\bin\Debug\DS.Motel.Business.Items.Repositories.pdb
+C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Business.Items.Repositories\obj\Debug\Business.Items.Repositories.csprojAssemblyReference.cache
+C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Business.Items.Repositories\obj\Debug\Business.Items.Repositories.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Business.Items.Repositories\obj\Debug\DS.Motel.Business.Items.Repositories.dll
+C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Business.Items.Repositories\obj\Debug\DS.Motel.Business.Items.Repositories.pdb

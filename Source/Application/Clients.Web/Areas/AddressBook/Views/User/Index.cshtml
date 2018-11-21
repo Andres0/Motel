@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#divContentCenter").load('@Url.Action("Navigator", "User", new { area = "AddressBook" })?userTypeId=@ViewData["UserTypeId"]');
+       
+    });
+
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 style="margin: 0px 0px 15px 15px;">Administracion de Usuarios</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div id="divContentCenter"></div>
+    </div>
+</div>
+

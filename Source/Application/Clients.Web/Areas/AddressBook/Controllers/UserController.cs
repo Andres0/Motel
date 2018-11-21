@@ -37,7 +37,10 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         {
             return View();
         }
-
+        public ActionResult Navigator()
+        {
+            return PartialView();
+        }
         #endregion
 
 

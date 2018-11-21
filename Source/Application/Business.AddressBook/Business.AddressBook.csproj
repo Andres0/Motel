@@ -41,7 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CargoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business.AddressBook.Entities\Business.AddressBook.Entities.csproj">
+      <Project>{59ab02cb-08dd-4872-bedf-a5652df31e0b}</Project>
+      <Name>Business.AddressBook.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business.AddressBook.Repositories\Business.AddressBook.Repositories.csproj">
+      <Project>{3ccc06c7-d5a7-41b7-8200-ec40397b96d5}</Project>
+      <Name>Business.AddressBook.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data.AddressBook\Data.AddressBook.csproj">
+      <Project>{86c635bc-57c6-46ac-9b87-33fbf7de440f}</Project>
+      <Name>Data.AddressBook</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

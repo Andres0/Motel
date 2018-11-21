@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.AddressBook.Reposi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Security", "Application\Data.Security\Data.Security.csproj", "{983AE7AD-C333-461B-B650-B47C7B26B2FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.AddressBook", "Application\Data.AddressBook\Data.AddressBook.csproj", "{86C635BC-57C6-46AC-9B87-33FBF7DE440F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,10 @@ Global
 		{983AE7AD-C333-461B-B650-B47C7B26B2FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{983AE7AD-C333-461B-B650-B47C7B26B2FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{983AE7AD-C333-461B-B650-B47C7B26B2FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86C635BC-57C6-46AC-9B87-33FBF7DE440F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86C635BC-57C6-46AC-9B87-33FBF7DE440F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86C635BC-57C6-46AC-9B87-33FBF7DE440F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86C635BC-57C6-46AC-9B87-33FBF7DE440F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,6 +157,7 @@ Global
 		{72D1A052-3FAF-4A5A-8B83-5651BED79F57} = {3BDDBC37-6257-40E1-AAC1-2EB72D563E64}
 		{3CCC06C7-D5A7-41B7-8200-EC40397B96D5} = {3BDDBC37-6257-40E1-AAC1-2EB72D563E64}
 		{983AE7AD-C333-461B-B650-B47C7B26B2FC} = {239B1754-BCC5-4AB0-A837-A90C898D5258}
+		{86C635BC-57C6-46AC-9B87-33FBF7DE440F} = {239B1754-BCC5-4AB0-A837-A90C898D5258}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25700B04-AD3C-41E7-AB64-90D767269A6D}

@@ -15,6 +15,10 @@ namespace DS.Motel.Data
         public DbSet<DS.Motel.Business.Security.Entities.UserType_SEC> Security_UserType { get; set; }
         public DbSet<DS.Motel.Business.Security.Entities.User_SEC> Security_User { get; set; }
 
+        public DbSet<DS.Motel.Business.AddressBook.Entities.Cargo_ADB> AddressBook_Cargo { get; set; }
+
+
+
         #endregion
 
 
@@ -41,6 +45,7 @@ namespace DS.Motel.Data
         {
             modelBuilder.Configurations.Add(new Configurations.Security.UserTypeConfiguration());
             modelBuilder.Configurations.Add(new Configurations.Security.UserConfiguration());
+            modelBuilder.Configurations.Add(new Configurations.AddressBook.CargoConfiguration());
         }
 
         #endregion

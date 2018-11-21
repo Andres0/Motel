@@ -235,7 +235,11 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcConfig.cs" />
     <Compile Include="Areas\AddressBook\AddressBookAreaRegistration.cs" />
+    <Compile Include="Areas\AddressBook\Controllers\CargosController.cs" />
     <Compile Include="Areas\AddressBook\Controllers\UserController.cs" />
+    <Compile Include="Areas\AddressBook\Models\Cargos\AddViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Cargos\NavegadorViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\User\NavegatorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\Models\UserType\AddViewModel.cs" />
     <Compile Include="Areas\Security\Models\UserType\EditViewModel.cs" />
@@ -8144,6 +8148,12 @@
     <Content Include="Content\kendo\2018.3.1017\images\kendoui.woff" />
     <Content Include="Areas\Security\Views\UserType\Add.cshtml" />
     <Content Include="Areas\Security\Views\UserType\Edit.cshtml" />
+    <Content Include="Areas\AddressBook\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\AddressBook\Views\User\Index.cshtml" />
+    <Content Include="Areas\AddressBook\Views\User\Navigator.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Cargos\Index.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Cargos\Add.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -10257,9 +10267,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AddressBook\Models\" />
-    <Folder Include="Areas\AddressBook\Views\Shared\" />
-    <Folder Include="Areas\AddressBook\Views\User\" />
     <Folder Include="Areas\Items\Controllers\" />
     <Folder Include="Areas\Items\Models\" />
     <Folder Include="Areas\Items\Views\Shared\" />
@@ -10337,6 +10344,10 @@
     <ProjectReference Include="..\Business.Security\Business.Security.csproj">
       <Project>{068cac68-6989-45ae-8d59-bd8f71c51732}</Project>
       <Name>Business.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data.AddressBook\Data.AddressBook.csproj">
+      <Project>{86c635bc-57c6-46ac-9b87-33fbf7de440f}</Project>
+      <Name>Data.AddressBook</Name>
     </ProjectReference>
     <ProjectReference Include="..\Data.Security\Data.Security.csproj">
       <Project>{983ae7ad-c333-461b-b650-b47c7b26b2fc}</Project>

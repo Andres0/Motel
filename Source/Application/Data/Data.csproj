@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\AddressBook\CargoConfiguration.cs" />
     <Compile Include="Configurations\Security\UserConfiguration.cs" />
     <Compile Include="Configurations\Security\UserTypeConfiguration.cs" />
     <Compile Include="DsConfiguration.cs" />
@@ -60,6 +61,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business.AddressBook.Entities\Business.AddressBook.Entities.csproj">
+      <Project>{59ab02cb-08dd-4872-bedf-a5652df31e0b}</Project>
+      <Name>Business.AddressBook.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business.AddressBook.Repositories\Business.AddressBook.Repositories.csproj">
+      <Project>{3ccc06c7-d5a7-41b7-8200-ec40397b96d5}</Project>
+      <Name>Business.AddressBook.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Business.Security.Entities\Business.Security.Entities.csproj">
       <Project>{ef989558-019c-4b3e-988a-723df038c682}</Project>
       <Name>Business.Security.Entities</Name>
