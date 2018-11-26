@@ -1,34 +1,63 @@
 ﻿@model DS.Motel.Clients.Web.Areas.AddressBook.Models.Cargos.AddViewModel
-@{
-    ViewBag.Title = "Add";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 
-}
+
+<script type="text/javascript">
+
+    function Add_callOnBegin() {
+        $("#btnAdd").attr("disabled", "disabled")
+        $("#btnAdd").text("Guardando...");
+    }
+
+    function Add_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("El cargo se guardó con exito", { globalPosition: "top center", className: "success" });
+                    setTimeout(function () { location.reload() }, 2000);
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+</script>
+
 
 @Html.AntiForgeryToken()
-<div class="box-header with-border">
-    <div class="row">
-        <div class="col-md-12">
-            <button id="btnCancel" type="button" class="btn bg-navy btn-flat pull-right" style="margin-left:10px;">Cancelar</button>
-            <button id="btnSave" type="submit" class="btn btn-success pull-right">Guardar</button>
-
-        </div>
-    </div>
-
+<div class="modal-header">
+    <h1 class="modal-title">Nuevo Cargo</h1>
 </div>
-<div class="box-body">
+<div class="modal-body">
     <div class="row">
         <div class="form-group col-md-6">
             <label>Nombre</label>
             @Html.TextBoxFor(m => m.Nombre, new { maxlength = "50", @class = "form-control", tabindex = "1" })
             @Html.ValidationMessageFor(m => m.Nombre)
         </div>
-        <div class="form-group col-md-12">
-            <label>Descripcion</label>
-            @Html.TextBoxFor(m => m.Descripcion, new { maxlength = "1024", @class = "form-control", tabindex = "2" })
-            @Html.ValidationMessageFor(m => m.Descripcion)
-        </div>
-
     </div>
-
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <label>Descripción</label>
+                @Html.TextAreaFor(m => m.Descripcion, new { maxlength = "5000", @class = "form-control", tabindex = "2" })
+                @Html.ValidationMessageFor(m => m.Descripcion)
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnAdd" type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 </div>

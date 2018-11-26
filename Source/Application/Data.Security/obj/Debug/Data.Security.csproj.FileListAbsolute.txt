@@ -57,3 +57,5 @@ C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Data.Security\o
 C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Data.Security\obj\Debug\DS.Motel.Data.Security.pdb
 C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Data.Security\bin\Debug\DS.Motel.Business.AddressBook.Entities.dll
 C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Data.Security\bin\Debug\DS.Motel.Business.AddressBook.Entities.pdb
+C:\Proyectos\Motel\Source\Application\Data.Security\bin\Debug\DS.Motel.Business.AddressBook.Entities.dll
+C:\Proyectos\Motel\Source\Application\Data.Security\bin\Debug\DS.Motel.Business.AddressBook.Entities.pdb

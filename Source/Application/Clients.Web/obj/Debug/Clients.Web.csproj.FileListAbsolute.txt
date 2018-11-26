@@ -606,3 +606,5 @@ C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Clients.Web\obj
 C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.pdb
 C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Clients.Web\bin\DS.Motel.Data.AddressBook.dll
 C:\Users\Administrador\Documents\GitHub\Motel\Source\Application\Clients.Web\bin\DS.Motel.Data.AddressBook.pdb
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\DS.Motel.Data.AddressBook.dll
+C:\Proyectos\Motel\Source\Application\Clients.Web\bin\DS.Motel.Data.AddressBook.pdb

@@ -18,11 +18,7 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
+/*input, select, textarea { max-width: 280px; }*/
  #inicio {
     background-image: url('http://www.happyhoursuites.com/wp-content/uploads/2018/01/prueba-fachada-noche-2.jpg');
     background-position: center;

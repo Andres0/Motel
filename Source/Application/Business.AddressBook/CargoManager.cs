@@ -16,6 +16,9 @@ namespace DS.Motel.Business.AddressBook
 
 
         #endregion
+
+
+
         #region Constructor
         public CargoManager(CargoRepository cargoRepository)
         {
@@ -23,12 +26,61 @@ namespace DS.Motel.Business.AddressBook
         }
 
         #endregion
+
+
+
         #region Consultas
         public IQueryable<Cargo_ADB> ObtenerTodos()
         {
             return _CargoRepository.ObtenerTodo();
         }
 
+        #endregion
+
+
+
+        #region Manipulation
+
+        public void Add(Cargo_ADB cargo)
+        {
+            try
+            {
+                _CargoRepository.Agregar(cargo);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public void Edit(Cargo_ADB cargo)
+        {
+            try
+            {
+                //Get original entity
+                Cargo_ADB cargoToUpdate = _CargoRepository.ObtenerPorId(cargo.CargoId);
+                cargoToUpdate.Nombre = cargo.Nombre;
+                cargoToUpdate.Descripcion = cargo.Descripcion;
+
+                _CargoRepository.Editar(cargoToUpdate);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public void Delete(Guid cargoId)
+        {
+            try
+            {
+                //Get original entity
+                Cargo_ADB cargoToDelete = _CargoRepository.ObtenerPorId(cargoId);
+
+                _CargoRepository.Eliminar(cargoToDelete);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
         #endregion
     }
 

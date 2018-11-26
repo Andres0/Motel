@@ -13,6 +13,18 @@ namespace DS.Motel.Business.AddressBook.Entities
         public Guid CargoId { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+
+        #endregion
+
+
+
+        #region Constructors
+
+        public Cargo_ADB()
+        {
+            CargoId = Guid.NewGuid();
+        }
+
         #endregion
     }
 }
