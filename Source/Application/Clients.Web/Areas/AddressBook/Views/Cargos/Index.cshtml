@@ -49,23 +49,23 @@
             <div class="row">
                 <div class="col-md-12">
                     @(
-                                Html.Kendo().Grid(Model.Cargos).Name("GridCargos")
-                                .Columns(colum =>
-                                {
-                                    colum.Bound(c => c.Nombre).Title("Nombre").Width("25%");
-                                    colum.Bound(c => c.Descripcion).Title("Descripción").Width("60%");
-                                    colum.Bound(c => c).Title("Acciones").Width("15%").ClientTemplate(
-                                        "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:CargoId#\");'><span class='glyphicon glyphicon-pencil'></span></button>" +
-                                        "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:CargoId#\");' style='margin-left:10px;'><span class='glyphicon glyphicon-remove' ></span></button>"
-                                        );
+                        Html.Kendo().Grid(Model.Cargos).Name("GridCargos")
+                        .Columns(colum =>
+                        {
+                            colum.Bound(c => c.Nombre).Title("Nombre").Width("25%");
+                            colum.Bound(c => c.Descripcion).Title("Descripción").Width("60%");
+                            colum.Bound(c => c).Title("Acciones").Width("15%").ClientTemplate(
+                                "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:CargoId#\");'><span class='glyphicon glyphicon-pencil'></span></button>" +
+                                "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:CargoId#\");' style='margin-left:10px;'><span class='glyphicon glyphicon-remove' ></span></button>"
+                                );
 
-                                })
-                                .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
-                                .Filterable(filterable => filterable.Enabled(true))
-                                .Sortable(sortable => sortable.Enabled(true))
-                                .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
-                                .DataSource(datasourse => datasourse
-                                .Ajax().PageSize(10).ServerOperation(false))
+                        })
+                        .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
+                        .Filterable(filterable => filterable.Enabled(true))
+                        .Sortable(sortable => sortable.Enabled(true))
+                        .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
+                        .DataSource(datasourse => datasourse
+                        .Ajax().PageSize(10).ServerOperation(false))
                     )
                 </div>
             </div>

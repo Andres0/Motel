@@ -10291,66 +10291,6 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Business.AddressBook.Entities\Business.AddressBook.Entities.csproj">
-      <Project>{59ab02cb-08dd-4872-bedf-a5652df31e0b}</Project>
-      <Name>Business.AddressBook.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.AddressBook.Repositories\Business.AddressBook.Repositories.csproj">
-      <Project>{3ccc06c7-d5a7-41b7-8200-ec40397b96d5}</Project>
-      <Name>Business.AddressBook.Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.AddressBook\Business.AddressBook.csproj">
-      <Project>{047d571f-b98d-4158-be45-c0332092b61c}</Project>
-      <Name>Business.AddressBook</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Common.Entities\Business.Common.Entities.csproj">
-      <Project>{6c5f9043-71df-425a-a914-6813fa169163}</Project>
-      <Name>Business.Common.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Common.Repositories\Business.Common.Repositories.csproj">
-      <Project>{72d1a052-3faf-4a5a-8b83-5651bed79f57}</Project>
-      <Name>Business.Common.Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Common\Business.Common.csproj">
-      <Project>{83d46426-d510-4ba1-a208-c1f3fe3196e3}</Project>
-      <Name>Business.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Infrastructure.Entities\Business.Infrastructure.Entities.csproj">
-      <Project>{405d3572-924f-4e1d-bc5a-23e3cb08979c}</Project>
-      <Name>Business.Infrastructure.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Infrastructure.Repositories\Business.Infrastructure.Repositories.csproj">
-      <Project>{b94923c7-e660-4c7c-a253-263934c14855}</Project>
-      <Name>Business.Infrastructure.Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Infrastructure\Business.Infrastructure.csproj">
-      <Project>{2940d7bb-de6f-4cde-bf99-3703fc13be0b}</Project>
-      <Name>Business.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Items.Entities\Business.Items.Entities.csproj">
-      <Project>{fb75e380-4263-4044-bedd-0005ac3e5b28}</Project>
-      <Name>Business.Items.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Items.Repositories\Business.Items.Repositories.csproj">
-      <Project>{1a9e4472-9ed7-4217-ba41-1def5542f307}</Project>
-      <Name>Business.Items.Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Items\Business.Items.csproj">
-      <Project>{ab1d79de-7479-4d22-aa53-004a2f620d4a}</Project>
-      <Name>Business.Items</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Security.Entities\Business.Security.Entities.csproj">
-      <Project>{ef989558-019c-4b3e-988a-723df038c682}</Project>
-      <Name>Business.Security.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Security.Repositories\Business.Security.Repositories.csproj">
-      <Project>{7167fdcf-0469-41c8-b2b9-17847b907eb9}</Project>
-      <Name>Business.Security.Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Security\Business.Security.csproj">
-      <Project>{068cac68-6989-45ae-8d59-bd8f71c51732}</Project>
-      <Name>Business.Security</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Data.AddressBook\Data.AddressBook.csproj">
       <Project>{86c635bc-57c6-46ac-9b87-33fbf7de440f}</Project>
       <Name>Data.AddressBook</Name>

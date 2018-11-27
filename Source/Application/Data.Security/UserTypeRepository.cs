@@ -1,5 +1,4 @@
-﻿using DS.Motel.Business.Security.Entities;
-using DS.Motel.Business.Security.Repositories;
+﻿using DS.Motel.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DS.Motel.Data.Security
 {
-    public class UserTypeRepository : IUserTypeRepository
+    public class UserTypeRepository
     {
         #region Fields & Properties
 
@@ -22,16 +21,23 @@ namespace DS.Motel.Data.Security
 
 
         #region Manipulation
-        public void Add(UserType_SEC userType, bool commit)
+        public void Add(UserType userType, bool commit)
         {
             _context.Security_UserType.Add(userType);
             _context.SaveChanges();
         }
 
-        public void Edit(UserType_SEC userType, bool commit)
+        public void Edit(UserType userType, bool commit)
         {
             _context.Security_UserType.Attach(userType);
             _context.Entry(userType).State = System.Data.Entity.EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void Eliminar(Guid userTypeId)
+        {
+            UserType userType = GetSingle(userTypeId);
+            _context.Security_UserType.Remove(userType);
             _context.SaveChanges();
         }
 
@@ -44,12 +50,12 @@ namespace DS.Motel.Data.Security
 
         #region Queries
 
-        public IQueryable<UserType_SEC> GetAll()
+        public IQueryable<UserType> GetAll()
         {
             return _context.Security_UserType;
         }
 
-        public UserType_SEC GetSingle(Guid? userTypeId)
+        public UserType GetSingle(Guid? userTypeId)
         {
             return _context.Security_UserType.SingleOrDefault(s => s.UserTypeId == userTypeId);
         }

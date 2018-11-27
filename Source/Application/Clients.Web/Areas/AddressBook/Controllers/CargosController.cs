@@ -1,6 +1,6 @@
-﻿using DS.Motel.Business.AddressBook;
-using DS.Motel.Business.AddressBook.Entities;
-using DS.Motel.Clients.Web.Areas.AddressBook.Models.Cargos;
+﻿using DS.Motel.Clients.Web.Areas.AddressBook.Models.Cargos;
+using DS.Motel.Data.AddressBook;
+using DS.Motel.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +41,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         private List<Tuple<string, string>> GetErroresAdd(AddViewModel model)
         {
             List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
-            CargoManager cargoManager = container.Resolve<CargoManager>();
+            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
 
             if (string.IsNullOrEmpty(model.Nombre))
             {
@@ -49,7 +49,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             }
             else
             {
-                if (cargoManager.ObtenerTodos().Count(c => c.Nombre == model.Nombre) > 0)
+                if (cargoRepository.ObtenerTodo().Count(c => c.Nombre == model.Nombre) > 0)
                 {
                     toReturn.Add(new Tuple<string, string>("Nombre", "Ya existe una categoria con el mismo nombre"));
                 }
@@ -60,7 +60,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         private List<Tuple<string, string>> GetErroresEdit(EditViewModel model)
         {
             List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
-            CargoManager cargoManager = container.Resolve<CargoManager>();
+            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
 
             if (string.IsNullOrEmpty(model.Nombre))
             {
@@ -68,7 +68,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             }
             else
             {
-                if (cargoManager.ObtenerTodos().Count(c => c.Nombre == model.Nombre && c.CargoId != model.CargoId) > 0)
+                if (cargoRepository.ObtenerTodo().Count(c => c.Nombre == model.Nombre && c.CargoId != model.CargoId) > 0)
                 {
                     toReturn.Add(new Tuple<string, string>("Nombre", "Ya existe una categoria con el mismo nombre"));
                 }
@@ -86,9 +86,9 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 
         public ActionResult Index()
         {
-            CargoManager cargoManager = container.Resolve<CargoManager>();
+            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
             NavegadorViewModel navegadorViewModel = new NavegadorViewModel();
-            navegadorViewModel.Cargos = cargoManager.ObtenerTodos().Select(t => new NavegadorGridViewModel()
+            navegadorViewModel.Cargos = cargoRepository.ObtenerTodo().Select(t => new NavegadorGridViewModel()
             {
                 CargoId = t.CargoId,
                 Nombre = t.Nombre,
@@ -108,7 +108,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(AddViewModel model)
         {
-            CargoManager cargoManager = container.Resolve<CargoManager>();
+            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
 
             ModelState.Clear();
             List<Tuple<string, string>> errores = GetErroresAdd(model);
@@ -121,13 +121,13 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 
             if (ModelState.IsValid)
             {
-                Cargo_ADB cargo = new Cargo_ADB();
+                Cargo cargo = new Cargo();
                 cargo.Nombre = model.Nombre;
                 cargo.Descripcion = model.Descripcion;
 
                 try
                 {
-                    cargoManager.Add(cargo);
+                    cargoRepository.Agregar(cargo);
 
                     model.Result = Web.Models.EnumActionResult.Saved;
                 }
@@ -145,8 +145,8 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 
         public ActionResult Edit(Guid cargoId)
         {
-            CargoManager cargoManager = container.Resolve<CargoManager>();
-            Cargo_ADB cargo = cargoManager.ObtenerTodos().SingleOrDefault(s => s.CargoId == cargoId);
+            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
+            Cargo cargo = cargoRepository.ObtenerTodo().SingleOrDefault(s => s.CargoId == cargoId);
 
             EditViewModel editViewModel = new EditViewModel();
             editViewModel.CargoId = cargo.CargoId;
@@ -160,7 +160,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditViewModel model)
         {
-            CargoManager cargoManager = container.Resolve<CargoManager>();
+            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
 
             ModelState.Clear();
             List<Tuple<string, string>> errores = GetErroresEdit(model);
@@ -171,14 +171,14 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 
             if (ModelState.IsValid)
             {
-                Cargo_ADB cargo = new Cargo_ADB();
+                Cargo cargo = new Cargo();
                 cargo.CargoId = model.CargoId;
                 cargo.Nombre = model.Nombre;
                 cargo.Descripcion = model.Descripcion;
 
                 try
                 {
-                    cargoManager.Edit(cargo);
+                    cargoRepository.Editar(cargo);
 
                     model.Result = Web.Models.EnumActionResult.Saved;
                 }
@@ -206,7 +206,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(DeleteViewModel model)
         {
-            CargoManager cargoManager = container.Resolve<CargoManager>();
+            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
 
             ModelState.Clear();
             //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
@@ -215,7 +215,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             {
                 try
                 {
-                    cargoManager.Delete(model.CargoId);
+                    cargoRepository.Eliminar(model.CargoId);
 
                     model.Result = Web.Models.EnumActionResult.Saved;
                 }

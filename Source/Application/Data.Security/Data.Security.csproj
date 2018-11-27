@@ -51,18 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserRepository.cs" />
     <Compile Include="UserTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Business.Security.Entities\Business.Security.Entities.csproj">
-      <Project>{ef989558-019c-4b3e-988a-723df038c682}</Project>
-      <Name>Business.Security.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Business.Security.Repositories\Business.Security.Repositories.csproj">
-      <Project>{7167fdcf-0469-41c8-b2b9-17847b907eb9}</Project>
-      <Name>Business.Security.Repositories</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{b026f459-929c-4b25-90a5-458a1e2c6c50}</Project>
       <Name>Data</Name>

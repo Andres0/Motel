@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DS.Motel.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -12,10 +13,8 @@ namespace DS.Motel.Data
     {
         #region Fields & Properties
 
-        public DbSet<DS.Motel.Business.Security.Entities.UserType_SEC> Security_UserType { get; set; }
-        public DbSet<DS.Motel.Business.Security.Entities.User_SEC> Security_User { get; set; }
-
-        public DbSet<DS.Motel.Business.AddressBook.Entities.Cargo_ADB> AddressBook_Cargo { get; set; }
+        public DbSet<UserType> Security_UserType { get; set; }
+        public DbSet<Cargo> AddressBook_Cargo { get; set; }
 
 
 
@@ -44,7 +43,6 @@ namespace DS.Motel.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new Configurations.Security.UserTypeConfiguration());
-            modelBuilder.Configurations.Add(new Configurations.Security.UserConfiguration());
             modelBuilder.Configurations.Add(new Configurations.AddressBook.CargoConfiguration());
         }
 

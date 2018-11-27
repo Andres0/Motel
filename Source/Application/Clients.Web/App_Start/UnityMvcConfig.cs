@@ -30,10 +30,10 @@ namespace DS.Motel.Clients.Web
         public static void RegisterTypes(IUnityContainer container)
         {
             //Managers
-            container.RegisterType<DS.Motel.Business.Security.Repositories.IUserRepository, DS.Motel.Business.Security.UserManager>();
+            //container.RegisterType<DS.Motel.Business.Security.Repositories.IUserRepository, DS.Motel.Business.Security.UserManager>();
 
             //Data
-            container.RegisterType<DS.Motel.Business.Security.Repositories.IUserRepository, DS.Motel.Data.Security.UserRepository>();
+            //container.RegisterType<DS.Motel.Business.Security.Repositories.IUserRepository, DS.Motel.Data.Security.UserRepository>();
         }
     }
 }

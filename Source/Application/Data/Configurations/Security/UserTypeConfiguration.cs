@@ -1,4 +1,4 @@
-﻿using DS.Motel.Business.Security.Entities;
+﻿using DS.Motel.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DS.Motel.Data.Configurations.Security
 {
-    public class UserTypeConfiguration : EntityTypeConfiguration<UserType_SEC>
+    public class UserTypeConfiguration : EntityTypeConfiguration<UserType>
     {
         #region Others
 

@@ -1,4 +1,4 @@
-﻿using DS.Motel.Business.AddressBook.Entities;
+﻿using DS.Motel.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DS.Motel.Data.Configurations.AddressBook
 {
-   public class CargoConfiguration : EntityTypeConfiguration<Cargo_ADB>
+   public class CargoConfiguration : EntityTypeConfiguration<Cargo>
     {
         #region Others
 
