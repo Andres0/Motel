@@ -12,7 +12,8 @@
             case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
                 {
                     $.notify("El Tipo de Cuenta se elimino correctamente", { globalPosition: "top center", className: "success" });
-                    setTimeout(function () { location.reload() }, 2000);
+                    $("#GridUserTypes").data("kendoGrid").dataSource.read();
+                    $('#DeleteModal').modal('hide');
                 }
                 break;
             case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':

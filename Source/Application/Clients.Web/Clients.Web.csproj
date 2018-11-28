@@ -240,7 +240,6 @@
     <Compile Include="Areas\AddressBook\Models\Cargos\DeleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\EditViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\NavegadorViewModel.cs" />
-    <Compile Include="Areas\AddressBook\Models\User\NavegatorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\Models\UserType\AddViewModel.cs" />
     <Compile Include="Areas\Security\Models\UserType\DeleteViewModel.cs" />

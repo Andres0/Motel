@@ -13,7 +13,8 @@
             case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
                 {
                     $.notify("El cargo se guardó con exito", { globalPosition: "top center", className: "success" });
-                    setTimeout(function () { location.reload() }, 2000);
+                    $("#GridCargos").data("kendoGrid").dataSource.read();
+                    $('#EditModal').modal('hide');
                 }
                 break;
             case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':

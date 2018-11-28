@@ -1,5 +1,4 @@
-﻿@model DS.Motel.Clients.Web.Areas.AddressBook.Models.Cargos.NavegadorViewModel
-@using Kendo.Mvc.UI
+﻿@using Kendo.Mvc.UI
 
 @{
     ViewBag.Title = "Index";
@@ -49,12 +48,12 @@
             <div class="row">
                 <div class="col-md-12">
                     @(
-                        Html.Kendo().Grid(Model.Cargos).Name("GridCargos")
-                        .Columns(colum =>
+                        Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.AddressBook.Models.Cargos.NavegadorViewModel>().Name("GridCargos")
+                        .Columns(column =>
                         {
-                            colum.Bound(c => c.Nombre).Title("Nombre").Width("25%");
-                            colum.Bound(c => c.Descripcion).Title("Descripción").Width("60%");
-                            colum.Bound(c => c).Title("Acciones").Width("15%").ClientTemplate(
+                            column.Bound(c => c.Nombre).Title("Nombre").Width("25%");
+                            column.Bound(c => c.Descripcion).Title("Descripción").Width("60%");
+                            column.Bound(c => c).Title("Acciones").Width("15%").ClientTemplate(
                                 "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:CargoId#\");'><span class='glyphicon glyphicon-pencil'></span></button>" +
                                 "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:CargoId#\");' style='margin-left:10px;'><span class='glyphicon glyphicon-remove' ></span></button>"
                                 );
@@ -65,7 +64,10 @@
                         .Sortable(sortable => sortable.Enabled(true))
                         .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
                         .DataSource(datasourse => datasourse
-                        .Ajax().PageSize(10).ServerOperation(false))
+                            .Ajax()
+                            .PageSize(10)
+                            .Read(read => read.Action("LoadGrid", "Cargos"))
+                            .ServerOperation(false))
                     )
                 </div>
             </div>

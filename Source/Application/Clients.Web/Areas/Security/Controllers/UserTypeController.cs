@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Unity;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
 
 namespace DS.Motel.Clients.Web.Areas.Security.Controllers
 {
@@ -31,6 +33,10 @@ namespace DS.Motel.Clients.Web.Areas.Security.Controllers
         }
 
         #endregion
+
+
+
+
 
 
         #region Validacion
@@ -77,20 +83,13 @@ namespace DS.Motel.Clients.Web.Areas.Security.Controllers
 
 
 
+
+
         #region Eventos
 
         public ActionResult Index()
         {
-            UserTypeRepository userTypeRepository = container.Resolve<UserTypeRepository>();
-            NavigatorViewModel navegadorViewModel = new NavigatorViewModel();
-            navegadorViewModel.UserTypes = userTypeRepository.GetAll().Select(t => new NavigatorGridViewModel()
-            {
-                UserTypeId = t.UserTypeId,
-                Name = t.Name,
-                Descripcion = t.Descripcion
-            }).OrderBy(y => y.Name).ToList();
-
-            return View(navegadorViewModel);
+            return View();
         }
 
         public ActionResult Add()
@@ -228,5 +227,23 @@ namespace DS.Motel.Clients.Web.Areas.Security.Controllers
 
         #endregion
 
+
+
+        #region Queries
+
+        public ActionResult LoadGrid([DataSourceRequest]DataSourceRequest request)
+        {
+            UserTypeRepository userTypeRepository = container.Resolve<UserTypeRepository>();
+            List<NavigatorViewModel> toReturn = userTypeRepository.GetAll().Select(t => new NavigatorViewModel()
+            {
+                UserTypeId = t.UserTypeId,
+                Name = t.Name,
+                Descripcion = t.Descripcion
+            }).OrderBy(y => y.Name).ToList();
+
+            return Json(toReturn.ToDataSourceResult(request));
+        }
+
+        #endregion
     }
 }

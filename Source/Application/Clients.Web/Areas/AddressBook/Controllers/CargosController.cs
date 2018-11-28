@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Unity;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
 
 namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 {
@@ -86,16 +88,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 
         public ActionResult Index()
         {
-            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
-            NavegadorViewModel navegadorViewModel = new NavegadorViewModel();
-            navegadorViewModel.Cargos = cargoRepository.ObtenerTodo().Select(t => new NavegadorGridViewModel()
-            {
-                CargoId = t.CargoId,
-                Nombre = t.Nombre,
-                Descripcion = t.Descripcion
-            }).OrderBy(y => y.Nombre).ToList();
-
-            return View(navegadorViewModel);
+            return View();
         }
 
         public ActionResult Add()
@@ -233,5 +226,26 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 
         #endregion
 
+
+
+
+
+
+        #region Queries
+
+        public ActionResult LoadGrid([DataSourceRequest]DataSourceRequest request)
+        {
+            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
+            List<NavegadorViewModel> toReturn = cargoRepository.ObtenerTodo().Select(t => new NavegadorViewModel()
+            {
+                CargoId = t.CargoId,
+                Nombre = t.Nombre,
+                Descripcion = t.Descripcion
+            }).OrderBy(y => y.Nombre).ToList();
+
+            return Json(toReturn.ToDataSourceResult(request));
+        }
+
+        #endregion
     }
 }
