@@ -9,9 +9,6 @@ namespace DS.Motel.Clients.Web.Areas.Security.Models.UserType
     {
         #region Fields & Properties
 
-        public Guid? UserTypeId { get; set; }
-        public int GridPageSize { get; set; }
-        public int GridNumberOfPage { get; set; }
         public List<NavigatorGridViewModel> UserTypes { get; set; }
         
         #endregion
@@ -39,6 +36,8 @@ namespace DS.Motel.Clients.Web.Areas.Security.Models.UserType
 
         public Guid UserTypeId { get; set; }
         public string Name { get; set; }
+
+        public string Descripcion { get; set; }
 
         #endregion
     }

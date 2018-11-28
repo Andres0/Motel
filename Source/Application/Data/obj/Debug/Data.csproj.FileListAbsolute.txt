@@ -60,3 +60,15 @@ C:\Proyectos\Motel2\Source\Application\Data\bin\Debug\EntityFramework.SqlServer.
 C:\Proyectos\Motel2\Source\Application\Data\bin\Debug\EntityFramework.xml
 C:\Proyectos\Motel2\Source\Application\Data\bin\Debug\EntityFramework.SqlServer.xml
 C:\Proyectos\Motel2\Source\Application\Data\obj\Debug\Data.csproj.CopyComplete
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\bin\Debug\DS.Motel.Data.dll.config
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\bin\Debug\DS.Motel.Data.dll
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\bin\Debug\DS.Motel.Data.pdb
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\bin\Debug\EntityFramework.dll
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\bin\Debug\EntityFramework.xml
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\obj\Debug\Data.csprojAssemblyReference.cache
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\obj\Debug\Data.csproj.CopyComplete
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\obj\Debug\DS.Motel.Data.dll
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Data\obj\Debug\DS.Motel.Data.pdb

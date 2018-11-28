@@ -236,7 +236,6 @@
     <Compile Include="App_Start\UnityMvcConfig.cs" />
     <Compile Include="Areas\AddressBook\AddressBookAreaRegistration.cs" />
     <Compile Include="Areas\AddressBook\Controllers\CargosController.cs" />
-    <Compile Include="Areas\AddressBook\Controllers\UserController.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\AddViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\DeleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\EditViewModel.cs" />
@@ -244,9 +243,9 @@
     <Compile Include="Areas\AddressBook\Models\User\NavegatorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\Models\UserType\AddViewModel.cs" />
+    <Compile Include="Areas\Security\Models\UserType\DeleteViewModel.cs" />
     <Compile Include="Areas\Security\Models\UserType\EditViewModel.cs" />
     <Compile Include="Areas\Security\Models\UserType\NavigatorViewModel.cs" />
-    <Compile Include="Areas\Security\Models\UserType\SummaryViewModel.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -8049,7 +8048,6 @@
     <Content Include="Areas\AddressBook\Views\web.config" />
     <Content Include="Areas\Security\Views\UserType\Index.cshtml" />
     <Content Include="Areas\Security\Views\UserType\Navigator.cshtml" />
-    <Content Include="Areas\Security\Views\UserType\Summary.cshtml" />
     <Content Include="Content\kendo\2018.3.1017\kendo.black.min.css.map" />
     <Content Include="Content\kendo\2018.3.1017\kendo.black.mobile.min.css.map" />
     <Content Include="Content\kendo\2018.3.1017\kendo.blueopal.min.css.map" />
@@ -8152,12 +8150,11 @@
     <Content Include="Areas\Security\Views\UserType\Edit.cshtml" />
     <Content Include="Areas\AddressBook\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AddressBook\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\AddressBook\Views\User\Index.cshtml" />
-    <Content Include="Areas\AddressBook\Views\User\Navigator.cshtml" />
     <Content Include="Areas\AddressBook\Views\Cargos\Index.cshtml" />
     <Content Include="Areas\AddressBook\Views\Cargos\Add.cshtml" />
     <Content Include="Areas\AddressBook\Views\Cargos\Edit.cshtml" />
     <Content Include="Areas\AddressBook\Views\Cargos\Delete.cshtml" />
+    <Content Include="Areas\Security\Views\UserType\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

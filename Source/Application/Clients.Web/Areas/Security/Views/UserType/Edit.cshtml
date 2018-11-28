@@ -1,54 +1,63 @@
 ﻿@model DS.Motel.Clients.Web.Areas.Security.Models.UserType.EditViewModel
-@{
-    ViewBag.Title = "Add";
-}
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
-
-        $("#Name").focus();
-
-        $("#btnCancel").click(function () {
-            $("#divToolBarUserType").css("visibility", "visible");
-            $("#divContentRight").load('@Url.Action("Summary", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
-        });
-    });
-
-    function callOnBegin() {
-        $("#btnSave").text("Guardando...");
+    function Edit_callOnBegin() {
+        $("#btnEdit").attr("disabled", "disabled")
+        $("#btnEdit").text("Guardando...");
     }
 
-    function returnToSummary() {
-        if ('@Model.Result' == '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved') {
-            $("#divToolBarUserType").css("visibility", "visible");
-            $("#divContentLeft").load('@Url.Action("Navigator", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
-            $("#divContentRight").load('@Url.Action("Summary", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
+    function Edit_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("El Tipo de Cuenta se guardó con exito", { globalPosition: "top center", className: "success" });
+                    setTimeout(function () { location.reload() }, 2000);
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
         }
     }
 
 </script>
 
-<div id="divEditUserType">
-    @using (@Ajax.BeginForm("Edit", "UserType", new { area = "Security" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divEditUserType", OnSuccess = "returnToSummary", OnBegin = "callOnBegin" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(m => m.UserTypeIdSummary)
 
-        <div class="box-header with-border">
-            <div class="row">
-                <div class="col-md-12">
-                    <button id="btnCancel" type="button" class="btn bg-navy btn-flat pull-right" style="margin-left:10px;">Cancelar</button>
-                    <button id="btnSave" type="submit" class="btn btn-success pull-right">Guardar</button>
-                </div>
+@Html.AntiForgeryToken()
+@Html.HiddenFor(h => h.UserTypeId)
+<div class="modal-header">
+    <h1 class="modal-title">Editar Tipo de Cuenta</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Nombre</label>
+            @Html.TextBoxFor(m => m.Name, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <label>Descripción</label>
+                @Html.TextAreaFor(m => m.Descripcion, new { maxlength = "5000", @class = "form-control", tabindex = "2" })
+                @Html.ValidationMessageFor(m => m.Descripcion)
             </div>
         </div>
-        <div class="box-body">
-            <div class="form-group">
-                <label for="Name">Nombre</label>
-                @Html.TextBoxFor(m => m.Name, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Name)
-            </div>
-        </div>
-    }
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnEdit" type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 </div>

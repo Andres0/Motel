@@ -11,8 +11,9 @@ namespace DS.Motel.Data.Entities
         #region Fields & Properties
 
         public Guid UserTypeId { get; set; }
-        public bool Archived { get; set; }
         public string Name { get; set; }
+        public string Descripcion { get; set; }
+
 
         #endregion
 

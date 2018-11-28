@@ -8,8 +8,9 @@ namespace DS.Motel.Clients.Web.Areas.Security.Models.UserType
 {
     public class EditViewModel
     {
-        public Guid UserTypeIdSummary { get; set; }
+        public Guid UserTypeId { get; set; }
         public string Name { get; set; }
+        public string Descripcion { get; set; }
         public EnumActionResult Result { get; set; }
     }
 }

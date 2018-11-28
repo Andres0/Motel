@@ -1,4 +1,6 @@
 ﻿using DS.Motel.Clients.Web.Areas.Security.Models.UserType;
+using DS.Motel.Data.Entities;
+using DS.Motel.Data.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,156 +33,200 @@ namespace DS.Motel.Clients.Web.Areas.Security.Controllers
         #endregion
 
 
+        #region Validacion
+
+        private List<Tuple<string, string>> GetErroresAdd(AddViewModel model)
+        {
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+            UserTypeRepository UserTyoeRepository = container.Resolve<UserTypeRepository>();
+
+            if (string.IsNullOrEmpty(model.Name))
+            {
+                toReturn.Add(new Tuple<string, string>("Name", "Por favor ingrese tipo de cuenta"));
+            }
+            else
+            {
+                if (UserTyoeRepository.GetAll().Count(c => c.Name == model.Name) > 0)
+                {
+                    toReturn.Add(new Tuple<string, string>("Name", "Ya existe un tipo de cuenta con el mismo nombre"));
+                }
+            }
+            return toReturn;
+        }
+
+        private List<Tuple<string, string>> GetErroresEdit(EditViewModel model)
+        {
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+            UserTypeRepository UserTyoeRepository = container.Resolve<UserTypeRepository>();
+
+            if (string.IsNullOrEmpty(model.Name))
+            {
+                toReturn.Add(new Tuple<string, string>("Name", "Por favor ingrese el tipo de cuenta"));
+            }
+            else
+            {
+                if (UserTyoeRepository.GetAll().Count(c => c.Name == model.Name && c.UserTypeId != model.UserTypeId) > 0)
+                {
+                    toReturn.Add(new Tuple<string, string>("Name", "Ya existe un tipo de cuenta con el mismo nombre"));
+                }
+            }
+            return toReturn;
+        }
+        #endregion
 
 
 
 
-        //#region Events
+        #region Eventos
 
-        //public ActionResult Index()
-        //{
-        //    //Cargamos el primer elemento para cargar en un panel izquierdo el navegador y en el derecho
-        //    UserTypeManager userManager = container.Resolve<UserTypeManager>();
-        //    UserType_SEC userType = userManager.GetAll().OrderBy(o => o.Name).FirstOrDefault();
+        public ActionResult Index()
+        {
+            UserTypeRepository userTypeRepository = container.Resolve<UserTypeRepository>();
+            NavigatorViewModel navegadorViewModel = new NavigatorViewModel();
+            navegadorViewModel.UserTypes = userTypeRepository.GetAll().Select(t => new NavigatorGridViewModel()
+            {
+                UserTypeId = t.UserTypeId,
+                Name = t.Name,
+                Descripcion = t.Descripcion
+            }).OrderBy(y => y.Name).ToList();
 
-        //    ViewData["UserTypeId"] = userType != null ? (Guid?)userType.UserTypeId : null;
+            return View(navegadorViewModel);
+        }
 
-        //    return View();
-        //}
+        public ActionResult Add()
+        {
+            AddViewModel addViewModel = new AddViewModel();
+            return PartialView(addViewModel);
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(AddViewModel model)
+        {
+            UserTypeRepository userTypeRepository = container.Resolve<UserTypeRepository>();
 
-
-        //public ActionResult Navigator(Guid? userTypeId)
-        //{
-        //    UserTypeManager userManager = container.Resolve<UserTypeManager>();
-
-        //    NavigatorViewModel navigatorViewModel = new NavigatorViewModel();
-        //    navigatorViewModel.UserTypeId = userTypeId;
-        //    navigatorViewModel.GridPageSize = 10; //19 registros por pagina
-        //    navigatorViewModel.UserTypes = userManager.GetAll().Select(s => new NavigatorGridViewModel() {
-        //        UserTypeId = s.UserTypeId,
-        //        Name = s.Name,
-        //    }).OrderBy(o => o.Name).ToList();
-
-        //    if (userTypeId != null && navigatorViewModel.UserTypes != null && navigatorViewModel.UserTypes.Count() > 0)
-        //    {
-        //        int indexOfItem = navigatorViewModel.UserTypes.FindIndex(f => f.UserTypeId == userTypeId.Value);
-        //        navigatorViewModel.GridNumberOfPage = (int)(indexOfItem / navigatorViewModel.GridPageSize) + 1;
-        //    }
-        //    else
-        //        navigatorViewModel.GridNumberOfPage = 1;
-
-
-        //    return PartialView(navigatorViewModel);
-        //}
-
-        //public ActionResult Add(Guid? userTypeId)
-        //{
-        //    AddViewModel addViewModel = new AddViewModel();
-        //    addViewModel.UserTypeIdSummary = userTypeId;
-
-        //    return PartialView(addViewModel);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Add(AddViewModel model)
-        //{
-        //    UserTypeManager userManager = container.Resolve<UserTypeManager>();
-
-        //    ModelState.Clear();
-        //    if (string.IsNullOrEmpty(model.Name))
-        //    {
-        //        ModelState.AddModelError("Name", "Por favor ingrese un nombre");
-        //    }
+            ModelState.Clear();
+            List<Tuple<string, string>> errores = GetErroresAdd(model);
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
 
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        UserType_SEC userType = new UserType_SEC();
-        //        userType.Name = model.Name;
 
-        //        try
-        //        {
-        //            userManager.Add(userType, true);
+            if (ModelState.IsValid)
+            {
+                UserType userType = new UserType();
+                userType.Name = model.Name;
+                userType.Descripcion = model.Descripcion;
 
-        //            model.UserTypeIdSummary = userType.UserTypeId;
-        //            model.Result = Web.Models.EnumActionResult.Saved;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            model.Result = Web.Models.EnumActionResult.Error;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        model.Result = Web.Models.EnumActionResult.Validation;
-        //    }
-        //    return PartialView("Add", model);
-        //}
+                try
+                {
+                    userTypeRepository.Add(userType);
 
-        //public ActionResult Edit(Guid? userTypeId)
-        //{
-        //    UserTypeManager userManager = container.Resolve<UserTypeManager>();
-        //    UserType_SEC userType = userManager.GetSingle(userTypeId);
+                    model.Result = Web.Models.EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
+            return PartialView(model);
+        }
 
-        //    EditViewModel editViewModel = new EditViewModel();
-        //    editViewModel.UserTypeIdSummary = userType.UserTypeId;
-        //    editViewModel.Name = userType.Name;
+        public ActionResult Edit(Guid userTypeID)
+        {
+            UserTypeRepository userTypeRepository = container.Resolve<UserTypeRepository>();
+            UserType userType = userTypeRepository.GetSingle(userTypeID);
 
-        //    return PartialView(editViewModel);
-        //}
+            EditViewModel editViewModel = new EditViewModel();
+            editViewModel.UserTypeId = userType.UserTypeId;
+            editViewModel.Name = userType.Name;
+            editViewModel.Descripcion = userType.Descripcion;
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(EditViewModel model)
-        //{
-        //    UserTypeManager userManager = container.Resolve<UserTypeManager>();
+            return PartialView(editViewModel);
+        }
 
-        //    ModelState.Clear();
-        //    if (string.IsNullOrEmpty(model.Name))
-        //    {
-        //        ModelState.AddModelError("Name", "Por favor ingrese un nombre");
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditViewModel model)
+        {
+            UserTypeRepository userTypeRepository = container.Resolve<UserTypeRepository>();
 
+            ModelState.Clear();
+            List<Tuple<string, string>> errores = GetErroresEdit(model);
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        UserType_SEC userType = new UserType_SEC();
-        //        userType.UserTypeId = model.UserTypeIdSummary;
-        //        userType.Name = model.Name;
+            if (ModelState.IsValid)
+            {
+                UserType userType = new UserType();
+                userType.UserTypeId = model.UserTypeId;
+                userType.Name = model.Name;
+                userType.Descripcion = model.Descripcion;
 
-        //        try
-        //        {
-        //            userManager.Edit(userType, true);
+                try
+                {
+                    userTypeRepository.Edit(userType);
 
-        //            model.UserTypeIdSummary = userType.UserTypeId;
-        //            model.Result = Web.Models.EnumActionResult.Saved;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            model.Result = Web.Models.EnumActionResult.Error;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        model.Result = Web.Models.EnumActionResult.Validation;
-        //    }
-        //    return PartialView("Edit", model);
-        //}
+                    model.Result = Web.Models.EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
+            return PartialView(model);
+        }
 
-        //public ActionResult Summary(Guid? userTypeId)
-        //{
-        //    UserTypeManager userManager = container.Resolve<UserTypeManager>();
-        //    UserType_SEC userType = userManager.GetSingle(userTypeId);
+        public ActionResult Delete(Guid userTypeID)
+        {
+            DeleteViewModel deleteViewModel = new DeleteViewModel();
+            deleteViewModel.UserTypeId = userTypeID;
 
-        //    SummaryViewModel summaryViewModel = new SummaryViewModel();
-        //    summaryViewModel.UserTypeId = (userType != null) ? (Guid?)userType.UserTypeId : null;
-        //    summaryViewModel.Name = (userType != null) ? userType.Name : string.Empty;
+            return PartialView(deleteViewModel);
+        }
 
-        //    return PartialView(summaryViewModel);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(DeleteViewModel model)
+        {
+            UserTypeRepository userTypeRepository = container.Resolve<UserTypeRepository>();
 
-        //#endregion
+            ModelState.Clear();
+            //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    userTypeRepository.Eliminar(model.UserTypeId);
+
+                    model.Result = Web.Models.EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
+            return PartialView(model);
+        }
+
+        #endregion
+
     }
 }

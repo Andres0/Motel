@@ -21,13 +21,13 @@ namespace DS.Motel.Data.Security
 
 
         #region Manipulation
-        public void Add(UserType userType, bool commit)
+        public void Add(UserType userType)
         {
             _context.Security_UserType.Add(userType);
             _context.SaveChanges();
         }
 
-        public void Edit(UserType userType, bool commit)
+        public void Edit(UserType userType)
         {
             _context.Security_UserType.Attach(userType);
             _context.Entry(userType).State = System.Data.Entity.EntityState.Modified;

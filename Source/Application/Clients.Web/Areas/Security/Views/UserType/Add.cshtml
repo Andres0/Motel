@@ -1,103 +1,63 @@
 ﻿@model DS.Motel.Clients.Web.Areas.Security.Models.UserType.AddViewModel
-@{
-    ViewBag.Title = "Add";
-    
 
-}
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
-
-        $("#Name").focus();
-
-        $("#btnCancel").click(function () {
-            $("#divToolBarUserType").css("visibility", "visible");
-            $("#divContentRight").load('@Url.Action("Summary", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
-        });
-    });
-
-    function callOnBegin() {
-        $("#btnSave").text("Guardando...");
+    function Add_callOnBegin() {
+        $("#btnAdd").attr("disabled", "disabled")
+        $("#btnAdd").text("Guardando...");
     }
 
-    function returnToSummary() {
-        if ('@Model.Result' == '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved') {
-            $("#divToolBarUserType").css("visibility", "visible");
-            $("#divContentLeft").load('@Url.Action("Navigator", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
-            $("#divContentRight").load('@Url.Action("Summary", "UserType", new { area = "Security" })?userTypeId=@Model.UserTypeIdSummary');
+    function Add_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("El Tipo de Cuenta se guardó con exito", { globalPosition: "top center", className: "success" });
+                    setTimeout(function () { location.reload() }, 2000);
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
         }
     }
 
 </script>
 
-<div id="divAddUserType">
-    @using (@Ajax.BeginForm("Add", "UserType", new { area = "Security" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divAddUserType", OnSuccess = "returnToSummary", OnBegin = "callOnBegin" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(m => m.UserTypeIdSummary)
 
-        <div class="box-header with-border">
-            <div class="row">
-                <div class="col-md-12">
-                    <button id="btnCancel" type="button" class="btn bg-navy btn-flat pull-right" style="margin-left:10px;" >Cancelar</button>
-                    <button id="btnSave" type="submit" class="btn btn-success pull-right">Guardar</button>
-                </div>
+@Html.AntiForgeryToken()
+<div class="modal-header">
+    <h1 class="modal-title">Nuevo Tipo de Cuenta</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Nombre</label>
+            @Html.TextBoxFor(m => m.Name, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <label>Descripción</label>
+                @Html.TextAreaFor(m => m.Descripcion, new { maxlength = "5000", @class = "form-control", tabindex = "2" })
+                @Html.ValidationMessageFor(m => m.Descripcion)
             </div>
         </div>
-        <div class="box-body">
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="Name">Nombre</label>
-                    @Html.TextBoxFor(m => m.Name, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                    @Html.ValidationMessageFor(m => m.Name)
-
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="Name">Apellido</label>
-                    @Html.TextBoxFor(m => m.Apellidos, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                    @Html.ValidationMessageFor(m => m.Apellidos)
-
-                </div>
-            </div>
-            <div class="form-group">
-               
-               
-                <label for="Name">Direccion</label>
-                @Html.TextBoxFor(m => m.Direccion, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Direccion)
-                <label for="Name">Telefono</label>
-                @Html.TextBoxFor(m => m.Telefono, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Telefono)
-                <label for="Name">Celular</label>
-                @Html.TextBoxFor(m => m.Celular, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Celular)
-                <label for="Name">Email</label>
-                @Html.TextBoxFor(m => m.Email, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Email)
-                <label for="Name">Tipo de Usuario</label>
-                @Html.TextBoxFor(m => m.TipoUser, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.TipoUser)
-                <label for="Name">Cargo</label>
-                @Html.TextBoxFor(m => m.Cargo, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Cargo)
-                <label for="Name">Estado</label>
-                @Html.TextBoxFor(m => m.Estado, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Estado)
-                <label for="Name">Creado por</label>
-                @Html.TextBoxFor(m => m.CodUserCreator, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.CodUserCreator)
-                <label for="Name">Observaciones</label>
-                @Html.TextBoxFor(m => m.Obervaciones, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Obervaciones)
-                <label for="Name">Login</label>
-                @Html.TextBoxFor(m => m.Login, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Login)
-                <label for="Name">Password</label>
-                @Html.TextBoxFor(m => m.Password, new { maxlength = "50", @class = "form-control", tabindex = "1" })
-                @Html.ValidationMessageFor(m => m.Password)
-
-            </div>
-        </div>
-    }
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnAdd" type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 </div>
