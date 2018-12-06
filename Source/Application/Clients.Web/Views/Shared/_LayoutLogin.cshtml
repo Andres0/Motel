@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
@@ -11,11 +10,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body id="inicio">
+<body class="login_body text-center">
+    @RenderBody()
     
-    <div class="container body-content">
-        @RenderBody()
-        
+    <!--footer-->
+    <div class="login_footer">
+        © 2018 DrecoSoft. All rights reserved | Design by <a href="#">DrecoSoft</a>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

@@ -71,3 +71,4 @@ C:\Proyectos\Motel2\Source\Application\Data\obj\Debug\Data.csproj.CoreCompileInp
 C:\Proyectos\Motel2\Source\Application\Data\obj\Debug\Data.csproj.CopyComplete
 C:\Proyectos\Motel2\Source\Application\Data\obj\Debug\DS.Motel.Data.dll
 C:\Proyectos\Motel2\Source\Application\Data\obj\Debug\DS.Motel.Data.pdb
+C:\Proyectos\Motel2\Source\Application\Data\obj\Debug\Data.csprojAssemblyReference.cache

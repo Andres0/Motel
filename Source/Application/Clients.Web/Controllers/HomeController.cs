@@ -5,6 +5,7 @@ using System.Web;
 
 using Unity;
 using System.Web.Mvc;
+using DS.Motel.Data.AddressBook;
 
 namespace DS.Motel.Clients.Web.Controllers
 {
@@ -42,17 +43,15 @@ namespace DS.Motel.Clients.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //UserManager userManager = container.Resolve<UserManager>();
-            //var test = userManager.GetUserByUsernameAndPassword("", "");
-
-            //var test2 = userRepository.GetUserByUsernameAndPassword("", "");
-
             return View();
         }
 
         [AllowAnonymous]
         public ActionResult Login()
         {
+            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
+            var toReturn = cargoRepository.ObtenerTodo().ToList();
+
             return View();
         }
 

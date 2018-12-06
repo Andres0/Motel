@@ -1,9 +1,14 @@
-﻿/*body {
+﻿html, body { height: 100%; }
+body { display: flex; }
+.login_container { width: 100%; max-width: 330px; padding: 15px; margin: auto; }
+.login_body { background-color: darkcyan; height:100%; }
+.login_footer { background-color: black; color:white; font-size: 28px; position: absolute; bottom: 0; width: 100%; height: 60px; line-height: 40px; text-align:center; line-height:2; }
+.form-login { background-color: rgba(0,0,0,0.55); padding-top: 10px; padding-bottom: 20px; padding-left: 20px; padding-right: 20px; border-radius: 15px; border-color: #d2d2d2; border-width: 5px; 
+              color: white; box-shadow: 0 1px 0 #cfcfcf; }
+/*body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
-
-
 
 .body-content {
     padding-left: 15px;
@@ -16,10 +21,9 @@
 .dl-horizontal dt {
     white-space: normal;
 }
-
 /* Set width on the form input elements since they're 100% wide by default */
 /*input, select, textarea { max-width: 280px; }*/
- #inicio {
+ #/*inicio {
     background-image: url('http://www.happyhoursuites.com/wp-content/uploads/2018/01/prueba-fachada-noche-2.jpg');
     background-position: center;
     background-size: cover;
@@ -27,30 +31,12 @@
     -webkit-font-smoothing: antialiased;
     font: normal 14px Roboto,arial,sans-serif;
     font-family: 'Dancing Script', cursive !important;
-}
-
-.container {
-    padding: 110px;
-    position: fixed;
-}
+}*/
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #ffffff !important;
     opacity: 1; /* Firefox */
     font-size: 18px !important;
-}
-
-.form-login {
-    background-color: rgba(0,0,0,0.55);
-    padding-top: 10px;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 15px;
-    border-color: #d2d2d2;
-    border-width: 5px;
-    color: white;
-    box-shadow: 0 1px 0 #cfcfcf;
 }
 
 /*.form-control { background: transparent !important; color: white !important; font-size: 18px !important; }
@@ -62,17 +48,6 @@ h4 { border: 0 solid #fff; border-bottom-width: 1px; padding-bottom: 10px; text-
     color: white !important;
 }
 
-.wrapper { /*text-align: center;*/ }
-
-.footer p {
-    font-size: 28px;
-    background-color: black;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
-    color: white;
-}
 
 .content_summary { border-radius:4px; background:#ffffff; border:1px solid #cccccc; min-height:247px; padding:25px; }
 .field-validation-error { color: red; }

@@ -23,13 +23,13 @@ namespace DS.Motel.Data.Security
         #region Manipulation
         public void Add(UserType userType)
         {
-            _context.Security_UserType.Add(userType);
+            _context.UserType.Add(userType);
             _context.SaveChanges();
         }
 
         public void Edit(UserType userType)
         {
-            _context.Security_UserType.Attach(userType);
+            _context.UserType.Attach(userType);
             _context.Entry(userType).State = System.Data.Entity.EntityState.Modified;
             _context.SaveChanges();
         }
@@ -37,7 +37,7 @@ namespace DS.Motel.Data.Security
         public void Eliminar(Guid userTypeId)
         {
             UserType userType = GetSingle(userTypeId);
-            _context.Security_UserType.Remove(userType);
+            _context.UserType.Remove(userType);
             _context.SaveChanges();
         }
 
@@ -52,12 +52,12 @@ namespace DS.Motel.Data.Security
 
         public IQueryable<UserType> GetAll()
         {
-            return _context.Security_UserType;
+            return _context.UserType;
         }
 
         public UserType GetSingle(Guid? userTypeId)
         {
-            return _context.Security_UserType.SingleOrDefault(s => s.UserTypeId == userTypeId);
+            return _context.UserType.SingleOrDefault(s => s.UserTypeId == userTypeId);
         }
 
         #endregion

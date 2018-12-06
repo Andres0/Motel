@@ -48,12 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\AddressBook\CargoConfiguration.cs" />
-    <Compile Include="Configurations\Security\UserTypeConfiguration.cs" />
+    <Compile Include="Configurations\CargoConfiguration.cs" />
+    <Compile Include="Configurations\ParametrosConfiguration.cs" />
+    <Compile Include="Configurations\PersonalConfiguration.cs" />
+    <Compile Include="Configurations\SuiteConfiguration.cs" />
+    <Compile Include="Configurations\UserTypeConfiguration.cs" />
     <Compile Include="DsConfiguration.cs" />
     <Compile Include="DsContext.cs" />
     <Compile Include="Entities\Cargo.cs" />
-    <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\Parametros.cs" />
+    <Compile Include="Entities\Personal.cs" />
+    <Compile Include="Entities\PersonalEstado.cs" />
+    <Compile Include="Entities\Suite.cs" />
+    <Compile Include="Entities\SuiteEstado.cs" />
     <Compile Include="Entities\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
