@@ -236,10 +236,15 @@
     <Compile Include="App_Start\UnityMvcConfig.cs" />
     <Compile Include="Areas\AddressBook\AddressBookAreaRegistration.cs" />
     <Compile Include="Areas\AddressBook\Controllers\CargosController.cs" />
+    <Compile Include="Areas\AddressBook\Controllers\PersonalController.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\AddViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\DeleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\EditViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\NavegadorViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Personal\AddViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Personal\DeleteViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Personal\EditViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Personal\NavegadorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\Models\UserType\AddViewModel.cs" />
     <Compile Include="Areas\Security\Models\UserType\DeleteViewModel.cs" />
@@ -250,6 +255,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DropdownListViewModel.cs" />
     <Compile Include="Models\EnumActionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -8154,6 +8160,8 @@
     <Content Include="Areas\AddressBook\Views\Cargos\Edit.cshtml" />
     <Content Include="Areas\AddressBook\Views\Cargos\Delete.cshtml" />
     <Content Include="Areas\Security\Views\UserType\Delete.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Personal\Index.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Personal\AddPersonal.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
