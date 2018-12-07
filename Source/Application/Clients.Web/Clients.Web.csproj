@@ -240,6 +240,12 @@
     <Compile Include="Areas\AddressBook\Models\Cargos\DeleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\EditViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\NavegadorViewModel.cs" />
+    <Compile Include="Areas\Finances\Controllers\Cuenta_BancoController.cs" />
+    <Compile Include="Areas\Finances\FinancesAreaRegistration.cs" />
+    <Compile Include="Areas\Finances\Models\Cuenta_Banco\AddViewModel.cs" />
+    <Compile Include="Areas\Finances\Models\Cuenta_Banco\DeleteViewModel.cs" />
+    <Compile Include="Areas\Finances\Models\Cuenta_Banco\EditViewModel.cs" />
+    <Compile Include="Areas\Finances\Models\Cuenta_Banco\NavegadorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\Models\UserType\AddViewModel.cs" />
     <Compile Include="Areas\Security\Models\UserType\DeleteViewModel.cs" />
@@ -8154,6 +8160,13 @@
     <Content Include="Areas\AddressBook\Views\Cargos\Edit.cshtml" />
     <Content Include="Areas\AddressBook\Views\Cargos\Delete.cshtml" />
     <Content Include="Areas\Security\Views\UserType\Delete.cshtml" />
+    <Content Include="Areas\Finances\Views\web.config" />
+    <Content Include="Areas\Finances\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Finances\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Finances\Views\Cuenta_Banco\Index.cshtml" />
+    <Content Include="Areas\Finances\Views\Cuenta_Banco\Add.cshtml" />
+    <Content Include="Areas\Finances\Views\Cuenta_Banco\Edit.cshtml" />
+    <Content Include="Areas\Finances\Views\Cuenta_Banco\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -10291,6 +10304,10 @@
     <ProjectReference Include="..\Data.AddressBook\Data.AddressBook.csproj">
       <Project>{86c635bc-57c6-46ac-9b87-33fbf7de440f}</Project>
       <Name>Data.AddressBook</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data.Finances\Data.Finances.csproj">
+      <Project>{4f0b8001-09e4-4555-aca3-12d469066529}</Project>
+      <Name>Data.Finances</Name>
     </ProjectReference>
     <ProjectReference Include="..\Data.Security\Data.Security.csproj">
       <Project>{983ae7ad-c333-461b-b650-b47c7b26b2fc}</Project>

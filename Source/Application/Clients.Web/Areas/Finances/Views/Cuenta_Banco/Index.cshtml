@@ -1,0 +1,107 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn-add").click(function () {
+            $("#divContentAddCuenta").load('@Url.Action("Add", "Cuenta_Banco", new { area = "Finances" })', function () {
+                $('#AddModal').modal('show');
+            });
+        });
+    });
+
+    function btnEdit_onClick(cuentaId)
+    {
+        $("#divContentEditCuenta").load('@Url.Action("Edit", "Cuenta_Banco", new { area = "Finances" })?cuentaId=' + cuentaId, function () {
+            $('#EditModal').modal('show');
+        });
+    }
+
+    function btnDelete_onClick(cuentaId) {
+        $("#divContentDeleteCuenta").load('@Url.Action("Delete", "Cuenta_Banco", new { area = "Finances" })?cuentaId=' + cuentaId, function () {
+            $('#DeleteModal').modal('show');
+        });
+    }
+
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Cuentas Bancarias</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" id="btn-add" class="btn btn-success pull-right">Agregar Cuenta</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @(
+                        Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.Finances.Models.Cuenta_Banco.NavegadorViewModel>().Name("GridCuentas")
+                        .Columns(column =>
+                        {
+                            column.Bound(c => c.Numero).Title("Nro. de Cuenta").Width("20%");
+                            column.Bound(c => c.Titular).Title("Titular").Width("40%");
+                            column.Bound(c => c.Titular).Title("Banco").Width("calc(40%-120px)");
+                            column.Bound(c => c.Banco).Title("Acciones").Width("120px").Filterable(false).Sortable(false).ClientTemplate(
+                                "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:CuentaId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
+                                "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:CuentaId#\");'><span class='glyphicon glyphicon-remove' ></span></button>"
+                                );
+                        })
+                        .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
+                        .Filterable(filterable => filterable.Enabled(true))
+                        .Sortable(sortable => sortable.Enabled(true))
+                        .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
+                        .DataSource(datasourse => datasourse
+                            .Ajax()
+                            .PageSize(10)
+                            .Read(read => read.Action("LoadGrid", "Cuenta_Banco"))
+                            .ServerOperation(false))
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (@Ajax.BeginForm("Add", "Cuenta_Banco", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentAddCuenta", OnSuccess = "Add_onSuccess", OnBegin = "Add_callOnBegin" }))
+{
+    <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentAddCuenta" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Edit", "Cuenta_Banco", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentEditCuenta", OnSuccess = "Edit_onSuccess", OnBegin = "Edit_callOnBegin" }))
+{
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentEditCuenta" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Delete", "Cuenta_Banco", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeleteCuenta", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
+{
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentDeleteCuenta" class="modal-content">
+            </div>
+        </div>
+    </div>
+}

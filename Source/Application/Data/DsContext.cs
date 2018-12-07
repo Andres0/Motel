@@ -14,6 +14,7 @@ namespace DS.Motel.Data
         #region Fields & Properties
 
         public DbSet<Cargo> Cargo { get; set; }
+        public DbSet<Cuenta_Banco> Cuenta_Banco { get; set; }
         public DbSet<Parametros> Parametros { get; set; }
         public DbSet<Personal> Personal { get; set; }
         public DbSet<Suite> Suite { get; set; }
@@ -44,6 +45,7 @@ namespace DS.Motel.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new Configurations.CargoConfiguration());
+            modelBuilder.Configurations.Add(new Configurations.Cuenta_BancoConfiguration());
             modelBuilder.Configurations.Add(new Configurations.ParametrosConfiguration());
             modelBuilder.Configurations.Add(new Configurations.PersonalConfiguration());
             modelBuilder.Configurations.Add(new Configurations.SuiteConfiguration());

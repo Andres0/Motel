@@ -30,8 +30,12 @@ namespace DS.Motel.Data.AddressBook
         }
         public void Editar(Cargo cargo)
         {
-            _context.Cargo.Attach(cargo);
-            _context.Entry(cargo).State = System.Data.Entity.EntityState.Modified;
+            Cargo cargoaActualizar = _context.Cargo.SingleOrDefault(s => s.CargoId == cargo.CargoId);
+            cargoaActualizar.Nombre = cargo.Nombre;
+            cargoaActualizar.Descripcion = cargo.Descripcion;
+
+            _context.Cargo.Attach(cargoaActualizar);
+            _context.Entry(cargoaActualizar).State = System.Data.Entity.EntityState.Modified;
             _context.SaveChanges();
         }
         public void Eliminar(Guid cargoId)

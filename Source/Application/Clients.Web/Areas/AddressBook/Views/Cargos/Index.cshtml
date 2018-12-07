@@ -51,11 +51,11 @@
                         Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.AddressBook.Models.Cargos.NavegadorViewModel>().Name("GridCargos")
                         .Columns(column =>
                         {
-                            column.Bound(c => c.Nombre).Title("Nombre").Width("25%");
-                            column.Bound(c => c.Descripcion).Title("Descripción").Width("60%");
-                            column.Bound(c => c).Title("Acciones").Width("15%").ClientTemplate(
-                                "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:CargoId#\");'><span class='glyphicon glyphicon-pencil'></span></button>" +
-                                "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:CargoId#\");' style='margin-left:10px;'><span class='glyphicon glyphicon-remove' ></span></button>"
+                            column.Bound(c => c.Nombre).Title("Nombre").Width("30%");
+                            column.Bound(c => c.Descripcion).Title("Descripción").Width("calc(70%-120px)");
+                            column.Bound(c => c).Title("Acciones").Width("120px").Filterable(false).Sortable(false).ClientTemplate(
+                                "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:CargoId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
+                                "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:CargoId#\");'><span class='glyphicon glyphicon-remove' ></span></button>"
                                 );
 
                         })

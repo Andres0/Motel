@@ -29,8 +29,12 @@ namespace DS.Motel.Data.Security
 
         public void Edit(UserType userType)
         {
-            _context.UserType.Attach(userType);
-            _context.Entry(userType).State = System.Data.Entity.EntityState.Modified;
+            UserType userTypeaActualizar = _context.UserType.SingleOrDefault(s => s.UserTypeId == userType.UserTypeId);
+            userTypeaActualizar.Name = userType.Name;
+            userTypeaActualizar.Descripcion = userType.Descripcion;
+
+            _context.UserType.Attach(userTypeaActualizar);
+            _context.Entry(userTypeaActualizar).State = System.Data.Entity.EntityState.Modified;
             _context.SaveChanges();
         }
 

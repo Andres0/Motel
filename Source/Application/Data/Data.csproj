@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\CargoConfiguration.cs" />
+    <Compile Include="Configurations\Cuenta_BancoConfiguration.cs" />
     <Compile Include="Configurations\ParametrosConfiguration.cs" />
     <Compile Include="Configurations\PersonalConfiguration.cs" />
     <Compile Include="Configurations\SuiteConfiguration.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="DsConfiguration.cs" />
     <Compile Include="DsContext.cs" />
     <Compile Include="Entities\Cargo.cs" />
+    <Compile Include="Entities\Cuenta_Banco.cs" />
     <Compile Include="Entities\Parametros.cs" />
     <Compile Include="Entities\Personal.cs" />
     <Compile Include="Entities\PersonalEstado.cs" />
