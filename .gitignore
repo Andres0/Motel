@@ -1,5 +1,7 @@
 [Oo]bj
 [Bb]in
+obj
+bin
 *.user
 *.suo
 *.[Cc]ache

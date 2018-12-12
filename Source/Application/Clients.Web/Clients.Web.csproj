@@ -236,6 +236,7 @@
     <Compile Include="App_Start\UnityMvcConfig.cs" />
     <Compile Include="Areas\AddressBook\AddressBookAreaRegistration.cs" />
     <Compile Include="Areas\AddressBook\Controllers\CargosController.cs" />
+    <Compile Include="Areas\AddressBook\Controllers\PersonalController.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\AddViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\DeleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\EditViewModel.cs" />
@@ -244,6 +245,10 @@
     <Compile Include="Areas\Finances\FinancesAreaRegistration.cs" />
     <Compile Include="Areas\Finances\Models\Cuenta_Banco\AddViewModel.cs" />
     <Compile Include="Areas\Finances\Models\Cuenta_Banco\DeleteViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Personal\AddViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Personal\DeleteViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Personal\EditViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Personal\NavegadorViewModel.cs" />
     <Compile Include="Areas\Finances\Models\Cuenta_Banco\EditViewModel.cs" />
     <Compile Include="Areas\Finances\Models\Cuenta_Banco\NavegadorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
@@ -256,6 +261,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DropdownListViewModel.cs" />
     <Compile Include="Models\EnumActionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -8153,8 +8159,6 @@
     <Content Include="Content\kendo\2018.3.1017\images\kendoui.woff" />
     <Content Include="Areas\Security\Views\UserType\Add.cshtml" />
     <Content Include="Areas\Security\Views\UserType\Edit.cshtml" />
-    <Content Include="Areas\AddressBook\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\AddressBook\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AddressBook\Views\Cargos\Index.cshtml" />
     <Content Include="Areas\AddressBook\Views\Cargos\Add.cshtml" />
     <Content Include="Areas\AddressBook\Views\Cargos\Edit.cshtml" />
@@ -8162,6 +8166,8 @@
     <Content Include="Areas\Security\Views\UserType\Delete.cshtml" />
     <Content Include="Areas\Finances\Views\web.config" />
     <Content Include="Areas\Finances\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Personal\Index.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Personal\AddPersonal.cshtml" />
     <Content Include="Areas\Finances\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Finances\Views\Cuenta_Banco\Index.cshtml" />
     <Content Include="Areas\Finances\Views\Cuenta_Banco\Add.cshtml" />
@@ -10282,6 +10288,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\AddressBook\Views\Shared\" />
     <Folder Include="Areas\Items\Controllers\" />
     <Folder Include="Areas\Items\Models\" />
     <Folder Include="Areas\Items\Views\Shared\" />
