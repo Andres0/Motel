@@ -55,15 +55,14 @@
                             column.Bound(c => c.Nombre).Title("Nombre").Width("15%");
                             column.Bound(c => c.Apellido).Title("Apellido").Width("15%");
                             column.Bound(c => c.CI).Title("C.I.").Width("10%");
-                            column.Bound(c => c.Direccion).Title("Direccion").Width("30%");
+                            column.Bound(c => c.Direccion).Title("Direccion").Width("calc(30%-120px)");
                             column.Bound(c => c.Login).Title("Loggin").Width("10%");
                             column.Bound(c => c.Estado).Title("Estado").Width("10%");
-                            column.Bound(c => c.CargoId).Title("Cargo").Width("calc(10 % -120px)");
+                            column.Bound(c => c.Cargo_Name).Title("Cargo").Width("10%");
                             column.Bound(c => c).Title("Acciones").Width("120px").Sortable(false).Filterable(false).ClientTemplate(
                                 "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:PersonalId#\");'><span class='glyphicon glyphicon-pencil'></span></button>" +
                                 "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:PersonalId#\");' style='margin-left:10px;'><span class='glyphicon glyphicon-remove' ></span></button>"
                                 );
-
                         })
                         .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
                         .Filterable(filterable => filterable.Enabled(true))

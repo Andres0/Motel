@@ -15,8 +15,8 @@ namespace DS.Motel.Data
         public DsConfiguration()
         {
             //this.SetManifestTokenResolver(new MyManifestTokenResolver());
-           this.SetDatabaseInitializer<DsContext>(new DropCreateDatabaseAlways<DsContext>()); // for recreate database (comment this line when you need recreate the database)
-            this.SetDatabaseInitializer<DsContext>(new DropCreateDatabaseAlways<DsContext>()); // for recreate database (comment this line when you need recreate the database)
+            this.SetDatabaseInitializer<DsContext>(new DropCreateDatabaseIfModelChanges<DsContext>()); // for recreate database (comment this line when you need recreate the database)
+            //this.SetDatabaseInitializer<DsContext>(new DropCreateDatabaseAlways<DsContext>()); // for recreate database (comment this line when you need recreate the database)
 
             //Database.SetInitializer<SchoolDBContext>(new CreateDatabaseIfNotExists<SchoolDBContext>());
             //Database.SetInitializer<SchoolDBContext>(new DropCreateDatabaseIfModelChanges<SchoolDBContext>());

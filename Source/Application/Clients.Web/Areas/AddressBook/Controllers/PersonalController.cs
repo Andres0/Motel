@@ -10,6 +10,7 @@ using Unity;
 using Kendo.Mvc.Extensions;
 using DS.Motel.Clients.Web.Models;
 using DS.Motel.Data.Security;
+using DS.Motel.Data.Entities;
 
 namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 {
@@ -88,8 +89,12 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             {
                 if (personalRepository.ObtenerTodo().Count(c => c.Login == model.Login) > 0)
                 {
-                    toReturn.Add(new Tuple<string, string>("Login", "Ya existe una cuenta con ese LOGIN"));
+                    toReturn.Add(new Tuple<string, string>("Login", "Ya existe una cuenta con ese Login"));
                 }
+            }
+            if (model.Password != null && model.ConfirmarPsw != null && !model.Password.Equals(model.ConfirmarPsw))
+            {
+                toReturn.Add(new Tuple<string, string>("ConfirmarPsw", "Confirmar password no coincide con el password"));
             }
             return toReturn;
         }
@@ -173,9 +178,53 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPersonal(AddViewModel model)
         {
-            //ModelState.AddModelError(item.Item1, item.Item2);
-            ModelState.AddModelError("Nombre", "ERROR");
-            model.Result = Web.Models.EnumActionResult.Saved;
+            PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
+
+            //LIMPIA EL MODEO DE ERRORES
+            ModelState.Clear();
+
+            //OBTENGO LOS POSIBLES ERRORES
+            List<Tuple<string, string>> errores = GetErroresAdd(model);
+
+            //CARGO LOS ERRORES AL MODELSTATE
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
+
+            if (ModelState.IsValid)
+            {
+                Personal personal = new Personal();
+                personal.Nombre = model.Nombre.Trim();
+                personal.Apellido = model.Apellido.Trim();
+                personal.CI = model.CI.Trim();
+                personal.Direccion = model.Direccion.Trim();
+                personal.Telefono = model.Telefono.Trim();
+                personal.Email = model.Email.Trim();
+                personal.Login = model.Login.Trim();
+                personal.Password = model.Password.Trim();
+                personal.Observacion = model.Observacion.Trim();
+                personal.Estado = PersonalEstado.Activado;
+                personal.UserTypeId = model.UserTypeId;
+                personal.CargoId = model.CargoId;
+                personal.Creado_Por = null;
+
+                try
+                {
+                    personalRepository.Agregar(personal);
+
+                    model.Result = EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
+
             model.Cargos = Obtenercargos();
             model.TipoUsuario = ObtenerTipodeUser();
             return PartialView(model);
@@ -195,16 +244,14 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             PersonalRepository PersonalRepository = container.Resolve<PersonalRepository>();
             List<NavegadorViewModel> toReturn = PersonalRepository.ObtenerTodo().Select(t => new NavegadorViewModel()
             {
-               
+                PersonalId = t.PersonalId,
                 Nombre = t.Nombre,
                 Apellido = t.Apellido,
-                CI=t.Apellido,
-                Direccion= t.Direccion,
-                Login=t.Login,
-                Estado=t.Estado.ToString(),
-                CargoId=t.CargoId
-
-                
+                CI = t.Apellido,
+                Direccion = t.Direccion,
+                Login = t.Login,
+                Estado = t.Estado.ToString(),
+                Cargo_Name = t.Cargo.Nombre
             }).OrderBy(y => y.Nombre).ToList();
 
             return Json(toReturn.ToDataSourceResult(request));
