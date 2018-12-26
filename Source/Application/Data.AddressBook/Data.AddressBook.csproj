@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CargoRepository.cs" />
+    <Compile Include="ParametrosRepository.cs" />
     <Compile Include="PersonalRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

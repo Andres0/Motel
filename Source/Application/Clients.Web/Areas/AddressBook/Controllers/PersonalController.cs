@@ -363,7 +363,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
                 PersonalId = t.PersonalId,
                 Nombre = t.Nombre,
                 Apellido = t.Apellido,
-                CI = t.Apellido,
+                CI = t.CI,
                 Direccion = t.Direccion,
                 Login = t.Login,
                 Estado = t.Estado.ToString(),
