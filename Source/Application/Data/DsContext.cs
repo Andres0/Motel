@@ -32,7 +32,6 @@ namespace DS.Motel.Data
 
         public DsContext() : base("MotelDB")
         {
-            //Database.SetInitializer(new Inicializador());
         }
 
         #endregion

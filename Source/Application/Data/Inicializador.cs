@@ -1,13 +1,14 @@
 ﻿using DS.Motel.Data.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DS.Motel.Data
 {
-    public class Inicializador : System.Data.Entity.CreateDatabaseIfNotExists<DsContext>
+    public class Inicializador : CreateDatabaseIfNotExists<DsContext>
     {
         protected override void Seed(DsContext context)
         {
@@ -16,7 +17,7 @@ namespace DS.Motel.Data
                 new CajaBanco{ Nombre = "Caja chica", Descripcion = null, Tipo = CajaBancoTipo.Caja }
             };
             CajaBancos.ForEach(s => context.CajaBanco.Add(s));
-            context.SaveChanges();
+            base.Seed(context);
 
             //var students = new List<Student>
             //{
