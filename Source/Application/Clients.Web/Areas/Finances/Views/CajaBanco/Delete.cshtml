@@ -1,0 +1,53 @@
+﻿@model DS.Motel.Clients.Web.Areas.Finances.Models.CajaBanco.DeleteViewModel
+
+<script type="text/javascript">
+
+    function Delete_callOnBegin() {
+        $("#btnDelete").attr("disabled", "disabled")
+    }
+
+    function Delete_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("La cuenta se elimino correctamente", { globalPosition: "top center", className: "success" });
+                    $("#GridCuentas").data("kendoGrid").dataSource.read();
+                    $('#DeleteModal').modal('hide');
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Este cargo no se puede borrar", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+</script>
+
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(m => m.CajaBancoId)
+<div class="modal-header">
+    <h1 class="modal-title">Borrar Cuenta</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>¿Está seguro que desea borrar?</label>
+            @Html.ValidationMessageFor(m => m.ErrorMessage)
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnDelete" type="submit" class="btn btn-primary">Si</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+</div>

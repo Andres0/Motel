@@ -25,6 +25,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Models.Personal
         public PersonalEstado Estado { get; set; }
         public Guid UserTypeId { get; set; }
         public Guid CargoId { get; set; }
+        public string ConfirmarPsw { get; set; }
         public List<DropdownListViewModel> Cargos { get; set; }
         public List<DropdownListViewModel> TipoUsuario { get; set; }
     }

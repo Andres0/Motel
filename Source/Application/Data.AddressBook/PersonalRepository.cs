@@ -16,6 +16,7 @@ namespace DS.Motel.Data.AddressBook
         #endregion
 
 
+
         #region Manipulacion
 
         public void Agregar(Personal personal)
@@ -37,6 +38,7 @@ namespace DS.Motel.Data.AddressBook
             _context.SaveChanges();
         }
         #endregion
+
 
 
         #region Consultas

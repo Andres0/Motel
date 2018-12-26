@@ -71,10 +71,8 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             {
                 toReturn.Add(new Tuple<string, string>("CI", "Por favor ingrese un C.I."));
             }
-
             else
             {
-
                 if (personalRepository.ObtenerTodo().Count(c => c.CI == model.CI) > 0)
                 {
                     toReturn.Add(new Tuple<string, string>("CI", "Numero de carnet ya registrado"));
@@ -128,26 +126,27 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             {
                 toReturn.Add(new Tuple<string, string>("CI", "Por favor ingrese un C.I."));
             }
-
             else
             {
-
-                if (personalRepository.ObtenerTodo().Count(c => c.CI == model.CI && c.PersonalId!=model.PersonalId) > 0)
+                if (personalRepository.ObtenerTodo().Count(c => c.CI == model.CI && c.PersonalId != model.PersonalId) > 0)
                 {
                     toReturn.Add(new Tuple<string, string>("CI", "Numero de carnet ya registrado"));
                 }
             }
-
             if (string.IsNullOrEmpty(model.Login))
             {
                 toReturn.Add(new Tuple<string, string>("Login", "Por favor ingrese un Login"));
             }
             else
             {
-                if (personalRepository.ObtenerTodo().Count(c => c.Login == model.Login && c.PersonalId!= model.PersonalId) > 0)
+                if (personalRepository.ObtenerTodo().Count(c => c.Login == model.Login && c.PersonalId != model.PersonalId) > 0)
                 {
-                    toReturn.Add(new Tuple<string, string>("Login", "Ya existe una cuenta con ese LOGIN"));
+                    toReturn.Add(new Tuple<string, string>("Login", "Ya existe una cuenta con ese Login"));
                 }
+            }
+            if (model.Password != null && model.ConfirmarPsw != null && !model.Password.Equals(model.ConfirmarPsw))
+            {
+                toReturn.Add(new Tuple<string, string>("ConfirmarPsw", "Confirmar password no coincide con el password"));
             }
             return toReturn;
         }
@@ -195,15 +194,15 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             if (ModelState.IsValid)
             {
                 Personal personal = new Personal();
-                personal.Nombre = model.Nombre.Trim();
-                personal.Apellido = model.Apellido.Trim();
-                personal.CI = model.CI.Trim();
-                personal.Direccion = model.Direccion.Trim();
-                personal.Telefono = model.Telefono.Trim();
-                personal.Email = model.Email.Trim();
-                personal.Login = model.Login.Trim();
-                personal.Password = model.Password.Trim();
-                personal.Observacion = model.Observacion.Trim();
+                personal.Nombre = model.Nombre;
+                personal.Apellido = model.Apellido;
+                personal.CI = model.CI;
+                personal.Direccion = model.Direccion;
+                personal.Telefono = model.Telefono;
+                personal.Email = model.Email;
+                personal.Login = model.Login;
+                personal.Password = model.Password;
+                personal.Observacion = model.Observacion;
                 personal.Estado = PersonalEstado.Activado;
                 personal.UserTypeId = model.UserTypeId;
                 personal.CargoId = model.CargoId;
@@ -230,6 +229,123 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             return PartialView(model);
         }
 
+        public ActionResult EditPersonal(Guid personalId)
+        {
+            PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
+            Personal personal = personalRepository.ObtenerPorId(personalId);
+
+            EditViewModel editViewModel = new EditViewModel();
+            editViewModel.PersonalId = personal.PersonalId;
+            editViewModel.Nombre = personal.Nombre;
+            editViewModel.Apellido = personal.Apellido;
+            editViewModel.CI = personal.CI;
+            editViewModel.Direccion = personal.Direccion;
+            editViewModel.Telefono = personal.Telefono;
+            editViewModel.Email = personal.Email;
+            editViewModel.Login = personal.Login;
+            editViewModel.Password = personal.Password;
+            editViewModel.Observacion = personal.Observacion;
+            editViewModel.Estado = personal.Estado;
+            editViewModel.CargoId = personal.CargoId;
+            editViewModel.UserTypeId = personal.UserTypeId;
+
+            editViewModel.Cargos = Obtenercargos();
+            editViewModel.TipoUsuario = ObtenerTipodeUser();
+            
+            return PartialView(editViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPersonal(EditViewModel model)
+        {
+            PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
+
+            ModelState.Clear();
+
+            List<Tuple<string, string>> errores = GeterrorEdit(model);
+
+            //CARGO LOS ERRORES AL MODELSTATE
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
+
+            if (ModelState.IsValid)
+            {
+                Personal personal = new Personal();
+                personal.PersonalId = model.PersonalId;
+                personal.Nombre = model.Nombre;
+                personal.Apellido = model.Apellido;
+                personal.CI = model.CI;
+                personal.Direccion = model.Direccion;
+                personal.Telefono = model.Telefono;
+                personal.Email = model.Email;
+                personal.Login = model.Login;
+                personal.Password = model.Password;
+                personal.Observacion = model.Observacion;
+                personal.Estado = PersonalEstado.Activado;
+                personal.UserTypeId = model.UserTypeId;
+                personal.CargoId = model.CargoId;
+                personal.Creado_Por = null;
+
+                try
+                {
+                    personalRepository.Editar(personal);
+
+                    model.Result = EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
+
+            model.Cargos = Obtenercargos();
+            model.TipoUsuario = ObtenerTipodeUser();
+            return PartialView(model);
+        }
+
+        public ActionResult DeletePersonal(Guid personalId)
+        {
+            DeleteViewModel deleteViewModel = new DeleteViewModel();
+            deleteViewModel.PersonalId = personalId;
+
+            return PartialView(deleteViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePersonal(DeleteViewModel model)
+        {
+            PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
+
+            ModelState.Clear();
+            //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    personalRepository.Eliminar(model.PersonalId);
+
+                    model.Result = Web.Models.EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
+            return PartialView(model);
+        }
         #endregion
 
 

@@ -15,15 +15,13 @@
         });
     });
 
-    function btnEdit_onClick(cargoId)
+    function btnEdit_onClick(personalId)
     {
-        $("#divContentEditPersonal").load('@Url.Action("Edit", "Personal", new { area = "AddressBook" })?cargoId=' + cargoId, function () {
-            $('#EditModal').modal('show');
-        });
+        $("#divMasterOperationAreaContent").load('@Url.Action("EditPersonal", "Personal", new { area = "AddressBook" })?personalId=' + personalId);
     }
 
-    function btnDelete_onClick(cargoId) {
-        $("#divContentDeletePersonal").load('@Url.Action("Delete", "Personal", new { area = "AddressBook" })?cargoId=' + cargoId, function () {
+    function btnDelete_onClick(personalId) {
+        $("#divContentDeletePersonal").load('@Url.Action("DeletePersonal", "Personal", new { area = "AddressBook" })?personalId=' + personalId, function () {
             $('#DeleteModal').modal('show');
         });
     }
@@ -60,8 +58,8 @@
                             column.Bound(c => c.Estado).Title("Estado").Width("10%");
                             column.Bound(c => c.Cargo_Name).Title("Cargo").Width("10%");
                             column.Bound(c => c).Title("Acciones").Width("120px").Sortable(false).Filterable(false).ClientTemplate(
-                                "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:PersonalId#\");'><span class='glyphicon glyphicon-pencil'></span></button>" +
-                                "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:PersonalId#\");' style='margin-left:10px;'><span class='glyphicon glyphicon-remove' ></span></button>"
+                                "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:PersonalId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
+                                "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:PersonalId#\");' ><span class='glyphicon glyphicon-remove' ></span></button>"
                                 );
                         })
                         .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
@@ -81,18 +79,7 @@
 </div>
 
 
-
-@using (@Ajax.BeginForm("Edit", "Personal", new { area = "AddressBook" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentEditPersonal", OnSuccess = "Edit_onSuccess", OnBegin = "Edit_callOnBegin" }))
-{
-    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div id="divContentEditPersonal" class="modal-content">
-            </div>
-        </div>
-    </div>
-}
-
-@using (@Ajax.BeginForm("Delete", "Personal", new { area = "AddressBook" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeletePersonal", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
+@using (@Ajax.BeginForm("DeletePersonal", "Personal", new { area = "AddressBook" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeletePersonal", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
 {
     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">

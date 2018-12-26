@@ -49,21 +49,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\CargoConfiguration.cs" />
-    <Compile Include="Configurations\Cuenta_BancoConfiguration.cs" />
+    <Compile Include="Configurations\CajaBancoConfiguration.cs" />
     <Compile Include="Configurations\ParametrosConfiguration.cs" />
     <Compile Include="Configurations\PersonalConfiguration.cs" />
     <Compile Include="Configurations\SuiteConfiguration.cs" />
+    <Compile Include="Configurations\TransaccionConfiguration.cs" />
     <Compile Include="Configurations\UserTypeConfiguration.cs" />
     <Compile Include="DsConfiguration.cs" />
     <Compile Include="DsContext.cs" />
+    <Compile Include="Entities\CajaBancoTipo.cs" />
     <Compile Include="Entities\Cargo.cs" />
-    <Compile Include="Entities\Cuenta_Banco.cs" />
+    <Compile Include="Entities\CajaBanco.cs" />
     <Compile Include="Entities\Parametros.cs" />
     <Compile Include="Entities\Personal.cs" />
     <Compile Include="Entities\PersonalEstado.cs" />
     <Compile Include="Entities\Suite.cs" />
     <Compile Include="Entities\SuiteEstado.cs" />
+    <Compile Include="Entities\Transaccion.cs" />
+    <Compile Include="Entities\TransaccionTipo.cs" />
     <Compile Include="Entities\UserType.cs" />
+    <Compile Include="Inicializador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
