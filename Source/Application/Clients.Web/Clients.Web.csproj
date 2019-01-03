@@ -238,6 +238,7 @@
     <Compile Include="Areas\AddressBook\Controllers\CargosController.cs" />
     <Compile Include="Areas\AddressBook\Controllers\ParametrosController.cs" />
     <Compile Include="Areas\AddressBook\Controllers\PersonalController.cs" />
+    <Compile Include="Areas\AddressBook\Controllers\SuitesController.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\AddViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\DeleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\EditViewModel.cs" />
@@ -247,6 +248,10 @@
     <Compile Include="Areas\AddressBook\Models\Parametros\EditViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Parametros\EstadoViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Parametros\NavegadorViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Suites\AddViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Suites\DeleteViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Suites\EditViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Suites\NavegadorViewModel.cs" />
     <Compile Include="Areas\Finances\Controllers\CajaBancoController.cs" />
     <Compile Include="Areas\Finances\Controllers\TransaccionController.cs" />
     <Compile Include="Areas\Finances\FinancesAreaRegistration.cs" />
@@ -270,6 +275,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DropdownListEnumViewModel.cs" />
     <Compile Include="Models\DropdownListViewModel.cs" />
     <Compile Include="Models\EnumActionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -8190,6 +8196,10 @@
     <Content Include="Areas\AddressBook\Views\Parametros\EditParametros.cshtml" />
     <Content Include="Areas\AddressBook\Views\Parametros\DeleteParametros.cshtml" />
     <Content Include="Areas\AddressBook\Views\Parametros\EstadoParametros.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Suites\Index.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Suites\Add.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Suites\Edit.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Suites\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
