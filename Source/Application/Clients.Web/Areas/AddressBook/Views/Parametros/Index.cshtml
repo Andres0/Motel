@@ -1,0 +1,103 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Index";
+    if (Convert.ToBoolean(ViewData["MasterLoad"]) == true)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn-add").click(function () {
+            $("#divMasterOperationAreaContent").load('@Url.Action("AddParametros", "Parametros", new { area = "AddressBook" })');
+        });
+    });
+
+    function btnEdit_onClick(parametroId)
+    {
+        $("#divMasterOperationAreaContent").load('@Url.Action("EditParametros", "Parametros", new { area = "AddressBook" })?parametroId=' + parametroId);
+    }
+
+    function btnDelete_onClick(parametroId) {
+        $("#divContentDeleteParametro").load('@Url.Action("DeleteParametros", "Parametros", new { area = "AddressBook" })?parametroId=' + parametroId, function () {
+            $('#DeleteModal').modal('show');
+        });
+    }
+    function btnestado_onClick(parametroId) {
+         $("#divContentestadoParametro").load('@Url.Action("EstadoParametros", "Parametros", new { area = "AddressBook" })?parametroId=' + parametroId, function () {
+            $('#EstadoModal').modal('show');
+        });
+    }
+
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Administracion de Parametros</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" id="btn-add" class="btn btn-success pull-right">Agregar Parametro</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @(
+                    Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.AddressBook.Models.Parametros.NavegadorViewModel>().Name("GridParametro")
+                    .Columns(column =>
+                    {
+                        column.Bound(c => c.Nombre).Title("Nombre").Width("calc(50%-180px)"); ;
+                        column.Bound(c => c.Costo_Habitacion).Title("Costo Habitacion").Width("30%");
+                        column.Bound(c => c.Activado).Title("Estado Habitacion").Width("20%");
+                        column.Bound(c => c).Title("Acciones").Width("180px").Sortable(false).Filterable(false).ClientTemplate(
+                            "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:ParametroId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
+                            "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:ParametroId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-remove' ></span></button>" +
+                            "<button class='btn btn-info' title='Activar / Desactivar' onclick='btnestado_onClick(\"#:ParametroId#\");' ><span class='glyphicon glyphicon-edit' ></span></button>"
+                            );
+                    })
+                    .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
+                    .Filterable(filterable => filterable.Enabled(true))
+                    .Sortable(sortable => sortable.Enabled(true))
+                    .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
+                    .DataSource(datasourse => datasourse
+                        .Ajax()
+                        .PageSize(10)
+                        .Read(read => read.Action("LoadGrid", "Parametros"))
+                        .ServerOperation(false))
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (@Ajax.BeginForm("DeleteParametros", "Parametros", new { area = "AddressBook" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeleteParametro", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
+{
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentDeleteParametro" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+
+@using (@Ajax.BeginForm("EstadoParametros", "Parametros", new { area = "AddressBook" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentestadoParametro", OnSuccess = "Estado_onSuccess", OnBegin = "Estado_callOnBegin" }))
+{
+    <div class="modal fade" id="EstadoModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentestadoParametro" class="modal-content">
+            </div>
+        </div>
+    </div>
+}

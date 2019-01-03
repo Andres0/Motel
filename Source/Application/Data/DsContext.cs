@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace DS.Motel.Data
 {
-    [DbConfigurationType(typeof(DsConfiguration))]
     public class DsContext : DbContext
     {
         #region Fields & Properties

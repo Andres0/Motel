@@ -11,7 +11,7 @@ namespace DS.Motel.Data.Entities
         #region Fields & Properties
 
         public Guid ParametroId { get; set; }
-        public string Codigo { get; set; }
+        public string Nombre { get; set; }
         public decimal Costo_Habitacion { get; set; }
         public decimal Costo_Adicional1 { get; set; }
         public decimal Costo_Adicional2 { get; set; }
@@ -26,7 +26,7 @@ namespace DS.Motel.Data.Entities
         public decimal Numero_Inicio_Boleta { get; set; }
         public decimal Numero_Fin_Boleta { get; set; }
         public DateTime Fecha_Modificado { get; set; }
-        public Guid PersonalId { get; set; }
+        public Guid? PersonalId { get; set; }
         public bool Activado { get; set; }
         public virtual Personal Usuario { get; set; }
 

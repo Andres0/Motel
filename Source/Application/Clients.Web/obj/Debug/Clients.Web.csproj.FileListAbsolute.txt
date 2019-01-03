@@ -782,8 +782,8 @@ C:\Users\Administrador\Documents\happySys\happy\Source\Application\Clients.Web\o
 C:\Users\Administrador\Documents\happySys\happy\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.CopyComplete
 C:\Users\Administrador\Documents\happySys\happy\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.dll
 C:\Users\Administrador\Documents\happySys\happy\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.pdb
-C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csprojAssemblyReference.cache
-C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.CoreCompileInputs.cache
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Clients.Web\bin\DS.Motel.Data.Finances.dll
+C:\Users\Administrador\Documents\happySys\happy\Source\Application\Clients.Web\bin\DS.Motel.Data.Finances.pdb
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\ApplicationInsights.config
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Clients.Web.dll.config
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Clients.Web.dll
@@ -838,6 +838,7 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Antlr3.Runtime.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\CommonServiceLocator.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.AddressBook.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Finances.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Security.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\EntityFramework.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\EntityFramework.SqlServer.dll
@@ -884,6 +885,7 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Unity.RegistrationByConve
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Unity.ServiceLocation.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\WebGrease.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.AddressBook.pdb
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Finances.pdb
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Security.pdb
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Security.dll.config
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.pdb
@@ -953,8 +955,8 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\es\System.Web.WebPages.re
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\es\System.Web.WebPages.Razor.resources.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\es\System.Web.Optimization.resources.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csprojAssemblyReference.cache
+C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.CoreCompileInputs.cache
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.CopyComplete
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.pdb
-C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Finances.dll
-C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Finances.pdb
