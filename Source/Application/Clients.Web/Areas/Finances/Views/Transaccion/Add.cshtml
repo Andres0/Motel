@@ -1,0 +1,165 @@
+﻿@model DS.Motel.Clients.Web.Areas.Finances.Models.Transaccion.AddViewModel
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#Fecha_Inicio').datepicker({
+            autoclose: true,
+            dateFormat: 'dd/MM/yyyy'
+        });
+        $('#Fecha_Fin').datepicker({
+            autoclose: true,
+            dateFormat: 'dd/MM/yyyy'
+        });
+
+        $(".custom-decimal").each(function () {
+            $(this).ForceDecimalCulture();
+        });
+
+        $(".custom-decimal").on("focus", function () {
+            var valText = $(this).val();
+            var valTextParse = kendo.parseFloat(valText);
+            if (valTextParse == 0)
+                $(this).val("");
+            else
+                $(this).val(valText);
+        });
+        $(".custom-decimal").on("blur", function () {
+            var valText = $(this).val();
+            var valTextParse = kendo.parseFloat(valText);
+            if (valTextParse != "" && valTextParse != null)
+                $(this).val(valText);
+            else
+                $(this).val(0);
+        });
+
+        $("#btnCancel").click(function () {
+            $("#divMasterOperationAreaContent").load('@Url.Action("Index", "Transaccion", new { area = "Finances" })?masterload=false');
+            $(document).scrollTop(0);
+        });
+    });
+
+    function Add_callOnBegin() {
+        $("#btnAdd").attr("disabled", "disabled")
+        $("#btnAdd").text("Guardando...");
+    }
+
+    function Add_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("La transacción se guardó con exito", { globalPosition: "top center", className: "success" });
+                    $("#divMasterOperationAreaContent").load('@Url.Action("index", "Transaccion", new { area = "Finances" })?masterload=false');
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+        $(document).scrollTop(0);
+    }
+
+    
+    function CuentaId_onChange() {
+        if ($("#CuentaId option:selected").text() == "Caja chica")
+            $("#divFechasCuenta").hide();
+        else
+            $("#divFechasCuenta").show();
+    }
+
+</script>
+
+<div id="divAddTransaction">
+    @using (@Ajax.BeginForm("Add", "Transaccion", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divAddTransaction", OnBegin = "Add_callOnBegin", OnSuccess = "Add_onSuccess" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="margin:15px;">Agregar Transacción</h1>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box box-default">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <div class="radio">
+                                <label>
+                                    @Html.RadioButtonFor(m => m.IngresoOEgreso, "1", new { tabindex = "1" })
+                                    RETIRO
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    @Html.RadioButtonFor(m => m.IngresoOEgreso, "2", new { tabindex = "2" })
+                                    DEPÓSITO
+                                </label>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.IngresoOEgreso)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Cuenta</label>
+                            @Html.DropDownListFor(m => m.CuentaId, new SelectList(@Model.Cuentas, "Id", "Nombre"), new { @class = "form-control", tabindex = "3", onchange = "CuentaId_onChange();" })
+                            @Html.ValidationMessageFor(m => m.CuentaId)
+                        </div>
+                    </div>
+                    <div id="divFechasCuenta" class="row">
+                        <div class="form-group col-md-3">
+                            <label>Fecha Inicio</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right" tabindex="4" maxlength="10" id="Fecha_Inicio" name="Fecha_Inicio" value='@Model.Fecha_Inicio.ToString("dd/MM/yyyy")' />
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Fecha_Inicio)
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Fecha Fin</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right" tabindex="5" maxlength="10" id="Fecha_Fin" name="Fecha_Fin" value='@Model.Fecha_Fin.ToString("dd/MM/yyyy")' />
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Fecha_Fin)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Monto</label>
+                            @Html.TextBoxFor(m => m.Monto, new { maxlength = "50", @class = "form-control custom-decimal", tabindex = "6" })
+                            @Html.ValidationMessageFor(m => m.Monto)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Descripción</label>
+                            @Html.TextAreaFor(m => m.Concepto, new { @class = "form-control", tabindex = "7" })
+                            @Html.ValidationMessageFor(m => m.Concepto)
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button id="btnCancel" type="button" class="btn btn-secondary pull-right">Cancelar</button>
+                    <button id="btnAdd" type="submit" class="btn btn-success pull-right" style="margin-right:15px;">Guardar</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -6,11 +6,12 @@ using System.Web;
 
 namespace DS.Motel.Clients.Web.Areas.Finances.Models.Transaccion
 {
-    public class AddViewModel
+    public class EditViewModel
     {
         public EnumActionResult Result { get; set; }
 
 
+        public Guid TransaccionId { get; set; }
         public Guid CuentaId { get; set; }
         public int IngresoOEgreso { get; set; }
         public DateTime Fecha_Inicio { get; set; }

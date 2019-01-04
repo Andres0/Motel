@@ -264,6 +264,8 @@
     <Compile Include="Areas\Finances\Models\CajaBanco\EditViewModel.cs" />
     <Compile Include="Areas\Finances\Models\CajaBanco\NavegadorViewModel.cs" />
     <Compile Include="Areas\Finances\Models\Transaccion\AddViewModel.cs" />
+    <Compile Include="Areas\Finances\Models\Transaccion\DeleteViewModel.cs" />
+    <Compile Include="Areas\Finances\Models\Transaccion\EditViewModel.cs" />
     <Compile Include="Areas\Finances\Models\Transaccion\NavegadorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\Models\UserType\AddViewModel.cs" />
@@ -8200,6 +8202,9 @@
     <Content Include="Areas\AddressBook\Views\Suites\Add.cshtml" />
     <Content Include="Areas\AddressBook\Views\Suites\Edit.cshtml" />
     <Content Include="Areas\AddressBook\Views\Suites\Delete.cshtml" />
+    <Content Include="Areas\Finances\Views\Transaccion\Add.cshtml" />
+    <Content Include="Areas\Finances\Views\Transaccion\Delete.cshtml" />
+    <Content Include="Areas\Finances\Views\Transaccion\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

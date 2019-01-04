@@ -11,7 +11,7 @@ namespace DS.Motel.Data.Entities
         #region Fields & Properties
 
         public Guid TransaccionId { get; set; }
-        public Guid CuentaId { get; set; }
+        public Guid CajaBancoId { get; set; }
         public TransaccionTipo Tipo { get; set; }
         public DateTime Fecha_Ini { get; set; }
         public DateTime Fecha_Fin { get; set; }

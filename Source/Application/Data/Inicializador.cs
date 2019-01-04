@@ -31,9 +31,14 @@ namespace DS.Motel.Data
 
         protected override void Seed(DsContext context)
         {
+            //var Personas = new List<Personal>
+            //{
+            //    new Personal { Nombre = "Admin", Apellido = "Admin", CI = "0", Direccion="", Email="", Login="Admin", Password="Admin", Observacion="", Estado=PersonalEstado.Activado  }
+            //};
+
             var CajaBancos = new List<CajaBanco>
             {
-                new CajaBanco{ Nombre = "Caja chica", Descripcion = null, Tipo = CajaBancoTipo.Caja }
+                new CajaBanco { Nombre = "Caja chica", Descripcion = null, Tipo = CajaBancoTipo.Caja }
             };
             CajaBancos.ForEach(s => context.CajaBanco.Add(s));
             base.Seed(context);

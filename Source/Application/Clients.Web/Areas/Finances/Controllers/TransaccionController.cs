@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Unity;
 using Kendo.Mvc.Extensions;
 using DS.Motel.Clients.Web.Models;
+using DS.Motel.Data.Entities;
 
 namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
 {
@@ -40,6 +41,60 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
 
         #region Validacion
 
+        private List<Tuple<string, string>> GetErroresAdd(AddViewModel model)
+        {
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+
+            if (model.IngresoOEgreso == 0)
+            {
+                toReturn.Add(new Tuple<string, string>("IngresoOEgreso", "Por favor seleccione una opción"));
+            }
+            if (model.Fecha_Inicio != null && model.Fecha_Fin != null && model.Fecha_Fin < model.Fecha_Inicio)
+            {
+                toReturn.Add(new Tuple<string, string>("Fecha_Inicio", "Por favor ingrese un intervalo de fechas valido"));
+            }
+            if (string.IsNullOrEmpty(model.Concepto))
+            {
+                toReturn.Add(new Tuple<string, string>("Concepto", "Por favor ingrese una descripción"));
+            }
+            if (model.Monto == 0)
+            {
+                toReturn.Add(new Tuple<string, string>("Monto", "Por favor ingrese un monto"));
+            }
+            if (model.CuentaId == Guid.Empty)
+            {
+                toReturn.Add(new Tuple<string, string>("CuentaId", "Por favor seleccione una cuenta"));
+            }
+            return toReturn;
+        }
+
+        private List<Tuple<string, string>> GetErrorEdit(EditViewModel model)
+        {
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+
+            if (model.IngresoOEgreso == 0)
+            {
+                toReturn.Add(new Tuple<string, string>("IngresoOEgreso", "Por favor seleccione una opción"));
+            }
+            if (model.Fecha_Inicio != null && model.Fecha_Fin != null && model.Fecha_Fin < model.Fecha_Inicio)
+            {
+                toReturn.Add(new Tuple<string, string>("Fecha_Inicio", "Por favor ingrese un intervalo de fechas valido"));
+            }
+            if (string.IsNullOrEmpty(model.Concepto))
+            {
+                toReturn.Add(new Tuple<string, string>("Concepto", "Por favor ingrese una descripción"));
+            }
+            if (model.Monto == 0)
+            {
+                toReturn.Add(new Tuple<string, string>("Monto", "Por favor ingrese un monto"));
+            }
+            if (model.CuentaId == Guid.Empty)
+            {
+                toReturn.Add(new Tuple<string, string>("CuentaId", "Por favor seleccione una cuenta"));
+            }
+            return toReturn;
+        }
+        
         #endregion
 
 
@@ -55,188 +110,176 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
             return View();
         }
 
-        //public ActionResult Add()
-        //{
-        //    AddViewModel addViewModel = new AddViewModel();
-        //    addViewModel.Cuentas = ObtenerCuentas();
-        //    return PartialView(addViewModel);
-        //}
+        public ActionResult Add()
+        {
+            AddViewModel addViewModel = new AddViewModel();
+            addViewModel.Fecha_Inicio = DateTime.Now;
+            addViewModel.Fecha_Fin = DateTime.Now;
+            addViewModel.Cuentas = ObtenerCuentas();
+            return PartialView(addViewModel);
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Add(AddViewModel model)
-        //{
-        //    PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(AddViewModel model)
+        {
+            TransaccionRepository transaccionRepository = container.Resolve<TransaccionRepository>();
 
-        //    //LIMPIA EL MODEO DE ERRORES
-        //    ModelState.Clear();
+            //LIMPIA EL MODEO DE ERRORES
+            ModelState.Clear();
 
-        //    //OBTENGO LOS POSIBLES ERRORES
-        //    List<Tuple<string, string>> errores = GetErroresAdd(model);
+            //OBTENGO LOS POSIBLES ERRORES
+            List<Tuple<string, string>> errores = GetErroresAdd(model);
 
-        //    //CARGO LOS ERRORES AL MODELSTATE
-        //    foreach (Tuple<string, string> item in errores)
-        //    {
-        //        ModelState.AddModelError(item.Item1, item.Item2);
-        //    }
+            //CARGO LOS ERRORES AL MODELSTATE
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        Personal personal = new Personal();
-        //        personal.Nombre = model.Nombre;
-        //        personal.Apellido = model.Apellido;
-        //        personal.CI = model.CI;
-        //        personal.Direccion = model.Direccion;
-        //        personal.Telefono = model.Telefono;
-        //        personal.Email = model.Email;
-        //        personal.Login = model.Login;
-        //        personal.Password = model.Password;
-        //        personal.Observacion = model.Observacion;
-        //        personal.Estado = PersonalEstado.Activado;
-        //        personal.UserTypeId = model.UserTypeId;
-        //        personal.CargoId = model.CargoId;
-        //        personal.Creado_Por = null;
+            if (ModelState.IsValid)
+            {
+                Transaccion transaccion = new Transaccion();
+                transaccion.CajaBancoId = model.CuentaId;
+                transaccion.Tipo = (TransaccionTipo)model.IngresoOEgreso;
+                transaccion.Fecha_Ini = model.Fecha_Inicio;
+                transaccion.Fecha_Fin = model.Fecha_Fin;
+                transaccion.Fecha_Transaccion = DateTime.Now;
+                transaccion.Concepto = model.Concepto;
+                transaccion.Deposito = model.IngresoOEgreso == (int)TransaccionTipo.Deposito ? model.Monto : 0;
+                transaccion.Retiro = model.IngresoOEgreso == (int)TransaccionTipo.Retiro ? model.Monto : 0;
+                transaccion.Saldo = 0;
+                
+                try
+                {
+                    transaccionRepository.Agregar(transaccion);
 
-        //        try
-        //        {
-        //            personalRepository.Agregar(personal);
+                    model.Result = EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
 
-        //            model.Result = EnumActionResult.Saved;
-        //        }
-        //        catch (Exception)
-        //        {
-        //            model.Result = Web.Models.EnumActionResult.Error;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        model.Result = Web.Models.EnumActionResult.Validation;
-        //    }
+            model.Cuentas = ObtenerCuentas();
+            return PartialView(model);
+        }
 
-        //    model.Cargos = Obtenercargos();
-        //    model.TipoUsuario = ObtenerTipodeUser();
-        //    return PartialView(model);
-        //}
+        public ActionResult Edit(Guid transaccionId)
+        {
+            TransaccionRepository transaccionRepository = container.Resolve<TransaccionRepository>();
+            Transaccion transaccion = transaccionRepository.ObtenerPorId(transaccionId);
 
-        //public ActionResult Edit(Guid personalId)
-        //{
-        //    PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
-        //    Personal personal = personalRepository.ObtenerPorId(personalId);
+            EditViewModel editViewModel = new EditViewModel();
+            editViewModel.TransaccionId = transaccion.TransaccionId;
+            editViewModel.CuentaId = transaccion.CajaBancoId;
+            editViewModel.IngresoOEgreso = (int)transaccion.Tipo;
+            editViewModel.Fecha_Inicio = transaccion.Fecha_Ini;
+            editViewModel.Fecha_Fin = transaccion.Fecha_Fin;
+            editViewModel.Concepto = transaccion.Concepto;
+            editViewModel.Monto = transaccion.Tipo == TransaccionTipo.Retiro ? transaccion.Retiro : transaccion.Deposito;
 
-        //    EditViewModel editViewModel = new EditViewModel();
-        //    editViewModel.PersonalId = personal.PersonalId;
-        //    editViewModel.Nombre = personal.Nombre;
-        //    editViewModel.Apellido = personal.Apellido;
-        //    editViewModel.CI = personal.CI;
-        //    editViewModel.Direccion = personal.Direccion;
-        //    editViewModel.Telefono = personal.Telefono;
-        //    editViewModel.Email = personal.Email;
-        //    editViewModel.Login = personal.Login;
-        //    editViewModel.Password = personal.Password;
-        //    editViewModel.Observacion = personal.Observacion;
-        //    editViewModel.Estado = personal.Estado;
-        //    editViewModel.CargoId = personal.CargoId;
-        //    editViewModel.UserTypeId = personal.UserTypeId;
+            editViewModel.Cuentas = ObtenerCuentas();
 
-        //    editViewModel.Cargos = Obtenercargos();
-        //    editViewModel.TipoUsuario = ObtenerTipodeUser();
+            return PartialView(editViewModel);
+        }
 
-        //    return PartialView(editViewModel);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditViewModel model)
+        {
+            TransaccionRepository transaccionRepository = container.Resolve<TransaccionRepository>();
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(EditViewModel model)
-        //{
-        //    PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
+            ModelState.Clear();
 
-        //    ModelState.Clear();
+            List<Tuple<string, string>> errores = GetErrorEdit(model);
 
-        //    List<Tuple<string, string>> errores = GeterrorEdit(model);
+            //CARGO LOS ERRORES AL MODELSTATE
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
 
-        //    //CARGO LOS ERRORES AL MODELSTATE
-        //    foreach (Tuple<string, string> item in errores)
-        //    {
-        //        ModelState.AddModelError(item.Item1, item.Item2);
-        //    }
+            if (ModelState.IsValid)
+            {
+                Transaccion transaccion = new Transaccion();
+                transaccion.TransaccionId = model.TransaccionId;
+                transaccion.CajaBancoId = model.CuentaId;
+                transaccion.Tipo = (TransaccionTipo)model.IngresoOEgreso;
+                transaccion.Fecha_Ini = model.Fecha_Inicio;
+                transaccion.Fecha_Fin = model.Fecha_Fin;
+                transaccion.Fecha_Transaccion = DateTime.Now;
+                transaccion.Concepto = model.Concepto;
+                transaccion.Deposito = model.IngresoOEgreso == (int)TransaccionTipo.Deposito ? model.Monto : 0;
+                transaccion.Retiro = model.IngresoOEgreso == (int)TransaccionTipo.Retiro ? model.Monto : 0;
+                transaccion.Saldo = 0;
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        Personal personal = new Personal();
-        //        personal.PersonalId = model.PersonalId;
-        //        personal.Nombre = model.Nombre;
-        //        personal.Apellido = model.Apellido;
-        //        personal.CI = model.CI;
-        //        personal.Direccion = model.Direccion;
-        //        personal.Telefono = model.Telefono;
-        //        personal.Email = model.Email;
-        //        personal.Login = model.Login;
-        //        personal.Password = model.Password;
-        //        personal.Observacion = model.Observacion;
-        //        personal.Estado = PersonalEstado.Activado;
-        //        personal.UserTypeId = model.UserTypeId;
-        //        personal.CargoId = model.CargoId;
-        //        personal.Creado_Por = null;
+                try
+                {
+                    transaccionRepository.Editar(transaccion);
 
-        //        try
-        //        {
-        //            personalRepository.Editar(personal);
+                    model.Result = EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
 
-        //            model.Result = EnumActionResult.Saved;
-        //        }
-        //        catch (Exception)
-        //        {
-        //            model.Result = Web.Models.EnumActionResult.Error;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        model.Result = Web.Models.EnumActionResult.Validation;
-        //    }
+            model.Cuentas = ObtenerCuentas();
+            return PartialView(model);
+        }
 
-        //    model.Cargos = Obtenercargos();
-        //    model.TipoUsuario = ObtenerTipodeUser();
-        //    return PartialView(model);
-        //}
+        public ActionResult Delete(Guid transaccionId)
+        {
+            DeleteViewModel deleteViewModel = new DeleteViewModel();
+            deleteViewModel.TransaccionId = transaccionId;
 
-        //public ActionResult Delete(Guid personalId)
-        //{
-        //    DeleteViewModel deleteViewModel = new DeleteViewModel();
-        //    deleteViewModel.PersonalId = personalId;
+            return PartialView(deleteViewModel);
+        }
 
-        //    return PartialView(deleteViewModel);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(DeleteViewModel model)
+        {
+            TransaccionRepository transaccionRepository = container.Resolve<TransaccionRepository>();
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(DeleteViewModel model)
-        //{
-        //    PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
+            ModelState.Clear();
+            //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
 
-        //    ModelState.Clear();
-        //    //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    transaccionRepository.Eliminar(model.TransaccionId);
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            personalRepository.Eliminar(model.PersonalId);
-
-        //            model.Result = Web.Models.EnumActionResult.Saved;
-        //        }
-        //        catch (Exception)
-        //        {
-        //            model.Result = Web.Models.EnumActionResult.Error;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        model.Result = Web.Models.EnumActionResult.Validation;
-        //    }
-        //    return PartialView(model);
-        //}
+                    model.Result = Web.Models.EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
+            return PartialView(model);
+        }
 
         #endregion
+
+
+
 
 
 
@@ -245,7 +288,7 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
         public ActionResult LoadGrid([DataSourceRequest]DataSourceRequest request)
         {
             TransaccionRepository transaccionRepository = container.Resolve<TransaccionRepository>();
-            List<NavegadorViewModel> toReturn = transaccionRepository.ObtenerTodo().Select(t => new NavegadorViewModel()
+            List<NavegadorViewModel> toReturn = transaccionRepository.ObtenerTodo().ToList().Select(t => new NavegadorViewModel()
             {
                 TransaccionId = t.TransaccionId,
                 Nro_Cuenta = t.Cuenta.Nombre,
@@ -253,8 +296,8 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
                 Fecha_Ini = t.Fecha_Ini.ToString("dd/MM/yyyy"),
                 Fecha_Fin = t.Fecha_Fin.ToString("dd/MM/yyyy"),
                 Fecha_Transaccion = t.Fecha_Transaccion,
-                Concepto = t.Saldo.ToString(),
-                Saldo = t.Saldo.ToString(),
+                Concepto = t.Concepto,
+                Saldo = t.Tipo == TransaccionTipo.Retiro ? t.Retiro.ToString() : t.Deposito.ToString(),
             }).OrderBy(y => y.Fecha_Transaccion).ToList();
 
             return Json(toReturn.ToDataSourceResult(request));
@@ -274,7 +317,7 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
                 ToReturn.Insert(0, new DropdownListViewModel()
                 {
                     Id = Guid.Empty,
-                    Nombre = "Seleccione una Cuenta"
+                    Nombre = "Seleccione una cuenta"
                 });
             }
             else

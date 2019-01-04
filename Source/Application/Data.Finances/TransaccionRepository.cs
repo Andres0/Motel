@@ -27,8 +27,18 @@ namespace DS.Motel.Data.Finances
         }
         public void Editar(Transaccion transaccion)
         {
-            _context.Transaccion.Attach(transaccion);
-            _context.Entry(transaccion).State = System.Data.Entity.EntityState.Modified;
+            Transaccion transaccionAActualizar = _context.Transaccion.SingleOrDefault(s => s.TransaccionId == transaccion.TransaccionId);
+            transaccionAActualizar.CajaBancoId = transaccion.CajaBancoId;
+            transaccionAActualizar.Tipo = transaccion.Tipo;
+            transaccionAActualizar.Fecha_Ini = transaccion.Fecha_Ini;
+            transaccionAActualizar.Fecha_Fin = transaccion.Fecha_Fin;
+            transaccionAActualizar.Fecha_Transaccion = transaccion.Fecha_Transaccion;
+            transaccionAActualizar.Concepto = transaccion.Concepto;
+            transaccionAActualizar.Deposito = transaccion.Deposito;
+            transaccionAActualizar.Retiro = transaccion.Retiro;
+
+            _context.Transaccion.Attach(transaccionAActualizar);
+            _context.Entry(transaccionAActualizar).State = System.Data.Entity.EntityState.Modified;
             _context.SaveChanges();
         }
         public void Eliminar(Guid transaccionId)
