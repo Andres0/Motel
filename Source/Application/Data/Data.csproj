@@ -58,9 +58,11 @@
     <Compile Include="Configurations\UserTypeConfiguration.cs" />
     <Compile Include="DsConfiguration.cs" />
     <Compile Include="DsContext.cs" />
+    <Compile Include="Entities\Almacen.cs" />
     <Compile Include="Entities\CajaBancoTipo.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\CajaBanco.cs" />
+    <Compile Include="Entities\ItemCategoria.cs" />
     <Compile Include="Entities\Parametros.cs" />
     <Compile Include="Entities\Personal.cs" />
     <Compile Include="Entities\PersonalEstado.cs" />
