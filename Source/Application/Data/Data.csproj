@@ -62,6 +62,7 @@
     <Compile Include="Entities\CajaBancoTipo.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\CajaBanco.cs" />
+    <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemCategoria.cs" />
     <Compile Include="Entities\Parametros.cs" />
     <Compile Include="Entities\Personal.cs" />
