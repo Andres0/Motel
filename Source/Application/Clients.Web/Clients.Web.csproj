@@ -267,6 +267,12 @@
     <Compile Include="Areas\Finances\Models\Transaccion\DeleteViewModel.cs" />
     <Compile Include="Areas\Finances\Models\Transaccion\EditViewModel.cs" />
     <Compile Include="Areas\Finances\Models\Transaccion\NavegadorViewModel.cs" />
+    <Compile Include="Areas\Items\Controllers\ItemController.cs" />
+    <Compile Include="Areas\Items\ItemsAreaRegistration.cs" />
+    <Compile Include="Areas\Items\Models\Items\AddViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Items\DeleteViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Items\EditViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Items\NavegadorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\Models\UserType\AddViewModel.cs" />
     <Compile Include="Areas\Security\Models\UserType\DeleteViewModel.cs" />
@@ -280,6 +286,7 @@
     <Compile Include="Models\DropdownListEnumViewModel.cs" />
     <Compile Include="Models\DropdownListViewModel.cs" />
     <Compile Include="Models\EnumActionResult.cs" />
+    <Compile Include="Models\SessionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -8205,6 +8212,12 @@
     <Content Include="Areas\Finances\Views\Transaccion\Add.cshtml" />
     <Content Include="Areas\Finances\Views\Transaccion\Delete.cshtml" />
     <Content Include="Areas\Finances\Views\Transaccion\Edit.cshtml" />
+    <Content Include="Areas\Items\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Items\Views\Item\Index.cshtml" />
+    <Content Include="Areas\Items\Views\web.config" />
+    <Content Include="Areas\Items\Views\Item\Delete.cshtml" />
+    <Content Include="Areas\Items\Views\Item\Add.cshtml" />
+    <Content Include="Areas\Items\Views\Item\Edit.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -10322,8 +10335,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AddressBook\Views\Shared\" />
     <Folder Include="Areas\Finances\Views\Shared\" />
-    <Folder Include="Areas\Items\Controllers\" />
-    <Folder Include="Areas\Items\Models\" />
     <Folder Include="Areas\Items\Views\Shared\" />
     <Folder Include="Content\images\" />
   </ItemGroup>
@@ -10348,6 +10359,10 @@
     <ProjectReference Include="..\Data.Finances\Data.Finances.csproj">
       <Project>{4f0b8001-09e4-4555-aca3-12d469066529}</Project>
       <Name>Data.Finances</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data.Items\Data.Items.csproj">
+      <Project>{e00b7c35-7ccc-4cb9-89d3-e0a8adaf1c56}</Project>
+      <Name>Data.Items</Name>
     </ProjectReference>
     <ProjectReference Include="..\Data.Security\Data.Security.csproj">
       <Project>{983ae7ad-c333-461b-b650-b47c7b26b2fc}</Project>

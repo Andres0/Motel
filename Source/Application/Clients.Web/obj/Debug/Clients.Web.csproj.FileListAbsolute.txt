@@ -960,3 +960,5 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.CopyComplete
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.pdb
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.pdb

@@ -177,6 +177,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPersonal(AddViewModel model)
         {
+            SessionViewModel sessionViewModel = (SessionViewModel)Session["System_Information"];
             PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
 
             //LIMPIA EL MODEO DE ERRORES
@@ -206,7 +207,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
                 personal.Estado = PersonalEstado.Activado;
                 personal.UserTypeId = model.UserTypeId;
                 personal.CargoId = model.CargoId;
-                personal.Creado_Por = null;
+                personal.Creado_Por = personalRepository.ObtenerPorId(sessionViewModel.PersonalId);
 
                 try
                 {
@@ -259,6 +260,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPersonal(EditViewModel model)
         {
+            SessionViewModel sessionViewModel = (SessionViewModel)Session["System_Information"];
             PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
 
             ModelState.Clear();
@@ -287,7 +289,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
                 personal.Estado = PersonalEstado.Activado;
                 personal.UserTypeId = model.UserTypeId;
                 personal.CargoId = model.CargoId;
-                personal.Creado_Por = null;
+                personal.Creado_Por = personalRepository.ObtenerPorId(sessionViewModel.PersonalId);
 
                 try
                 {

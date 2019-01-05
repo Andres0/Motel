@@ -249,7 +249,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 
                     model.Result = EnumActionResult.Saved;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     model.Result = Web.Models.EnumActionResult.Error;
                     
@@ -335,7 +335,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 
                     model.Result = EnumActionResult.Saved;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     model.Result = Web.Models.EnumActionResult.Error;
 
@@ -435,14 +435,6 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
 
         public ActionResult LoadGrid([DataSourceRequest]DataSourceRequest request)
         {
-            decimal test = 9.2M;
-            decimal a = test;
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-BO");
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-BO");
-            decimal b = test;
-            decimal test3 = 9.2M;
-            decimal z = test3;
-
             ParametrosRepository parametrosRepository = container.Resolve<ParametrosRepository>();
             List<NavegadorViewModel> toReturn = parametrosRepository.ObtenerTodo().Select(t => new NavegadorViewModel()
             {

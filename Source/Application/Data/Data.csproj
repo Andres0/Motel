@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Configurations\CargoConfiguration.cs" />
     <Compile Include="Configurations\CajaBancoConfiguration.cs" />
+    <Compile Include="Configurations\ItemCategoriaConfiguration.cs" />
+    <Compile Include="Configurations\ItemConfiguration.cs" />
     <Compile Include="Configurations\ParametrosConfiguration.cs" />
     <Compile Include="Configurations\PersonalConfiguration.cs" />
     <Compile Include="Configurations\SuiteConfiguration.cs" />

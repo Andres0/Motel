@@ -28,4 +28,4 @@ namespace DS.Motel.Data.Entities
         #endregion
     }
 }
-}
+

@@ -1,0 +1,88 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Index";
+    if (Convert.ToBoolean(ViewData["MasterLoad"]) == true)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn-add").click(function () {
+            $("#divMasterOperationAreaContent").load('@Url.Action("Add", "Item", new { area = "Items" })');
+        });
+    });
+
+    function btnEdit_onClick(itemId)
+    {
+        $("#divMasterOperationAreaContent").load('@Url.Action("Edit", "Item", new { area = "Items" })?itemId=' + itemId);
+    }
+
+    function btnDelete_onClick(itemId) {
+        $("#divContentDeleteItem").load('@Url.Action("Delete", "Item", new { area = "Items" })?itemId=' + itemId, function () {
+            $('#DeleteModal').modal('show');
+        });
+    }
+
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Administracion de Items</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" id="btn-add" class="btn btn-success pull-right">Agregar Item</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @(
+                    Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.Items.Models.Items.NavegadorViewModel>().Name("GridItem")
+                    .Columns(column =>
+                    {
+                        column.Bound(c => c.Codigo).Title("Codigo").Width("20%");
+                        column.Bound(c => c.Nombre).Title("Nombre").Width("calc(40%-120px)");
+                        column.Bound(c => c.Cantidad_Stock).Title("Stock Actual").Width("15%");
+                        column.Bound(c => c.Stock_Minimo).Title("Stock Minimo").Width("15%");
+                        column.Bound(c => c.Es_Vendible).Title("Es vendible").Width("10%");
+                        column.Bound(c => c).Title("Acciones").Width("120px").Sortable(false).Filterable(false).ClientTemplate(
+                            "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:ItemId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
+                            "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:ItemId#\");' ><span class='glyphicon glyphicon-remove' ></span></button>"
+                            );
+                    })
+                    .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
+                    .Filterable(filterable => filterable.Enabled(true))
+                    .Sortable(sortable => sortable.Enabled(true))
+                    .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
+                    .DataSource(datasourse => datasourse
+                        .Ajax()
+                        .PageSize(10)
+                        .Read(read => read.Action("LoadGrid", "Item"))
+                        .ServerOperation(false))
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (@Ajax.BeginForm("Delete", "Item", new { area = "Items" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeleteItem", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
+{
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentDeleteItem" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
