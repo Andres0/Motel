@@ -6,6 +6,7 @@ using System.Web;
 using Unity;
 using System.Web.Mvc;
 using DS.Motel.Data.AddressBook;
+using DS.Motel.Clients.Web.Models.Home;
 
 namespace DS.Motel.Clients.Web.Controllers
 {
@@ -43,16 +44,34 @@ namespace DS.Motel.Clients.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            List<IndexViewModel> Suites = ObtenerSuites();
+            return View(Suites);
         }
 
         [AllowAnonymous]
         public ActionResult Login()
         {
-            CargoRepository cargoRepository = container.Resolve<CargoRepository>();
-            var toReturn = cargoRepository.ObtenerTodo().ToList();
+            LoginViewModel loginViewModel = container.Resolve<LoginViewModel>();
+            return View(loginViewModel);
+        }
 
-            return View();
+        #endregion
+
+
+
+        #region Queries
+        public List<IndexViewModel> ObtenerSuites()
+        {
+            SuitesRepository suitesRepository = container.Resolve<SuitesRepository>();
+            List<IndexViewModel> ToReturn = suitesRepository.ObtenerTodo().Select(s => new IndexViewModel()
+            {
+                SuiteId = s.SuiteId,
+                Nombre = s.Nombre,
+                EstadoId = (int)s.Estado,
+                EstadoNombre = s.Estado.ToString(),
+            }).OrderBy(o => o.Nombre).ToList();
+
+            return ToReturn;
         }
 
         #endregion

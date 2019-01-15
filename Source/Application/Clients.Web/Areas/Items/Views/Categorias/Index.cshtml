@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var tipo = (int)ViewData["Type"];
+    var title = tipo == (int)DS.Motel.Data.Entities.ItemCategoriaTipo.Item ? "Items" : "Productos";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#divTreeview").load('@Url.Action("TreeView", "Categorias", new { area = "Items" })?tipo=@tipo');
+
+        $("#btn-add").click(function () {
+            $("#divContentAddCategoria").load('@Url.Action("Add", "Categorias", new { area = "Items" })?tipo=@tipo', function () {
+                $('#AddModal').modal('show');
+            });
+        });
+    });
+
+    function btnEdit_onClick(categoriaId) {
+        $("#divContentEditCategoria").load('@Url.Action("Edit", "Categorias", new { area = "Items" })?tipo=@tipo&categoriaId=' + categoriaId, function () {
+            $('#EditModal').modal('show');
+        });
+    }
+
+    function btnDelete_onClick(categoriaId) {
+        $("#divContentDeleteCategoria").load('@Url.Action("Delete", "Categorias", new { area = "Items" })?tipo=@tipo&categoriaId=' + categoriaId, function () {
+            $('#DeleteModal').modal('show');
+        });
+    }
+
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Administracion de Categorias de @title</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" id="btn-add" class="btn btn-success pull-right">Agregar Categoria</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div id="divTreeview" class="col-md-12"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (@Ajax.BeginForm("Add", "Categorias", new { area = "Items" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentAddCategoria", OnSuccess = "Add_onSuccess", OnBegin = "Add_callOnBegin" }))
+{
+    <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentAddCategoria" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Edit", "Categorias", new { area = "Items" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentEditCategoria", OnSuccess = "Edit_onSuccess", OnBegin = "Edit_callOnBegin" }))
+{
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentEditCategoria" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Delete", "Categorias", new { area = "Items" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeleteCategoria", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
+{
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentDeleteCategoria" class="modal-content">
+            </div>
+        </div>
+    </div>
+}

@@ -1,25 +1,37 @@
-﻿
+﻿@model DS.Motel.Clients.Web.Models.Home.LoginViewModel
+
 @{
-    Layout= "~/Views/Shared/_LayoutLogin.cshtml";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
     ViewBag.Title = "Login";
 }
+<div id="divLogin">
+    @using (@Ajax.BeginForm("AddPersonal", "Home", new { area = "" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divLogin" }))
+    {
+        <div class="login_container">
+            <h1 class='text-white'>Happy Hour</h1>
+            <div class="form-login">
+                <h4 class="mb-3">Ingresar</h4>
+                <br />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Nombre</label>
+                        @Html.TextBoxFor(m => m.Nombre, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+                        @Html.ValidationMessageFor(m => m.Nombre)
+                    </div>
+                </div>
 
-<div class="login_container">
-    <h1 class='text-white'>Happy Hour</h1>
-    <div class="form-login">
-        <h4 class="mb-3">Ingresar</h4>
-        <br />
-        <input type="text" id="UserName" class="form-control input-sm chat-input" placeholder="Username" />
-        <br /><br />
-        <input type="text" id="UserPassword" class="form-control input-sm chat-input" placeholder="Password" />
-        <br /><br />
-        <input type="text" id="MontoInicial" class="form-control input-sm chat-input" placeholder="Monto Inicial" />
-        <br /><br />
-        <div class="wrapper">
-            <span class="group-btn">
-                <a href="#" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
-            </span>
+                <input type="text" id="UserName" class="form-control input-sm chat-input" placeholder="Username" />
+                <br /><br />
+                <input type="text" id="UserPassword" class="form-control input-sm chat-input" placeholder="Password" />
+                <br /><br />
+                <input type="text" id="MontoInicial" class="form-control input-sm chat-input" placeholder="Monto Inicial" />
+                <br /><br />
+                <div class="wrapper">
+                    <span class="group-btn">
+                        <a href="#" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
+                    </span>
+                </div>
+            </div>
         </div>
-    </div>
+    }
 </div>
-

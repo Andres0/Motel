@@ -18,6 +18,8 @@ namespace DS.Motel.Data
         public DbSet<ItemCategoria> ItemCategoria { get; set; }
         public DbSet<Parametros> Parametros { get; set; }
         public DbSet<Personal> Personal { get; set; }
+        public DbSet<Producto> Producto { get; set; }
+        public DbSet<ProductoDetalle> ProductoDetalle { get; set; }
         public DbSet<Suite> Suite { get; set; }
         public DbSet<Transaccion> Transaccion { get; set; }
         public DbSet<UserType> UserType { get; set; }
@@ -52,6 +54,8 @@ namespace DS.Motel.Data
             modelBuilder.Configurations.Add(new Configurations.ItemCategoriaConfiguration());
             modelBuilder.Configurations.Add(new Configurations.ParametrosConfiguration());
             modelBuilder.Configurations.Add(new Configurations.PersonalConfiguration());
+            modelBuilder.Configurations.Add(new Configurations.ProductoConfiguration());
+            modelBuilder.Configurations.Add(new Configurations.ProductoDetalleConfiguration());
             modelBuilder.Configurations.Add(new Configurations.SuiteConfiguration());
             modelBuilder.Configurations.Add(new Configurations.TransaccionConfiguration());
             modelBuilder.Configurations.Add(new Configurations.UserTypeConfiguration());

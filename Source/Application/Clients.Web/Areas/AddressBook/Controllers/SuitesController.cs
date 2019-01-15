@@ -168,7 +168,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             EditViewModel editViewModel = new EditViewModel();
             editViewModel.SuiteId = suite.SuiteId;
             editViewModel.Nombre = suite.Nombre;
-            editViewModel.EstadoId = (int)suite.Estado;
+            editViewModel.EstadoId = suite.Estado == SuiteEstado.Habilitado || suite.Estado == SuiteEstado.Deshabilitado || suite.Estado == SuiteEstado.Mantenimiento ? (int)suite.Estado : (int)SuiteEstado.Habilitado;
             editViewModel.ParametroId = suite.ParametroId;
 
 
@@ -309,21 +309,17 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
         }
         public List<DropdownListEnumViewModel> ObtenerEstados()
         {
-
             List<DropdownListEnumViewModel> ToReturn = new List<DropdownListEnumViewModel>();
-            foreach (SuiteEstado suitestado in (SuiteEstado[])Enum.GetValues(typeof(SuiteEstado)))
-            {
+            ToReturn.Add(new DropdownListEnumViewModel() { Id = (int)SuiteEstado.Habilitado, Nombre= SuiteEstado.Habilitado.ToString()  });
+            ToReturn.Add(new DropdownListEnumViewModel() { Id = (int)SuiteEstado.Deshabilitado, Nombre = SuiteEstado.Deshabilitado.ToString() });
+            ToReturn.Add(new DropdownListEnumViewModel() { Id = (int)SuiteEstado.Mantenimiento, Nombre = SuiteEstado.Mantenimiento.ToString() });
 
-
-                ToReturn.Add(new DropdownListEnumViewModel() { Id=(int) suitestado, Nombre= suitestado.ToString()  });
-            }
-           
             if (ToReturn.Count() > 0)
             {
                 ToReturn.Insert(0, new DropdownListEnumViewModel()
                 {
                     Id = 0,
-                    Nombre = "Seleccione un Estado"
+                    Nombre = "Seleccione un estado"
                 });
             }
           

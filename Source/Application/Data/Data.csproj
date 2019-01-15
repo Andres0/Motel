@@ -55,6 +55,8 @@
     <Compile Include="Configurations\ItemConfiguration.cs" />
     <Compile Include="Configurations\ParametrosConfiguration.cs" />
     <Compile Include="Configurations\PersonalConfiguration.cs" />
+    <Compile Include="Configurations\ProductoConfiguration.cs" />
+    <Compile Include="Configurations\ProductoDetalleConfiguration.cs" />
     <Compile Include="Configurations\SuiteConfiguration.cs" />
     <Compile Include="Configurations\TransaccionConfiguration.cs" />
     <Compile Include="Configurations\UserTypeConfiguration.cs" />
@@ -69,6 +71,8 @@
     <Compile Include="Entities\Parametros.cs" />
     <Compile Include="Entities\Personal.cs" />
     <Compile Include="Entities\PersonalEstado.cs" />
+    <Compile Include="Entities\Producto.cs" />
+    <Compile Include="Entities\ProductoDetalle.cs" />
     <Compile Include="Entities\Suite.cs" />
     <Compile Include="Entities\SuiteEstado.cs" />
     <Compile Include="Entities\Transaccion.cs" />

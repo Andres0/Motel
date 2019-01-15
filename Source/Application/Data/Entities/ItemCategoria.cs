@@ -13,8 +13,10 @@ namespace DS.Motel.Data.Entities
         public Guid ItemCategoriaId { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public Guid? PadreId { get; set; }
-        public virtual ItemCategoria Padre { get; set; }
+        public ItemCategoriaTipo Tipo { get; set; }
+        public Guid? PadreItemCategoriaId { get; set; }
+        public ItemCategoria Padre { get; set; }
+        public virtual List<ItemCategoria> SubCategorias { get; set; }
 
         #endregion
 
@@ -24,9 +26,16 @@ namespace DS.Motel.Data.Entities
 
         public ItemCategoria()
         {
-            ItemCategoriaId = new Guid();
+            ItemCategoriaId = Guid.NewGuid();
         }
 
         #endregion
+    }
+
+
+    public enum ItemCategoriaTipo
+    {
+        Item = 1,
+        Producto = 2
     }
 }

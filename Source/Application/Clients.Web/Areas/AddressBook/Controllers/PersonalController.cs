@@ -207,7 +207,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
                 personal.Estado = PersonalEstado.Activado;
                 personal.UserTypeId = model.UserTypeId;
                 personal.CargoId = model.CargoId;
-                personal.Creado_Por = personalRepository.ObtenerPorId(sessionViewModel.PersonalId);
+                personal.Creado_Por = null; //personalRepository.ObtenerPorId(sessionViewModel.PersonalId);
 
                 try
                 {
@@ -289,7 +289,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
                 personal.Estado = PersonalEstado.Activado;
                 personal.UserTypeId = model.UserTypeId;
                 personal.CargoId = model.CargoId;
-                personal.Creado_Por = personalRepository.ObtenerPorId(sessionViewModel.PersonalId);
+                personal.Creado_Por = null; //personalRepository.ObtenerPorId(sessionViewModel.PersonalId);
 
                 try
                 {

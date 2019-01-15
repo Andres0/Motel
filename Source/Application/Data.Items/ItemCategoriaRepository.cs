@@ -33,7 +33,7 @@ namespace DS.Motel.Data.Items
             ItemCategoria itemCategoriaAActualizar = _context.ItemCategoria.SingleOrDefault(s => s.ItemCategoriaId == itemCategoria.ItemCategoriaId);
             itemCategoriaAActualizar.Nombre = itemCategoria.Nombre;
             itemCategoriaAActualizar.Descripcion = itemCategoria.Descripcion;
-            itemCategoriaAActualizar.PadreId = itemCategoria.PadreId;
+            itemCategoriaAActualizar.PadreItemCategoriaId = itemCategoria.PadreItemCategoriaId;
 
             _context.ItemCategoria.Attach(itemCategoriaAActualizar);
             _context.Entry(itemCategoriaAActualizar).State = System.Data.Entity.EntityState.Modified;
@@ -42,6 +42,13 @@ namespace DS.Motel.Data.Items
         public void Eliminar(Guid itemCategoriaId)
         {
             ItemCategoria itemCategoria = ObtenerPorId(itemCategoriaId);
+            List<ItemCategoria> categoriaIdABorrar = GetCategoryChilds(itemCategoria, new List<ItemCategoria>());
+
+            //Delete Childs
+            foreach (ItemCategoria _categoria in categoriaIdABorrar)
+            {
+                _context.ItemCategoria.Remove(_categoria);
+            }
             _context.ItemCategoria.Remove(itemCategoria);
             _context.SaveChanges();
         }
@@ -62,6 +69,20 @@ namespace DS.Motel.Data.Items
         public ItemCategoria ObtenerPorId(Guid? itemCategoriaId)
         {
             return _context.ItemCategoria.SingleOrDefault(s => s.ItemCategoriaId == itemCategoriaId);
+        }
+
+        private List<ItemCategoria> GetCategoryChilds(ItemCategoria category, List<ItemCategoria> categoryToReturn)
+        {
+            categoryToReturn.Add(category);
+            List<ItemCategoria> categoriesChilds = category.SubCategorias.ToList();
+            if (categoriesChilds.Count() > 0)
+            {
+                foreach (ItemCategoria ci in categoriesChilds)
+                {
+                    GetCategoryChilds(ci, categoryToReturn);
+                }
+            }
+            return categoryToReturn;
         }
 
         #endregion

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace DS.Motel.Data
 {
+    //public class Inicializador : DropCreateDatabaseIfModelChanges<DsContext>
     public class Inicializador : CreateDatabaseIfNotExists<DsContext>
     {
         public override void InitializeDatabase(DsContext context)
@@ -31,10 +32,24 @@ namespace DS.Motel.Data
 
         protected override void Seed(DsContext context)
         {
-            //var Personas = new List<Personal>
-            //{
-            //    new Personal { Nombre = "Admin", Apellido = "Admin", CI = "0", Direccion="", Email="", Login="Admin", Password="Admin", Observacion="", Estado=PersonalEstado.Activado  }
-            //};
+            var Cargo = new List<Cargo>
+            {
+                new Cargo { CargoId = Guid.NewGuid(), Nombre = "Admin", Descripcion = "Es cargo administrador" }
+            };
+            Cargo.ForEach(s => context.Cargo.Add(s));
+
+            var TipoUsuarios = new List<UserType>
+            {
+                new UserType { UserTypeId = Guid.NewGuid(), Name = "Admin", Descripcion = "Es tipo administrador" }
+            };
+            TipoUsuarios.ForEach(s => context.UserType.Add(s));
+
+            var Personas = new List<Personal>
+            {
+                new Personal { PersonalId = Guid.NewGuid(), Nombre = "Admin", Apellido = "Admin", CI = "0", Direccion="", Email="", Login="Admin", Password="Admin", Observacion="", Estado=PersonalEstado.Activado,
+                 CargoId = Cargo.FirstOrDefault().CargoId, UserTypeId = TipoUsuarios.FirstOrDefault().UserTypeId }
+            };
+            Personas.ForEach(s => context.Personal.Add(s));
 
             var CajaBancos = new List<CajaBanco>
             {

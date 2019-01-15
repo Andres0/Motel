@@ -267,12 +267,22 @@
     <Compile Include="Areas\Finances\Models\Transaccion\DeleteViewModel.cs" />
     <Compile Include="Areas\Finances\Models\Transaccion\EditViewModel.cs" />
     <Compile Include="Areas\Finances\Models\Transaccion\NavegadorViewModel.cs" />
+    <Compile Include="Areas\Items\Controllers\CategoriasController.cs" />
     <Compile Include="Areas\Items\Controllers\ItemController.cs" />
+    <Compile Include="Areas\Items\Controllers\ProductoController.cs" />
     <Compile Include="Areas\Items\ItemsAreaRegistration.cs" />
+    <Compile Include="Areas\Items\Models\Categorias\AddViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Categorias\DeleteViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Categorias\EditViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Categorias\NavegadorViewModel.cs" />
     <Compile Include="Areas\Items\Models\Items\AddViewModel.cs" />
     <Compile Include="Areas\Items\Models\Items\DeleteViewModel.cs" />
     <Compile Include="Areas\Items\Models\Items\EditViewModel.cs" />
     <Compile Include="Areas\Items\Models\Items\NavegadorViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Producto\AddViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Producto\DeleteViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Producto\EditViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Producto\NavegadorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\Models\UserType\AddViewModel.cs" />
     <Compile Include="Areas\Security\Models\UserType\DeleteViewModel.cs" />
@@ -284,8 +294,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DropdownListEnumViewModel.cs" />
+    <Compile Include="Models\DropDownListHierarchyViewModel.cs" />
     <Compile Include="Models\DropdownListViewModel.cs" />
     <Compile Include="Models\EnumActionResult.cs" />
+    <Compile Include="Models\Home\IndexViewModel.cs" />
+    <Compile Include="Models\Home\LoginViewModel.cs" />
     <Compile Include="Models\SessionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -8218,6 +8231,15 @@
     <Content Include="Areas\Items\Views\Item\Delete.cshtml" />
     <Content Include="Areas\Items\Views\Item\Add.cshtml" />
     <Content Include="Areas\Items\Views\Item\Edit.cshtml" />
+    <Content Include="Areas\Items\Views\Categorias\Index.cshtml" />
+    <Content Include="Areas\Items\Views\Categorias\Add.cshtml" />
+    <Content Include="Areas\Items\Views\Categorias\TreeView.cshtml" />
+    <Content Include="Areas\Items\Views\Categorias\Edit.cshtml" />
+    <Content Include="Areas\Items\Views\Categorias\Delete.cshtml" />
+    <Content Include="Areas\Items\Views\Producto\Index.cshtml" />
+    <Content Include="Areas\Items\Views\Producto\Add.cshtml" />
+    <Content Include="Areas\Items\Views\Producto\Edit.cshtml" />
+    <Content Include="Areas\Items\Views\Producto\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
