@@ -49,8 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\AlmacenConfiguration.cs" />
     <Compile Include="Configurations\CargoConfiguration.cs" />
     <Compile Include="Configurations\CajaBancoConfiguration.cs" />
+    <Compile Include="Configurations\InventarioConfiguration.cs" />
+    <Compile Include="Configurations\InventarioDetalleConfiguration.cs" />
     <Compile Include="Configurations\ItemCategoriaConfiguration.cs" />
     <Compile Include="Configurations\ItemConfiguration.cs" />
     <Compile Include="Configurations\ParametrosConfiguration.cs" />
@@ -60,12 +63,15 @@
     <Compile Include="Configurations\SuiteConfiguration.cs" />
     <Compile Include="Configurations\TransaccionConfiguration.cs" />
     <Compile Include="Configurations\UserTypeConfiguration.cs" />
+    <Compile Include="Configurations\UsoHabitacionConfiguration.cs" />
     <Compile Include="DsConfiguration.cs" />
     <Compile Include="DsContext.cs" />
     <Compile Include="Entities\Almacen.cs" />
     <Compile Include="Entities\CajaBancoTipo.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\CajaBanco.cs" />
+    <Compile Include="Entities\Inventario.cs" />
+    <Compile Include="Entities\InventarioDetalle.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\ItemCategoria.cs" />
     <Compile Include="Entities\Parametros.cs" />
@@ -78,6 +84,7 @@
     <Compile Include="Entities\Transaccion.cs" />
     <Compile Include="Entities\TransaccionTipo.cs" />
     <Compile Include="Entities\UserType.cs" />
+    <Compile Include="Entities\UsoHabitacion.cs" />
     <Compile Include="Inicializador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

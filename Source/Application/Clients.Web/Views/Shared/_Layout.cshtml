@@ -11,6 +11,9 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="~/Content/menu/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/menu/bower_components/jquery-ui/themes/base/jquery-ui.min.css" />
+    @*<link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.min.css" />*@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/Content/menu/bower_components/font-awesome/css/font-awesome.min.css" />
     <!-- Ionicons -->
@@ -45,12 +48,15 @@
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <script src="~/Content/menu/bower_components/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
     <!-- jQuery UI 1.11.4 -->
-    <script src="~/Content/menu/bower_components/jquery-ui/jquery-ui.min.js"></script>
+    @*<script src="~/Content/menu/bower_components/jquery-ui/jquery-ui.min.js"></script>*@
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>$.widget.bridge('uibutton', $.ui.button);</script>
     <!-- Bootstrap 3.3.7 -->
     <script src="~/Content/menu/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
     <!-- Morris.js charts -->
     <script src="~/Content/menu/bower_components/raphael/raphael.min.js"></script>
     <script src="~/Content/menu/bower_components/morris.js/morris.min.js"></script>
@@ -98,6 +104,9 @@
     <script src="@Url.Content("~/Scripts/Motel.js")"></script>
 
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type="text"]').attr('autocomplete', 'off');
+        });
         kendo.culture("es-BO");
     </script>
 </head>

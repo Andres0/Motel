@@ -1,0 +1,318 @@
+﻿@model DS.Motel.Clients.Web.Areas.Inventario.Models.Inventario.AddViewModel
+@using Kendo.Mvc.UI
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnCancel").click(function () {
+            $("#divMasterOperationAreaContent").load('@Url.Action("Index", "Inventario", new { area = "Inventario" })?masterload=false');
+            $(document).scrollTop(0);
+        });
+
+        $('#Fecha').datepicker({
+            autoclose: true,
+            dateFormat: 'dd/MM/yyyy'
+        });
+    });
+
+    function Add_callOnBegin() {
+        $("#btnAdd").attr("disabled", "disabled")
+        $("#btnAdd").text("Guardando...");
+    }
+
+    function Add_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("El inventario se guardó con exito", { globalPosition: "top center", className: "success" });
+                    $("#divMasterOperationAreaContent").load('@Url.Action("index", "Inventario", new { area = "Inventario" })?masterload=false');
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+        $(document).scrollTop(0);
+    }
+
+    function Cantidad_onfocus(id) {
+        var valText = $("#" + id).val();
+        var valTextParse = kendo.parseFloat(valText);
+        if (valTextParse == 0)
+            $("#" + id).val("");
+        else
+            $("#" + id).val(valText);
+    }
+    function Cantidad_onblur(id) {
+        var valText = $("#" + id).val();
+        var valTextParse = kendo.parseFloat(valText);
+        if (valTextParse != "" && valTextParse != null)
+            $("#" + id).val(valText);
+        else
+            $("#" + id).val(0);
+    }
+    function Cantidad_onchange(id) {
+        if ('@Model.Tipo' == '@DS.Motel.Data.Entities.InventarioTipo.Ingreso') {
+            var index = id.substr(9);
+            index = index.substr(0, index.indexOf('_'));
+            var valCantidad = kendo.parseFloat($("#Detalles_" + index + "__Cantidad").val());
+            var valCosto = kendo.parseFloat($("#Detalles_" + index + "__Costo").val());
+            $("#Detalles_" + index + "__TotalText").text(valCantidad * valCosto);
+            $("#Detalles_" + index + "__Total").val(valCantidad * valCosto);
+        }
+    }
+
+    function GridAddInventario_onDataBound(e) {
+        $(".custom-decimal").each(function () {
+            $(this).ForceDecimalCulture();
+        });
+        $(".templateCell").each(function () {
+            eval($(this).children("script").last().html());
+        });
+        //foreach(var i in ModelState.)
+
+        $(".custom_autocomplete").autocomplete({
+            delay: 400,
+            source: '@Url.Action("LoadItem", "Inventario", new { area = "Inventario" })',
+            minLength: 0,
+            change: function (event, ui) {
+                var index = event.target.id.substr(9);
+                index = index.substr(0, index.indexOf('_'));
+                if ($("#Detalles_" + index + "__ItemName").val() != $("#Detalles_" + index + "__ItemNameSelected").val()) {
+                    $("#Detalles_" + index + "__ItemName").val("");
+                    $("#Detalles_" + index + "__ItemNameSelected").val("");
+                    $("#Detalles_" + index + "__ItemId").val("");
+                    $("#Detalles_" + index + "__Cantidad").val("");
+                    $("#Detalles_" + index + "__Costo").val("");
+                    $("#Detalles_" + index + "__TotalText").val("");
+                    $("#Detalles_" + index + "__TotalText").text("");
+                    $("#Detalles_" + index + "__Total").val("");
+                    $("#Detalles_" + index + "__Borrar").val(true);
+                }
+            },
+            select: function (event, ui) {
+                if (ui.item.value != '@Guid.Empty') {
+                    var index = event.target.id.substr(9);
+                    index = index.substr(0, index.indexOf('_'));
+
+                    $("#Detalles_" + index + "__ItemName").val(ui.item.label);
+                    $("#Detalles_" + index + "__ItemNameSelected").val(ui.item.label);
+                    $("#Detalles_" + index + "__ItemId").val(ui.item.value);
+                    $("#Detalles_" + index + "__Cantidad").val("");
+                    $("#Detalles_" + index + "__Costo").val("");
+                    $("#Detalles_" + index + "__TotalText").val("");
+                    $("#Detalles_" + index + "__TotalText").text("");
+                    $("#Detalles_" + index + "__Total").val("");
+                    $("#Detalles_" + index + "__Borrar").val(true);
+
+                    var gridCount = $("#GridAddInventario").data("kendoGrid").dataSource.data().length;
+                    if (index == (gridCount - 1)) {
+                        saveValuesInGrid();
+                        $("#GridAddInventario").data("kendoGrid").dataSource.add({
+                            Indice: gridCount, ItemId: "", ItemName: "", Cantidad: "", Costo: "", Total: "", Borrar: false, ItemIdError: "", CantidadError: "", CostoError: ""
+                        });
+                    }
+                }
+                else {
+                    $("#Detalles_" + index + "__ItemName").val("");
+                    $("#Detalles_" + index + "__ItemNameSelected").val("");
+                    $("#Detalles_" + index + "__ItemId").val("");
+                    $("#Detalles_" + index + "__Cantidad").val("");
+                    $("#Detalles_" + index + "__Costo").val("");
+                    $("#Detalles_" + index + "__TotalText").val("");
+                    $("#Detalles_" + index + "__TotalText").text("");
+                    $("#Detalles_" + index + "__Total").val("");
+                    $("#Detalles_" + index + "__Borrar").val(true);
+                }
+                return false;
+            }
+        });
+    }
+
+    function RemoveLineMovement(index) {
+        var grid = $("#GridAddInventario").data("kendoGrid");
+
+        //Save Lines
+        saveValuesInGrid();
+
+        //Remove Line
+        var gridData = grid.dataSource.at(index);
+        grid.dataSource.remove(gridData);
+
+        //Update Index
+        for (var j = 0; j < grid.dataSource.data().length; j++) {
+            var gridDataSource = grid.dataSource.data();
+            gridDataSource[j].Indice = j;
+        }
+        grid.refresh();
+    }
+
+    function saveValuesInGrid() {
+        var grid = $("#GridAddInventario").data("kendoGrid");
+        var datasourceLenght = grid.dataSource.data().length;
+        for (var i = 0; i < datasourceLenght; i++) {
+            var dsToUpdate = grid.dataSource.at(i);
+            dsToUpdate.Indice = $("#Detalles_" + i + "__Indice").val();
+            dsToUpdate.ItemId = $("#Detalles_" + i + "__ItemId").val();
+            dsToUpdate.ItemName = $("#Detalles_" + i + "__ItemName").val();
+            dsToUpdate.Cantidad = $("#Detalles_" + i + "__Cantidad").val();
+            dsToUpdate.Costo = $("#Detalles_" + i + "__Costo").val();
+            dsToUpdate.Total = $("#Detalles_" + i + "__Total").val();
+            dsToUpdate.Borrar = $("#Detalles_" + i + "__Borrar").val();
+        }
+    }
+
+</script>
+
+<div id="divAddInventario">
+    @using (@Ajax.BeginForm("Add", "Inventario", new { area = "Inventario" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divAddInventario", OnBegin = "Add_callOnBegin", OnSuccess = "Add_onSuccess" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(h => h.Tipo)
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="margin:15px;">Agregar @Model.Tipo.ToString()</h1>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box box-default">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Fecha</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right" tabindex="4" maxlength="10" id="Fecha" name="Fecha" value='@Model.Fecha.ToString("dd/MM/yyyy")' />
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Fecha)
+                        </div>
+                        <div class="form-group col-md-6">
+                            @if (Model.Tipo == DS.Motel.Data.Entities.InventarioTipo.Ingreso)
+                            {
+                                <div class="form-group col-md-12">
+                                    <label>Almacen</label>
+                                    @Html.DropDownListFor(m => m.AId, new SelectList(@Model.Almacenes, "Id", "Nombre"), new { @class = "form-control", tabindex = "1" })
+                                    @Html.ValidationMessageFor(m => m.AId)
+                                </div>
+                            }
+                            else if (Model.Tipo == DS.Motel.Data.Entities.InventarioTipo.Egreso)
+                            {
+                                <div class="form-group col-md-12">
+                                    <label>Almacen</label>
+                                    @Html.DropDownListFor(m => m.DeId, new SelectList(@Model.Almacenes, "Id", "Nombre"), new { @class = "form-control", tabindex = "2" })
+                                    @Html.ValidationMessageFor(m => m.DeId)
+                                </div>
+                            }
+                            else if (Model.Tipo == DS.Motel.Data.Entities.InventarioTipo.Transferencia)
+                            {
+                                <div class="form-group col-md-6">
+                                    <label>De</label>
+                                    @Html.DropDownListFor(m => m.DeId, new SelectList(@Model.Almacenes, "Id", "Nombre"), new { @class = "form-control", tabindex = "2" })
+                                    @Html.ValidationMessageFor(m => m.DeId)
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>A</label>
+                                    @Html.DropDownListFor(m => m.AId, new SelectList(@Model.Almacenes, "Id", "Nombre"), new { @class = "form-control", tabindex = "2" })
+                                    @Html.ValidationMessageFor(m => m.AId)
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Descripción</label>
+                            @Html.TextAreaFor(m => m.Descripcion, new { maxlength = "50", @class = "form-control", tabindex = "4" })
+                            @Html.ValidationMessageFor(m => m.Descripcion)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @(Html.Kendo().Grid(Model.Detalles).Name("GridAddInventario")
+                            .TableHtmlAttributes(new { @class = "" })
+                            .Columns(columns =>
+                            {
+                                columns.Bound(m => m.ItemId).Width("30%").Title("Item")
+                                    .HeaderHtmlAttributes(new { @class = "" }).HtmlAttributes(new { @class = "" })
+                                    .ClientTemplate(
+
+                                    "<input id='Detalles_#=Indice#__ItemName' name='Detalles[#=Indice#].ItemName' value='#=ItemName#' class='form-control box_sizing_border_box custom_autocomplete' />" +
+                                    "<input id='Detalles_#=Indice#__ItemNameSelected' type='hidden' />" +
+                                    "<input id='Detalles_#=Indice#__ItemId' name='Detalles[#=Indice#].ItemId' type='hidden' value='#=ItemId#' />" +
+                                    "<span class='field-validation-error'>#=ItemIdError#</span>"
+                                    );
+
+                                columns.Bound(m => m.Cantidad).Width("calc(20% - 80px)").Title("Cantidad")
+                                    .HeaderHtmlAttributes(new { @class = "", style = "text-align:right" }).HtmlAttributes(new { @class = "custom-decimal templateCell" })
+                                    .ClientTemplate(
+                                    "<input id='Detalles_#=Indice#__Cantidad' name='Detalles[#=Indice#].Cantidad' value='#=Cantidad#' class='form-control box_sizing_border_box text-right' maxlength='10' onfocus='Cantidad_onfocus(this.id);' onblur='Cantidad_onblur(this.id);' onchange='Cantidad_onchange(this.id);' />" +
+                                    "<span class='field-validation-error'>#=CantidadError#</span>"
+                                    );
+                                //Html.ValidationMessage("Detalles[#=Indice#].Cantidad")
+                                if (Model.Tipo == DS.Motel.Data.Entities.InventarioTipo.Ingreso)
+                                {
+                                    columns.Bound(m => m.Costo).Width("25%").Title("Costo")
+                                    .HeaderHtmlAttributes(new { @class = "", style = "text-align:right" }).HtmlAttributes(new { @class = "custom-decimal" })
+                                    .ClientTemplate(
+
+                                        "<input id='Detalles_#=Indice#__Costo' name='Detalles[#=Indice#].Costo' value='#=Costo#' class='form-control box_sizing_border_box text-right' maxlength='10' onfocus='Cantidad_onfocus(this.id);' onblur='Cantidad_onblur(this.id);' onchange='Cantidad_onchange(this.id);' />" +
+                                        "<span class='field-validation-error'>#=CostoError#</span>"
+                                        );
+
+                                    columns.Bound(m => m.Total).Width("25%").Title("Total")
+                                    .HeaderHtmlAttributes(new { @class = "", style = "text-align:right" }).HtmlAttributes(new { @class = "text-right" })
+                                    .ClientTemplate(
+
+                                        "<label id='Detalles_#=Indice#__TotalText'>#:Total#</label>" +
+                                        "<input id='Detalles_#=Indice#__Total' name='Detalles[#=Indice#].Total' class='hidden' type='text' value='#=Total#'/>"
+                                        );
+                                }
+
+                                columns.Bound(m => m.Indice).Title("Acciones").Width("80px").HeaderHtmlAttributes(new { @class = "" }).HtmlAttributes(new { @class = "" })
+                                    .ClientTemplate(
+
+                                    "<input id='Detalles_#=Indice#__Indice' name='Detalles[#=Indice#].Indice' type='hidden' value='#=Indice#' />" +
+                                    "<input id='Detalles_#=Indice#__Borrar' name='Detalles[#=Indice#].Borrar' type='hidden' value='#=Borrar#' />" +
+                                    "# if (Borrar == true || Borrar == 'true') { #" +
+                                        "<button id='Detalles_#=Indice#' class='btn btn-danger' onclick='RemoveLineMovement(#=Indice#);' ><span class='glyphicon glyphicon-remove' ></span></button>" +
+                                    "# } #"
+                                );
+                            })
+                            .Events(ev => ev.DataBound("GridAddInventario_onDataBound"))
+                            //.Events(ev => ev.DataBound("GridAddMovementDetail_onDataBound").DataBinding("GridAddMovementDetail_onDataBinding"))
+                            .Resizable(resizable => resizable.Columns(false))
+                            .Scrollable(scrollable => scrollable.Enabled(false))
+                            .Pageable(pageable => pageable.Enabled(false))
+                            .Sortable(sortable => sortable.Enabled(false))
+                            .Selectable(selectable => selectable.Enabled(false))
+                            .Filterable(filtrable => filtrable.Enabled(false))
+                            .DataSource(datasource => datasource
+                                .Ajax()
+                                .Model(model =>
+                                {
+                                    model.Id(m => m.Indice);
+                                })
+                                .ServerOperation(false))
+                            )
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button id="btnCancel" type="button" class="btn btn-secondary pull-right">Cancelar</button>
+                    <button id="btnAdd" type="submit" class="btn btn-success pull-right" style="margin-right:15px;">Guardar</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

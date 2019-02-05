@@ -12,8 +12,11 @@ namespace DS.Motel.Data
     {
         #region Fields & Properties
 
+        public DbSet<Almacen> Almacen { get; set; }
         public DbSet<Cargo> Cargo { get; set; }
         public DbSet<CajaBanco> CajaBanco { get; set; }
+        public DbSet<Inventario> Inventario { get; set; }
+        public DbSet<InventarioDetalle> InventarioDetalle { get; set; }
         public DbSet<Item> Item { get; set; }
         public DbSet<ItemCategoria> ItemCategoria { get; set; }
         public DbSet<Parametros> Parametros { get; set; }
@@ -23,6 +26,7 @@ namespace DS.Motel.Data
         public DbSet<Suite> Suite { get; set; }
         public DbSet<Transaccion> Transaccion { get; set; }
         public DbSet<UserType> UserType { get; set; }
+        public DbSet<UsoHabitacion> UsoHabitacion { get; set; }
 
         #endregion
 
@@ -48,8 +52,11 @@ namespace DS.Motel.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new Configurations.AlmacenConfiguration());
             modelBuilder.Configurations.Add(new Configurations.CargoConfiguration());
             modelBuilder.Configurations.Add(new Configurations.CajaBancoConfiguration());
+            modelBuilder.Configurations.Add(new Configurations.InventarioConfiguration());
+            modelBuilder.Configurations.Add(new Configurations.InventarioDetalleConfiguration());
             modelBuilder.Configurations.Add(new Configurations.ItemConfiguration());
             modelBuilder.Configurations.Add(new Configurations.ItemCategoriaConfiguration());
             modelBuilder.Configurations.Add(new Configurations.ParametrosConfiguration());
@@ -59,6 +66,7 @@ namespace DS.Motel.Data
             modelBuilder.Configurations.Add(new Configurations.SuiteConfiguration());
             modelBuilder.Configurations.Add(new Configurations.TransaccionConfiguration());
             modelBuilder.Configurations.Add(new Configurations.UserTypeConfiguration());
+            modelBuilder.Configurations.Add(new Configurations.UsoHabitacionConfiguration());
         }
 
         #endregion
