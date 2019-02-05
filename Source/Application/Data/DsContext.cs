@@ -24,6 +24,8 @@ namespace DS.Motel.Data
         public DbSet<Transaccion> Transaccion { get; set; }
         public DbSet<UserType> UserType { get; set; }
 
+        public DbSet<TarjetaDescuento> TarjetaDescuento { get; set; }
+
         #endregion
 
 
@@ -59,6 +61,7 @@ namespace DS.Motel.Data
             modelBuilder.Configurations.Add(new Configurations.SuiteConfiguration());
             modelBuilder.Configurations.Add(new Configurations.TransaccionConfiguration());
             modelBuilder.Configurations.Add(new Configurations.UserTypeConfiguration());
+            modelBuilder.Configurations.Add(new Configurations.TarjetaDescuentoConfiguration());
         }
 
         #endregion

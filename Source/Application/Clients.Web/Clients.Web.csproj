@@ -270,6 +270,7 @@
     <Compile Include="Areas\Items\Controllers\CategoriasController.cs" />
     <Compile Include="Areas\Items\Controllers\ItemController.cs" />
     <Compile Include="Areas\Items\Controllers\ProductoController.cs" />
+    <Compile Include="Areas\Items\Controllers\TarjetaDescuentoController.cs" />
     <Compile Include="Areas\Items\ItemsAreaRegistration.cs" />
     <Compile Include="Areas\Items\Models\Categorias\AddViewModel.cs" />
     <Compile Include="Areas\Items\Models\Categorias\DeleteViewModel.cs" />
@@ -283,6 +284,10 @@
     <Compile Include="Areas\Items\Models\Producto\DeleteViewModel.cs" />
     <Compile Include="Areas\Items\Models\Producto\EditViewModel.cs" />
     <Compile Include="Areas\Items\Models\Producto\NavegadorViewModel.cs" />
+    <Compile Include="Areas\Items\Models\TarjetaDescuento\AddViewModel.cs" />
+    <Compile Include="Areas\Items\Models\TarjetaDescuento\DeleteViewModel.cs" />
+    <Compile Include="Areas\Items\Models\TarjetaDescuento\EditViewModel.cs" />
+    <Compile Include="Areas\Items\Models\TarjetaDescuento\NavegadorViewModel.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
     <Compile Include="Areas\Security\Models\UserType\AddViewModel.cs" />
     <Compile Include="Areas\Security\Models\UserType\DeleteViewModel.cs" />
@@ -8240,6 +8245,10 @@
     <Content Include="Areas\Items\Views\Producto\Add.cshtml" />
     <Content Include="Areas\Items\Views\Producto\Edit.cshtml" />
     <Content Include="Areas\Items\Views\Producto\Delete.cshtml" />
+    <Content Include="Areas\Items\Views\TarjetaDescuento\Index.cshtml" />
+    <Content Include="Areas\Items\Views\TarjetaDescuento\Add.cshtml" />
+    <Content Include="Areas\Items\Views\TarjetaDescuento\Edit.cshtml" />
+    <Content Include="Areas\Items\Views\TarjetaDescuento\Delete.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

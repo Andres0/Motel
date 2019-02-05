@@ -58,6 +58,7 @@
     <Compile Include="Configurations\ProductoConfiguration.cs" />
     <Compile Include="Configurations\ProductoDetalleConfiguration.cs" />
     <Compile Include="Configurations\SuiteConfiguration.cs" />
+    <Compile Include="Configurations\TarjetaDescuentoConfiguration.cs" />
     <Compile Include="Configurations\TransaccionConfiguration.cs" />
     <Compile Include="Configurations\UserTypeConfiguration.cs" />
     <Compile Include="DsConfiguration.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Entities\ProductoDetalle.cs" />
     <Compile Include="Entities\Suite.cs" />
     <Compile Include="Entities\SuiteEstado.cs" />
+    <Compile Include="Entities\TarjetaDescuento.cs" />
     <Compile Include="Entities\Transaccion.cs" />
     <Compile Include="Entities\TransaccionTipo.cs" />
     <Compile Include="Entities\UserType.cs" />
