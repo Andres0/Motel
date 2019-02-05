@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DS.Motel.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,9 @@ namespace DS.Motel.Clients.Web.Models.Home
     {
         public Guid SuiteId { get; set; }
         public string Nombre { get; set; }
-        public int EstadoId { get; set; }
-        public string EstadoNombre { get; set; }
+        public SuiteEstado Estado { get; set; }
+        public decimal Tiempo_Anular { get; set; }
+        public DateTime Ingreso { get; set; }
+        public TipoIngreso TipoIngreso { get; set; }
     }
 }

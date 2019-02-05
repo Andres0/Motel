@@ -962,5 +962,5 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.We
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.pdb
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.pdb
-C:\Users\Administrador\Documents\happySys\happy\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.dll
-C:\Users\Administrador\Documents\happySys\happy\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.pdb
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Inventarios.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Inventarios.pdb

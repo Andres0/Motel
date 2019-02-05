@@ -1,0 +1,73 @@
+﻿@model DS.Motel.Clients.Web.Models.Home.IngresarViewModel
+
+@{
+    Layout = null;
+}
+
+<script type="text/javascript">
+
+    function Ingresar_callOnBegin() {
+        $("#btnIngresar").attr("disabled", "disabled")
+        $("#btnIngresar").text("Guardando...");
+    }
+
+    function Ingresar_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("Se guardó con exito", { globalPosition: "top center", className: "success" });
+                    $('#mIngresar').modal('hide');
+                    setTimeout(function () {
+                        $("#divMasterOperationAreaContent").load('@Url.Action("Index", "Home", new { area = "" })?masterload=false');
+                    }, 1000);
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+</script>
+
+@Html.HiddenFor(m => m.SuiteId)
+@Html.AntiForgeryToken()
+<div class="modal-header">
+    <h1 class="modal-title">Tipo de Ingreso del Cliente</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.RadioButtonFor(m => m.TipoIngreso, DS.Motel.Data.Entities.TipoIngreso.Pie) Ingreso a Pie
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.RadioButtonFor(m => m.TipoIngreso, DS.Motel.Data.Entities.TipoIngreso.Particular) Ingreso en Particular
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.RadioButtonFor(m => m.TipoIngreso, DS.Motel.Data.Entities.TipoIngreso.Taxi) Ingreso en Taxi
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.ValidationMessageFor(m => m.TipoIngreso)
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnIngresar" type="submit" class="btn btn-primary">Ingresar</button>
+    <button id="btnCancelar" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+</div>

@@ -1,7 +1,7 @@
-[Oo]bj
-[Bb]in
-obj
-bin
+Obj/
+obj/
+Bin/
+bin/
 *.user
 *.suo
 *.[Cc]ache

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace DS.Motel.Data
 {
     //public class Inicializador : DropCreateDatabaseIfModelChanges<DsContext>
-    public class Inicializador : CreateDatabaseIfNotExists<DsContext>
+    public class Inicializador : DropCreateDatabaseIfModelChanges<DsContext>
     {
         public override void InitializeDatabase(DsContext context)
         {

@@ -22,7 +22,7 @@ namespace DS.Motel.Data.Entities
 
         public Almacen()
         {
-            AlmacenId = new Guid();
+            AlmacenId = Guid.NewGuid();
         }
 
         #endregion
