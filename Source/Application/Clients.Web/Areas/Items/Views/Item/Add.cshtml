@@ -29,18 +29,6 @@
             else
                 $(this).val(0);
         });
-
-        $("#Cantidad_Stock, #Costo_Total").change(function () {
-            var cantidadStock = $("#Cantidad_Stock").val();
-            var costoTotal = $("#Costo_Total").val();
-            if (cantidadStock != null && costoTotal != null && cantidadStock != 0) {
-                var total = kendo.parseFloat(costoTotal) / kendo.parseFloat(cantidadStock);
-                $("#Costo_Unitario").val(total.toLocaleString());
-            }
-            else {
-                $("#Costo_Unitario").val(0);
-            }
-        });
     });
 
     function Add_callOnBegin() {
@@ -114,39 +102,21 @@
                             @Html.DropDownListFor(m => m.CategoriaId, new SelectList(@Model.Categorias, "Id", "Nombre"), new { @class = "form-control", tabindex = "4" })
                             @Html.ValidationMessageFor(m => m.CategoriaId)
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Cantidad en Stock</label>
-                            @Html.TextBoxFor(m => m.Cantidad_Stock, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "5" })
-                            @Html.ValidationMessageFor(m => m.Cantidad_Stock)
+                            <label>Precio de Venta</label>
+                            @Html.TextBoxFor(m => m.Precio, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "5" })
+                            @Html.ValidationMessageFor(m => m.Precio)
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Costo Total</label>
-                            @Html.TextBoxFor(m => m.Costo_Total, new { maxlength = "20", @class = "form-control custom-decimal", tabindex = "6" })
-                            @Html.ValidationMessageFor(m => m.Costo_Total)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label>Costo Unitario</label>
-                            @Html.TextBoxFor(m => m.Costo_Unitario, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "7", @readonly="readonly" })
-                            @Html.ValidationMessageFor(m => m.Costo_Unitario)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label>Porcion (Se puede subdividir en Nº raciones)</label>
-                            @Html.TextBoxFor(m => m.Proporcion, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "8" })
+                            <label>Proporcion 1 a (Se puede subdividir en Nº raciones)</label>
+                            @Html.TextBoxFor(m => m.Proporcion, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "6" })
                             @Html.ValidationMessageFor(m => m.Proporcion)
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-6">
                             <label>Stock Minimo</label>
-                            @Html.TextBoxFor(m => m.Stock_Minimo, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "9" })
+                            @Html.TextBoxFor(m => m.Stock_Minimo, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "7" })
                             @Html.ValidationMessageFor(m => m.Stock_Minimo)
                         </div>
                     </div>
@@ -154,7 +124,7 @@
                         <div class="form-group col-md-6">
                             <div class="checkbox">
                                 <label>
-                                    @Html.CheckBoxFor(m => m.EsVendible, new { tabindex = "10" })
+                                    @Html.CheckBoxFor(m => m.EsVendible, new { tabindex = "8" })
                                     Es vendible
                                 </label>
                             </div>

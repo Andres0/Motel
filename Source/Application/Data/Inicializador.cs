@@ -53,7 +53,7 @@ namespace DS.Motel.Data
 
             var CajaBancos = new List<CajaBanco>
             {
-                new CajaBanco { Nombre = "Caja chica", Descripcion = null, Tipo = CajaBancoTipo.Caja }
+                new CajaBanco { CajaBancoId = new Guid("11111111-2222-3333-4444-555555555555"), Nombre = "Caja chica", Descripcion = null, Tipo = CajaBancoTipo.Caja }
             };
             CajaBancos.ForEach(s => context.CajaBanco.Add(s));
             base.Seed(context);

@@ -14,11 +14,9 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
 {
     public class TarjetaDescuentoController : Controller
     {
-        // GET: Items/TarjetaDescuento
         #region Fields & properties 
 
         private IUnityContainer container;
-        private TarjetaDescuento tarjetaDescuento;
 
         #endregion
 
@@ -79,7 +77,20 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             }
             return toReturn;
         }
-#endregion
+
+        private List<Tuple<string, string>> GetErroresDelete(DeleteViewModel model)
+        {
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+            TarjetaDescuentoRepository tarjetaDescuentoRepository = container.Resolve<TarjetaDescuentoRepository>();
+
+            if (tarjetaDescuentoRepository.ObtenerPorId(model.tarjetaDescuentoId).TransaccionId != null)
+            {
+                toReturn.Add(new Tuple<string, string>("ErrorMessage", "No se pudo borrar la tarjeta de descuento porque se encuentra vendida"));
+            }
+            return toReturn;
+        }
+
+        #endregion
 
 
 
@@ -112,8 +123,6 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
                 ModelState.AddModelError(item.Item1, item.Item2);
             }
 
-
-
             if (ModelState.IsValid)
             {
                 TarjetaDescuento tarjetaDescuento = new TarjetaDescuento();
@@ -126,7 +135,6 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
                 tarjetaDescuento.NroUsadas = 0;
                 tarjetaDescuento.NroUsos = model.NroUsos;
                 tarjetaDescuento.Porcentaje = model.Porcentaje;
-               
                 
                 try
                 {
@@ -205,10 +213,10 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             return PartialView(model);
         }
 
-        public ActionResult Delete(Guid tarjetaDescuentoID)
+        public ActionResult Delete(Guid tarjetaDescuentoId)
         {
             DeleteViewModel deleteViewModel = new DeleteViewModel();
-            deleteViewModel.tarjetaDescuentoId = tarjetaDescuentoID;
+            deleteViewModel.tarjetaDescuentoId = tarjetaDescuentoId;
 
             return PartialView(deleteViewModel);
         }
@@ -242,6 +250,44 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             return PartialView(model);
         }
 
+        public ActionResult Sale(Guid tarjetaDescuentoId)
+        {
+            SaleViewModel saleViewModel = new SaleViewModel();
+            saleViewModel.tarjetaDescuentoId = tarjetaDescuentoId;
+
+            return PartialView(saleViewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Sale(SaleViewModel model)
+        {
+            TarjetaDescuentoRepository tarjetaDescuentoRepository = container.Resolve<TarjetaDescuentoRepository>();
+
+            ModelState.Clear();
+            //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    tarjetaDescuentoRepository.Vender(model.tarjetaDescuentoId);
+
+                    model.Result = Web.Models.EnumActionResult.Saved;
+                }
+                catch (Exception)
+                {
+                    model.Result = Web.Models.EnumActionResult.Error;
+                }
+            }
+            else
+            {
+                model.Result = Web.Models.EnumActionResult.Validation;
+            }
+            return PartialView(model);
+        }
+
         #endregion
 
 
@@ -254,17 +300,18 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
         public ActionResult LoadGrid([DataSourceRequest]DataSourceRequest request)
         {
             TarjetaDescuentoRepository tarjetaDescuentoRepository = container.Resolve<TarjetaDescuentoRepository>();
-            List<NavegadorViewModel> toReturn = tarjetaDescuentoRepository.ObtenerTodo().Select(t => new NavegadorViewModel()
+            List<NavegadorViewModel> toReturn = tarjetaDescuentoRepository.ObtenerTodo().ToList().Select(t => new NavegadorViewModel()
             {
                 TarjetaDescuentoId = t.TarjetaDescuentoId,
                 Porcentaje = t.Porcentaje,
                 Codigo = t.Codigo,
-                Costo=t.Costo,
-                Activado=t.Activado,
-                FechaCreacion= t.FechaCreacion,
-                FechaUltimoUso= t.FechaUltimoUso,
-                NroUsadas=t.NroUsadas
-            }).OrderBy(y => y.Costo).ToList();
+                Costo = t.Costo,
+                Activado = t.Activado ? "Si" : "No",
+                FechaCreacion = t.FechaCreacion.ToString("dd/MM/yyyy"),
+                FechaUltimoUso = t.FechaUltimoUso != null ? t.FechaUltimoUso.Value.ToString("dd/MM/yyyy") : string.Empty,
+                NroUsadas = t.NroUsadas,
+                EsVendido = t.TransaccionId == null ? "No" : "Si",
+            }).OrderBy(y => y.Codigo).ToList();
 
             return Json(toReturn.ToDataSourceResult(request));
         }

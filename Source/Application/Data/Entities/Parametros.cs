@@ -26,9 +26,7 @@ namespace DS.Motel.Data.Entities
         public decimal Numero_Inicio_Boleta { get; set; }
         public decimal Numero_Fin_Boleta { get; set; }
         public DateTime Fecha_Modificado { get; set; }
-        public Guid? PersonalId { get; set; }
         public bool Activado { get; set; }
-        public virtual Personal Usuario { get; set; }
 
         #endregion
 

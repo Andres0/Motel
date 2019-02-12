@@ -61,11 +61,11 @@
     <div class="row">
         <div class="form-group col-md-6">
             <label>Categoria Padre</label>
-            @(Html.Kendo().DropDownListFor(m => m.PadreId).DataTextField("Nombre").DataValueField("Id")
+            @(Html.Kendo().DropDownListFor(m => m.EditPadreId).DataTextField("Nombre").DataValueField("Id")
                             .HtmlAttributes(new { @class = "", style = "width:100%;", tabindex = "3" }).BindTo(Model.Categorias)
                             .Template("# var marginLeft = (Index*15) + 'px'; # " +
                                     "<div style='margin-left: #= marginLeft #'>#= Nombre #</div>"))
-            @Html.ValidationMessageFor(m => m.PadreId)
+            @Html.ValidationMessageFor(m => m.EditPadreId)
         </div>
     </div>
 </div>

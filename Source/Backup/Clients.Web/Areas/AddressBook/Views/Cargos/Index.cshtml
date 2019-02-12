@@ -1,0 +1,107 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn-add").click(function () {
+            $("#divContentAddCargo").load('@Url.Action("Add", "Cargos", new { area = "AddressBook" })', function () {
+                $('#AddModal').modal('show');
+            });
+        });
+    });
+
+    function btnEdit_onClick(cargoId)
+    {
+        $("#divContentEditCargo").load('@Url.Action("Edit", "Cargos", new { area = "AddressBook" })?cargoId=' + cargoId, function () {
+            $('#EditModal').modal('show');
+        });
+    }
+
+    function btnDelete_onClick(cargoId) {
+        $("#divContentDeleteCargo").load('@Url.Action("Delete", "Cargos", new { area = "AddressBook" })?cargoId=' + cargoId, function () {
+            $('#DeleteModal').modal('show');
+        });
+    }
+
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Administracion de Cargos</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" id="btn-add" class="btn btn-success pull-right">Agregar Cargo</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @(
+                        Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.AddressBook.Models.Cargos.NavegadorViewModel>().Name("GridCargos")
+                        .Columns(column =>
+                        {
+                            column.Bound(c => c.Nombre).Title("Nombre").Width("30%");
+                            column.Bound(c => c.Descripcion).Title("Descripción").Width("calc(70%-120px)");
+                            column.Bound(c => c).Title("Acciones").Width("120px").Filterable(false).Sortable(false).ClientTemplate(
+                                "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:CargoId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
+                                "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:CargoId#\");'><span class='glyphicon glyphicon-remove' ></span></button>"
+                                );
+
+                        })
+                        .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
+                        .Filterable(filterable => filterable.Enabled(true))
+                        .Sortable(sortable => sortable.Enabled(true))
+                        .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
+                        .DataSource(datasourse => datasourse
+                            .Ajax()
+                            .PageSize(10)
+                            .Read(read => read.Action("LoadGrid", "Cargos"))
+                            .ServerOperation(false))
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (@Ajax.BeginForm("Add", "Cargos", new { area = "AddressBook" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentAddCargo", OnSuccess = "Add_onSuccess", OnBegin = "Add_callOnBegin" }))
+{
+    <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentAddCargo" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Edit", "Cargos", new { area = "AddressBook" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentEditCargo", OnSuccess = "Edit_onSuccess", OnBegin = "Edit_callOnBegin" }))
+{
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentEditCargo" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Delete", "Cargos", new { area = "AddressBook" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeleteCargo", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
+{
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentDeleteCargo" class="modal-content">
+            </div>
+        </div>
+    </div>
+}

@@ -25,8 +25,31 @@ namespace DS.Motel.Data.Inventarios
         public void Agregar(Inventario inventario)
         {
             _context.Inventario.Add(inventario);
-            _context.SaveChanges();
+            #region Actualizar Stock
+            if (inventario.Tipo == InventarioTipo.Ingreso)
+            {
+                foreach (InventarioDetalle inventarioDetalle in inventario.Detalle)
+                {
+                    Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                    item.Cantidad_Stock = item.Cantidad_Stock + inventarioDetalle.Cantidad;
 
+                    _context.Item.Attach(item);
+                    _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                }
+            }
+            else if (inventario.Tipo == InventarioTipo.Egreso)
+            {
+                foreach (InventarioDetalle inventarioDetalle in inventario.Detalle)
+                {
+                    Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                    item.Cantidad_Stock = item.Cantidad_Stock - inventarioDetalle.Cantidad;
+
+                    _context.Item.Attach(item);
+                    _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                }
+            }
+            #endregion
+            _context.SaveChanges();
         }
         public void Editar(Inventario inventario)
         {
@@ -38,24 +61,83 @@ namespace DS.Motel.Data.Inventarios
             inventarioaActualizar.AAlmacenId = inventario.AAlmacenId;
 
             List<Guid> detalleAEliminar = inventarioaActualizar.Detalle.Select(s => s.ItemId).ToList();
-            foreach (var item in inventario.Detalle)
+            foreach (InventarioDetalle inventarioDetalle in inventario.Detalle)
             {
-                if (!detalleAEliminar.Exists(e => e == item.ItemId))
+                if (!detalleAEliminar.Exists(e => e == inventarioDetalle.ItemId))
                 {
-                    inventarioaActualizar.Detalle.Add(item);
+                    inventarioaActualizar.Detalle.Add(inventarioDetalle);
+
+                    #region Actualizar Stock
+                    if (inventario.Tipo == InventarioTipo.Ingreso)
+                    {
+                        Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                        item.Cantidad_Stock = item.Cantidad_Stock + inventarioDetalle.Cantidad;
+
+                        _context.Item.Attach(item);
+                        _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else if (inventario.Tipo == InventarioTipo.Egreso)
+                    {
+                        Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                        item.Cantidad_Stock = item.Cantidad_Stock - inventarioDetalle.Cantidad;
+
+                        _context.Item.Attach(item);
+                        _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    #endregion
                 }
                 else
                 {
-                    InventarioDetalle _detalle = inventarioaActualizar.Detalle.SingleOrDefault(s => s.ItemId == item.ItemId);
-                    _detalle.Cantidad = item.Cantidad;
-                    _detalle.Costo = item.Costo;
-                    _detalle.Indice = item.Indice;
+                    InventarioDetalle _detalle = inventarioaActualizar.Detalle.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+
+                    #region Actualizar Stock
+                    if (inventario.Tipo == InventarioTipo.Ingreso)
+                    {
+                        Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                        item.Cantidad_Stock = item.Cantidad_Stock + inventarioDetalle.Cantidad - _detalle.Cantidad;
+
+                        _context.Item.Attach(item);
+                        _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else if (inventario.Tipo == InventarioTipo.Egreso)
+                    {
+                        Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                        item.Cantidad_Stock = item.Cantidad_Stock - inventarioDetalle.Cantidad + _detalle.Cantidad;
+
+                        _context.Item.Attach(item);
+                        _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    #endregion
+
+                    _detalle.Cantidad = inventarioDetalle.Cantidad;
+                    _detalle.Costo = inventarioDetalle.Costo;
+                    _detalle.Indice = inventarioDetalle.Indice;
                     detalleAEliminar.RemoveAll(r => r == _detalle.ItemId);
                 }
             }
-            foreach (var item in detalleAEliminar)
+            foreach (var itemIdEliminar in detalleAEliminar)
             {
-                InventarioDetalle inventarioDetalle = _context.InventarioDetalle.SingleOrDefault(s => s.ItemId == item);
+                InventarioDetalle inventarioDetalle = _context.InventarioDetalle.SingleOrDefault(s => s.InventarioId == inventario.InventarioId && s.ItemId == itemIdEliminar);
+
+                #region Actualizar Stock
+                if (inventario.Tipo == InventarioTipo.Ingreso)
+                {
+                    Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                    item.Cantidad_Stock = item.Cantidad_Stock - inventarioDetalle.Cantidad;
+
+                    _context.Item.Attach(item);
+                    _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                }
+                else if (inventario.Tipo == InventarioTipo.Egreso)
+                {
+                    Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                    item.Cantidad_Stock = item.Cantidad_Stock + inventarioDetalle.Cantidad;
+
+                    _context.Item.Attach(item);
+                    _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                }
+                #endregion
+
                 _context.InventarioDetalle.Remove(inventarioDetalle);
             }
 
@@ -70,6 +152,26 @@ namespace DS.Motel.Data.Inventarios
             foreach (var detalle in detalleIds)
             {
                 InventarioDetalle inventarioDetalle = _context.InventarioDetalle.SingleOrDefault(s => s.InventarioDetalleId == detalle);
+
+                #region Actualizar Stock
+                if (inventario.Tipo == InventarioTipo.Ingreso)
+                {
+                    Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                    item.Cantidad_Stock = item.Cantidad_Stock - inventarioDetalle.Cantidad;
+
+                    _context.Item.Attach(item);
+                    _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                }
+                else if (inventario.Tipo == InventarioTipo.Egreso)
+                {
+                    Item item = _context.Item.SingleOrDefault(s => s.ItemId == inventarioDetalle.ItemId);
+                    item.Cantidad_Stock = item.Cantidad_Stock + inventarioDetalle.Cantidad;
+
+                    _context.Item.Attach(item);
+                    _context.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                }
+                #endregion
+
                 _context.InventarioDetalle.Remove(inventarioDetalle);
             }
             _context.Inventario.Remove(inventario);
@@ -92,6 +194,11 @@ namespace DS.Motel.Data.Inventarios
         public Inventario ObtenerPorId(Guid? inventarioId)
         {
             return _context.Inventario.SingleOrDefault(s => s.InventarioId == inventarioId);
+        }
+
+        public bool Existe(Guid itemId)
+        {
+            return _context.InventarioDetalle.Where(w => w.ItemId == itemId).Count() > 0 ? true : false;
         }
 
         #endregion

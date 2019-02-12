@@ -2,22 +2,28 @@
 
 @{
     ViewBag.Title = "Index";
-    if (Convert.ToBoolean(ViewData["MasterLoad"]) == true)
-    {
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#btn-add").click(function () {
-            $("#divMasterOperationAreaContent").load('@Url.Action("Add", "Transaccion", new { area = "Finances" })');
+        $("#btn-addIngreso").click(function () {
+            $("#divContentAddTransaccion").load('@Url.Action("Add", "Transaccion", new { area = "Finances" })?tipo=Deposito', function () {
+                $('#AddModal').modal('show');
+            });
+        });
+        $("#btn-addEgreso").click(function () {
+            $("#divContentAddTransaccion").load('@Url.Action("Add", "Transaccion", new { area = "Finances" })?tipo=Retiro', function () {
+                $('#AddModal').modal('show');
+            });
         });
     });
 
     function btnEdit_onClick(transaccionId)
     {
-        $("#divMasterOperationAreaContent").load('@Url.Action("Edit", "Transaccion", new { area = "Finances" })?transaccionId=' + transaccionId);
+        $("#divContentEditTransaccion").load('@Url.Action("Edit", "Transaccion", new { area = "Finances" })?transaccionId=' + transaccionId, function () {
+            $('#EditModal').modal('show');
+        });
     }
 
     function btnDelete_onClick(transaccionId) {
@@ -39,7 +45,8 @@
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-md-12">
-                    <button type="button" id="btn-add" class="btn btn-success pull-right">Agregar Transaccion</button>
+                    <button type="button" id="btn-addEgreso" class="btn btn-success pull-right" style="margin:0px 0px 0px 10px;">Agregar Egreso</button>
+                    <button type="button" id="btn-addIngreso" class="btn btn-success pull-right">Agregar Ingreso</button>
                 </div>
             </div>
         </div>
@@ -52,10 +59,11 @@
                     {
                         column.Bound(c => c.Nro_Cuenta).Title("Nro. de Cuenta").Width("10%");
                         column.Bound(c => c.Tipo).Title("Tipo").Width("10%");
+                        column.Bound(c => c.Fecha_Transaccion).Title("Fecha").Width("10%");
                         column.Bound(c => c.Fecha_Ini).Title("Fecha Inicio").Width("10%");
                         column.Bound(c => c.Fecha_Fin).Title("Fecha Fin").Width("10%");
                         column.Bound(c => c.Concepto).Title("Concepto").Width("calc(40%-120px)");
-                        column.Bound(c => c.Saldo).Title("Saldo").Width("20%");
+                        column.Bound(c => c.Saldo).Title("Saldo").Width("10%");
                         column.Bound(c => c).Title("Acciones").Width("120px").Sortable(false).Filterable(false).ClientTemplate(
                             "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:TransaccionId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
                             "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:TransaccionId#\");' ><span class='glyphicon glyphicon-remove' ></span></button>"
@@ -78,6 +86,25 @@
 </div>
 
 
+@using (@Ajax.BeginForm("Add", "Transaccion", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentAddTransaccion", OnSuccess = "Add_onSuccess", OnBegin = "Add_callOnBegin" }))
+{
+    <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentAddTransaccion" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Edit", "Transaccion", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentEditTransaccion", OnSuccess = "Edit_onSuccess", OnBegin = "Edit_callOnBegin" }))
+{
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentEditTransaccion" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
 
 @using (@Ajax.BeginForm("Delete", "Transaccion", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeleteTransaccion", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
 {

@@ -1,6 +1,7 @@
 ﻿using DS.Motel.Clients.Web.Areas.Items.Models.Items;
 using DS.Motel.Clients.Web.Models;
 using DS.Motel.Data.Entities;
+using DS.Motel.Data.Inventarios;
 using DS.Motel.Data.Items;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -66,6 +67,10 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             {
                 toReturn.Add(new Tuple<string, string>("CategoriaId", "Por favor seleccione una categoría"));
             }
+            if (model.Proporcion == 0)
+            {
+                toReturn.Add(new Tuple<string, string>("Proporcion", "Por favor ingrese una proporción"));
+            }
             return toReturn;
         }
 
@@ -92,6 +97,22 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             if (model.CategoriaId == Guid.Empty)
             {
                 toReturn.Add(new Tuple<string, string>("CategoriaId", "Por favor seleccione una categoría"));
+            }
+            if (model.Proporcion == 0)
+            {
+                toReturn.Add(new Tuple<string, string>("Proporcion", "Por favor ingrese una proporción"));
+            }
+            return toReturn;
+        }
+
+        private List<Tuple<string, string>> GetErroresDelete(DeleteViewModel model)
+        {
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+            InventarioRepository inventarioRepository = container.Resolve<InventarioRepository>();
+
+            if (inventarioRepository.Existe(model.ItemId))
+            {
+                toReturn.Add(new Tuple<string, string>("ErrorMessage", "No se pudo borrar el item porque tiene registros de inventario"));
             }
             return toReturn;
         }
@@ -142,11 +163,11 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
                 item.Codigo = model.Codigo;
                 item.Nombre = model.Nombre;
                 item.Descripcion = model.Descripcion;
-                item.Cantidad_Stock = model.Cantidad_Stock;
-                item.Costo_Total = model.Costo_Total;
-                item.Costo_Unitario = model.Costo_Unitario;
+                item.Precio = model.Precio;
                 item.Proporcion = model.Proporcion;
+                item.Proporcion_Usada = model.Proporcion;
                 item.Stock_Minimo = model.Stock_Minimo;
+                item.Cantidad_Stock = model.Cantidad_Stock;
                 item.EsVendible = model.EsVendible;
                 item.ItemCategoriaId = model.CategoriaId;
 
@@ -180,11 +201,11 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             editViewModel.Codigo = item.Codigo;
             editViewModel.Nombre = item.Nombre;
             editViewModel.Descripcion = item.Descripcion;
-            editViewModel.Cantidad_Stock = item.Cantidad_Stock;
-            editViewModel.Costo_Total = item.Costo_Total;
-            editViewModel.Costo_Unitario = item.Costo_Unitario;
+            editViewModel.Precio = item.Precio;
             editViewModel.Proporcion = item.Proporcion;
+            editViewModel.Proporcion_Usada = item.Proporcion_Usada;
             editViewModel.Stock_Minimo = item.Stock_Minimo;
+            editViewModel.Cantidad_Stock = item.Cantidad_Stock;
             editViewModel.EsVendible = item.EsVendible;
             editViewModel.CategoriaId = item.ItemCategoriaId;
 
@@ -216,11 +237,11 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
                 item.Codigo = model.Codigo;
                 item.Nombre = model.Nombre;
                 item.Descripcion = model.Descripcion;
-                item.Cantidad_Stock = model.Cantidad_Stock;
-                item.Costo_Total = model.Costo_Total;
-                item.Costo_Unitario = model.Costo_Unitario;
+                item.Precio = model.Precio;
                 item.Proporcion = model.Proporcion;
+                item.Proporcion_Usada = model.Proporcion_Usada;
                 item.Stock_Minimo = model.Stock_Minimo;
+                item.Cantidad_Stock = model.Cantidad_Stock;
                 item.EsVendible = model.EsVendible;
                 item.ItemCategoriaId = model.CategoriaId;
 
@@ -259,7 +280,11 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             ItemRepository itemRepository = container.Resolve<ItemRepository>();
 
             ModelState.Clear();
-            //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
+            List<Tuple<string, string>> errores = GetErroresDelete(model);
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
 
             if (ModelState.IsValid)
             {
@@ -310,7 +335,7 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
         {
             List<DropdownListViewModel> toReturn = new List<DropdownListViewModel>();
             ItemCategoriaRepository itemCategoriaRepository = container.Resolve<ItemCategoriaRepository>();
-            toReturn = itemCategoriaRepository.ObtenerTodo().Select(x => new DropdownListViewModel()
+            toReturn = itemCategoriaRepository.ObtenerTodo().Where(w => w.Tipo == ItemCategoriaTipo.Item).Select(x => new DropdownListViewModel()
             {
                 Id = x.ItemCategoriaId,
                 Nombre = x.Nombre

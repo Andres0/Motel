@@ -52,7 +52,8 @@
             case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
                 {
                     $.notify("La transacción se guardó con exito", { globalPosition: "top center", className: "success" });
-                    $("#divMasterOperationAreaContent").load('@Url.Action("index", "Transaccion", new { area = "Finances" })?masterload=false');
+                    $("#GridTransaccion").data("kendoGrid").dataSource.read();
+                    $('#EditModal').modal('hide');
                 }
                 break;
             case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
@@ -71,95 +72,60 @@
         $(document).scrollTop(0);
     }
 
-
-    function CuentaId_onChange() {
-        if ($("#CuentaId option:selected").text() == "Caja chica")
-            $("#divFechasCuenta").hide();
-        else
-            $("#divFechasCuenta").show();
-    }
-
 </script>
 
-<div id="divEditTransaction">
-    @using (@Ajax.BeginForm("Edit", "Transaccion", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divEditTransaction", OnBegin = "Edit_callOnBegin", OnSuccess = "Edit_onSuccess" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(m => m.TransaccionId)
-        <div class="row">
-            <div class="col-md-12">
-                <h1 style="margin:15px;">Editar Transacción</h1>
-            </div>
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(m => m.TransaccionId)
+@Html.HiddenFor(h => h.Tipo)
+<div class="modal-header">
+    <h1 class="modal-title">Editar Transacción</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Cuenta</label>
+            @Html.DropDownListFor(m => m.CuentaId, new SelectList(@Model.Cuentas, "Id", "Nombre"), new { @class = "form-control", tabindex = "1" })
+            @Html.ValidationMessageFor(m => m.CuentaId)
         </div>
-        <div class="col-md-12">
-            <div class="box box-default">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <div class="radio">
-                                <label>
-                                    @Html.RadioButtonFor(m => m.IngresoOEgreso, "1", new { tabindex = "1" })
-                                    RETIRO
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    @Html.RadioButtonFor(m => m.IngresoOEgreso, "2", new { tabindex = "2" })
-                                    DEPÓSITO
-                                </label>
-                            </div>
-                            @Html.ValidationMessageFor(m => m.IngresoOEgreso)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label>Cuenta</label>
-                            @Html.DropDownListFor(m => m.CuentaId, new SelectList(@Model.Cuentas, "Id", "Nombre"), new { @class = "form-control", tabindex = "3", onchange = "CuentaId_onChange();" })
-                            @Html.ValidationMessageFor(m => m.CuentaId)
-                        </div>
-                    </div>
-                    <div id="divFechasCuenta" class="row">
-                        <div class="form-group col-md-3">
-                            <label>Fecha Inicio</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" class="form-control pull-right" tabindex="4" maxlength="10" id="Fecha_Inicio" name="Fecha_Inicio" value='@Model.Fecha_Inicio.ToString("dd/MM/yyyy")' />
-                            </div>
-                            @Html.ValidationMessageFor(m => m.Fecha_Inicio)
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>Fecha Fin</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" class="form-control pull-right" tabindex="5" maxlength="10" id="Fecha_Fin" name="Fecha_Fin" value='@Model.Fecha_Fin.ToString("dd/MM/yyyy")' />
-                            </div>
-                            @Html.ValidationMessageFor(m => m.Fecha_Fin)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label>Monto</label>
-                            @Html.TextBoxFor(m => m.Monto, new { maxlength = "50", @class = "form-control custom-decimal", tabindex = "6" })
-                            @Html.ValidationMessageFor(m => m.Monto)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label>Descripción</label>
-                            @Html.TextAreaFor(m => m.Concepto, new { @class = "form-control", tabindex = "7" })
-                            @Html.ValidationMessageFor(m => m.Concepto)
-                        </div>
-                    </div>
+    </div>
+    @if (Model.Tipo == DS.Motel.Data.Entities.TransaccionTipo.Deposito)
+    {
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Fecha Inicio</label>
+                <div class="input-group date">
+                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                    @Html.TextBoxFor(m => m.Fecha_Inicio, "{0:dd/MM/yyyy}", new { maxlength = "10", @class = "form-control pull-right", tabindex = "2" })
                 </div>
-                <div class="box-footer">
-                    <button id="btnCancel" type="button" class="btn btn-secondary pull-right">Cancelar</button>
-                    <button id="btnEditar" type="submit" class="btn btn-success pull-right" style="margin-right:15px;">Guardar</button>
+                @Html.ValidationMessageFor(m => m.Fecha_Inicio)
+            </div>
+            <div class="form-group col-md-6">
+                <label>Fecha Fin</label>
+                <div class="input-group date">
+                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                    @Html.TextBoxFor(m => m.Fecha_Fin, "{0:dd/MM/yyyy}", new { maxlength = "10", @class = "form-control pull-right", tabindex = "3" })
                 </div>
+                @Html.ValidationMessageFor(m => m.Fecha_Fin)
             </div>
         </div>
     }
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Monto</label>
+            @Html.TextBoxFor(m => m.Monto, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "4" })
+            @Html.ValidationMessageFor(m => m.Monto)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Descripción</label>
+            @Html.TextAreaFor(m => m.Concepto, new { maxlength = "5000", @class = "form-control", tabindex = "5" })
+            @Html.ValidationMessageFor(m => m.Concepto)
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnAdd" type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 </div>

@@ -1,0 +1,115 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn-addIngreso").click(function () {
+            $("#divContentAddTransaccion").load('@Url.Action("Add", "CajaChica", new { area = "Finances" })?tipo=Deposito', function () {
+                $('#AddModal').modal('show');
+            });
+        });
+        $("#btn-addEgreso").click(function () {
+            $("#divContentAddTransaccion").load('@Url.Action("Add", "CajaChica", new { area = "Finances" })?tipo=Retiro', function () {
+                $('#AddModal').modal('show');
+            });
+        });
+    });
+
+    function btnEdit_onClick(transaccionId)
+    {
+        $("#divContentEditTransaccion").load('@Url.Action("Edit", "CajaChica", new { area = "Finances" })?transaccionId=' + transaccionId, function () {
+            $('#EditModal').modal('show');
+        });
+    }
+
+    function btnDelete_onClick(transaccionId) {
+        $("#divContentDeleteTransaccion").load('@Url.Action("Delete", "CajaChica", new { area = "Finances" })?transaccionId=' + transaccionId, function () {
+            $('#DeleteModal').modal('show');
+        });
+    }
+
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Administracion de Caja Chica</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" id="btn-addEgreso" class="btn btn-success pull-right" style="margin:0px 0px 0px 10px;">Agregar Egreso</button>
+                    <button type="button" id="btn-addIngreso" class="btn btn-success pull-right">Agregar Ingreso</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @(
+                        Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.Finances.Models.Transaccion.NavegadorViewModel>().Name("GridTransaccion")
+                        .Columns(column =>
+                        {
+                            column.Bound(c => c.Nro_Cuenta).Title("Nro. de Cuenta").Width("10%");
+                            column.Bound(c => c.Tipo).Title("Tipo").Width("10%");
+                            column.Bound(c => c.Fecha_Transaccion).Title("Fecha").Width("10%");
+                            column.Bound(c => c.Concepto).Title("Concepto").Width("calc(60%-120px)");
+                            column.Bound(c => c.Saldo).Title("Saldo").Width("10%");
+                            column.Bound(c => c).Title("Acciones").Width("120px").Sortable(false).Filterable(false).ClientTemplate(
+                                "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:TransaccionId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
+                                "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:TransaccionId#\");' ><span class='glyphicon glyphicon-remove' ></span></button>"
+                                );
+                        })
+                        .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
+                        .Filterable(filterable => filterable.Enabled(true))
+                        .Sortable(sortable => sortable.Enabled(true))
+                        .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
+                        .DataSource(datasourse => datasourse
+                            .Ajax()
+                            .PageSize(10)
+                            .Read(read => read.Action("LoadGrid", "CajaChica"))
+                            .ServerOperation(false))
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (@Ajax.BeginForm("Add", "CajaChica", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentAddTransaccion", OnSuccess = "Add_onSuccess", OnBegin = "Add_callOnBegin" }))
+{
+    <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentAddTransaccion" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Edit", "CajaChica", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentEditTransaccion", OnSuccess = "Edit_onSuccess", OnBegin = "Edit_callOnBegin" }))
+{
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentEditTransaccion" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Delete", "CajaChica", new { area = "Finances" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeleteTransaccion", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
+{
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentDeleteTransaccion" class="modal-content">
+            </div>
+        </div>
+    </div>
+}

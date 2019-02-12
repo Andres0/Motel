@@ -8,9 +8,12 @@ using System.Web.Mvc;
 using DS.Motel.Data.AddressBook;
 using DS.Motel.Clients.Web.Models.Home;
 using DS.Motel.Data.Entities;
+using DS.Motel.Clients.Web.Models;
+using System.Web.Security;
 
 namespace DS.Motel.Clients.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         #region Fields & Properties
@@ -39,6 +42,29 @@ namespace DS.Motel.Clients.Web.Controllers
 
         #region Validacion
 
+        private List<Tuple<string, string>> GetErroresLogin(LoginViewModel model)
+        {
+            PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+            if (string.IsNullOrEmpty(model.Username))
+            {
+                toReturn.Add(new Tuple<string, string>("Username", "Por favor ingrese un usuario"));
+            }
+            if (string.IsNullOrEmpty(model.Password))
+            {
+                toReturn.Add(new Tuple<string, string>("Password", "Por favor ingrese un password"));
+            }
+            if (model.Saldo == null)
+            {
+                toReturn.Add(new Tuple<string, string>("Saldo", "Por favor ingrese un saldo"));
+            }
+            if (personalRepository.ObtenerPorUsuarioYContraseña(model.Username, model.Password) == null)
+            {
+                toReturn.Add(new Tuple<string, string>("Password", "Datos incorrectos"));
+            }
+            return toReturn;
+        }
+            
         private List<Tuple<string, string>> GetErroresIngresar(IngresarViewModel model)
         {
             List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
@@ -69,6 +95,50 @@ namespace DS.Motel.Clients.Web.Controllers
         {
             LoginViewModel loginViewModel = container.Resolve<LoginViewModel>();
             return View(loginViewModel);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel model)
+        {
+            PersonalRepository personalRepository = container.Resolve<PersonalRepository>();
+
+            ModelState.Clear();
+
+            List<Tuple<string, string>> errores = GetErroresLogin(model);
+            
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
+
+            if (ModelState.IsValid)
+            {
+                Personal personal = personalRepository.ObtenerPorUsuarioYContraseña(model.Username, model.Password);
+                SessionViewModel sessionViewModel = new SessionViewModel();
+                sessionViewModel.PersonalId = personal.PersonalId;
+                sessionViewModel.Nombre = personal.Nombre;
+
+                Session["System_Information"] = sessionViewModel;
+                FormsAuthentication.SetAuthCookie(model.Username, false);
+
+                try
+                {
+                    return RedirectToAction("Index", "Home", new { area = "" });
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            return PartialView(model);
+        }
+
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Ingresar(Guid suiteId)

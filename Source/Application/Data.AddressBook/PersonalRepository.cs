@@ -53,6 +53,11 @@ namespace DS.Motel.Data.AddressBook
             return _context.Personal.SingleOrDefault(s => s.PersonalId == PersonalID);
         }
 
+        public Personal ObtenerPorUsuarioYContraseña(string username, string password)
+        {
+            return _context.Personal.SingleOrDefault(s => s.Login == username && s.Password == password);
+        }
+
         #endregion
     }
 }

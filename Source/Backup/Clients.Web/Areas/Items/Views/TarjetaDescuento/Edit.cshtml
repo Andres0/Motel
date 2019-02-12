@@ -1,0 +1,83 @@
+﻿@model DS.Motel.Clients.Web.Areas.Items.Models.TarjetaDescuento.EditViewModel
+
+<script type="text/javascript">
+
+    function Edit_callOnBegin() {
+        $("#btnEdit").attr("disabled", "disabled")
+        $("#btnEdit").text("Guardando...");
+    }
+
+    function Edit_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("La tarjeta se guardó con exito", { globalPosition: "top center", className: "success" });
+                    $("#GridTarjetaDescuento").data("kendoGrid").dataSource.read();
+                    $('#EditModal').modal('hide');
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+</script>
+
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(h => h.TarjetaDescuentoId)
+<div class="modal-header">
+    <h1 class="modal-title">Editar Cargo</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Codigo de la tarjeta</label>
+            @Html.TextBoxFor(m => m.Codigo, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+            @Html.ValidationMessageFor(m => m.Codigo)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Numero de usos</label>
+            @Html.TextAreaFor(m => m.NroUsos, new { maxlength = "5000", @class = "form-control", tabindex = "2" })
+            @Html.ValidationMessageFor(m => m.NroUsos)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Porcentaje de Descuento</label>
+            @Html.TextAreaFor(m => m.Porcentaje, new { maxlength = "5000", @class = "form-control", tabindex = "3" })
+            @Html.ValidationMessageFor(m => m.Porcentaje)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Costo Tarjeta</label>
+            @Html.TextAreaFor(m => m.Costo, new { maxlength = "5000", @class = "form-control", tabindex = "4" })
+            @Html.ValidationMessageFor(m => m.Costo)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Maque esta casilla para activar esta Tarjeta</label>
+            @Html.CheckBoxFor(m => m.Activado, new { maxlength = "5000", tabindex = "5" })
+            @Html.ValidationMessageFor(m => m.Activado)
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnEdit" type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+</div>

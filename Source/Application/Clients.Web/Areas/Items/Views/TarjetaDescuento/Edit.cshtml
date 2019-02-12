@@ -2,6 +2,29 @@
 
 <script type="text/javascript">
 
+    $(document).ready(function () {
+        $(".custom-decimal").each(function () {
+            $(this).ForceDecimalCulture();
+        });
+
+        $(".custom-decimal").on("focus", function () {
+            var valText = $(this).val();
+            var valTextParse = kendo.parseFloat(valText);
+            if (valTextParse == 0)
+                $(this).val("");
+            else
+                $(this).val(valText);
+        });
+        $(".custom-decimal").on("blur", function () {
+            var valText = $(this).val();
+            var valTextParse = kendo.parseFloat(valText);
+            if (valTextParse != "" && valTextParse != null)
+                $(this).val(valText);
+            else
+                $(this).val(0);
+        });
+    });
+
     function Edit_callOnBegin() {
         $("#btnEdit").attr("disabled", "disabled")
         $("#btnEdit").text("Guardando...");
@@ -38,41 +61,47 @@
 @Html.AntiForgeryToken()
 @Html.HiddenFor(h => h.TarjetaDescuentoId)
 <div class="modal-header">
-    <h1 class="modal-title">Editar Cargo</h1>
+    <h1 class="modal-title">Editar Tarjeta</h1>
 </div>
 <div class="modal-body">
     <div class="row">
         <div class="form-group col-md-6">
             <label>Codigo de la tarjeta</label>
-            @Html.TextBoxFor(m => m.Codigo, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+            @Html.TextBoxFor(m => m.Codigo, new { maxlength = "50", @class = "form-control custom-decimal", tabindex = "1" })
             @Html.ValidationMessageFor(m => m.Codigo)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-12">
-            <label>Numero de usos</label>
-            @Html.TextAreaFor(m => m.NroUsos, new { maxlength = "5000", @class = "form-control", tabindex = "2" })
+            <label>Número de usos</label>
+            @Html.TextBoxFor(m => m.NroUsos, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "2" })
             @Html.ValidationMessageFor(m => m.NroUsos)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-12">
             <label>Porcentaje de Descuento</label>
-            @Html.TextAreaFor(m => m.Porcentaje, new { maxlength = "5000", @class = "form-control", tabindex = "3" })
+            <div class="input-group">
+                <span class="input-group-addon">%</span>
+                @Html.TextBoxFor(m => m.Porcentaje, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "3" })
+            </div>
             @Html.ValidationMessageFor(m => m.Porcentaje)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-12">
-            <label>Costo Tarjeta</label>
-            @Html.TextAreaFor(m => m.Costo, new { maxlength = "5000", @class = "form-control", tabindex = "4" })
+            <label>Costo</label>
+            <div class="input-group">
+                <span class="input-group-addon">Bs.</span>
+                @Html.TextBoxFor(m => m.Costo, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "4" })
+            </div>
             @Html.ValidationMessageFor(m => m.Costo)
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-12">
+            @Html.CheckBoxFor(m => m.Activado, new { tabindex = "5" })
             <label>Maque esta casilla para activar esta Tarjeta</label>
-            @Html.CheckBoxFor(m => m.Activado, new { maxlength = "5000", tabindex = "5" })
             @Html.ValidationMessageFor(m => m.Activado)
         </div>
     </div>

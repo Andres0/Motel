@@ -1,6 +1,7 @@
 ﻿using DS.Motel.Clients.Web.Areas.Items.Models.Categorias;
 using DS.Motel.Clients.Web.Models;
 using DS.Motel.Data.Entities;
+using DS.Motel.Data.Inventarios;
 using DS.Motel.Data.Items;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,19 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             }
             return toReturn;
         }
+
+        private List<Tuple<string, string>> GetErroresDelete(DeleteViewModel model)
+        {
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+            ItemRepository itemRepository = container.Resolve<ItemRepository>();
+
+            if (itemRepository.ObtenerTodo().Where(w => w.ItemCategoriaId == model.CategoriaId).Count() > 0)
+            {
+                toReturn.Add(new Tuple<string, string>("ErrorMessage", "No se pudo borrar la categoria porque se encuentra asociado a un item"));
+            }
+            return toReturn;
+        }
+
         #endregion
 
 
@@ -142,7 +156,7 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             editViewModel.CategoriaId = itemCategoria.ItemCategoriaId;
             editViewModel.Nombre = itemCategoria.Nombre;
             editViewModel.Descripcion = itemCategoria.Descripcion;
-            editViewModel.PadreId = itemCategoria.PadreItemCategoriaId;
+            editViewModel.EditPadreId = itemCategoria.PadreItemCategoriaId;
             editViewModel.Tipo = tipo;
             editViewModel.Categorias = ObtenerCategorias(tipo, itemCategoria.ItemCategoriaId);
 
@@ -169,7 +183,7 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
                 itemCategoria.Nombre = model.Nombre;
                 itemCategoria.Descripcion = model.Descripcion;
                 itemCategoria.Tipo = model.Tipo;
-                itemCategoria.PadreItemCategoriaId = model.PadreId == Guid.Empty ? null : model.PadreId;
+                itemCategoria.PadreItemCategoriaId = model.EditPadreId == Guid.Empty ? null : model.EditPadreId;
 
                 try
                 {
@@ -205,7 +219,11 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             ItemCategoriaRepository itemCategoriaRepository = container.Resolve<ItemCategoriaRepository>();
 
             ModelState.Clear();
-            //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
+            List<Tuple<string, string>> errores = GetErroresDelete(model);
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
 
             if (ModelState.IsValid)
             {

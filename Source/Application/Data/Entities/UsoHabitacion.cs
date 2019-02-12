@@ -11,8 +11,8 @@ namespace DS.Motel.Data.Entities
         #region Fields & Properties
 
         public Guid UsoHabitacionId { get; set; }
-        public int Numero { get; set; }
         public Guid SuiteId { get; set; }
+        public int Numero { get; set; }
         public TipoIngreso TipoIngreso { get; set; }
         public DateTime Ingreso { get; set; }
         public DateTime? Salida { get; set; }

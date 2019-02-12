@@ -160,7 +160,7 @@
                         <div class="form-group col-md-6">
                             <label>Categoría</label>
                             @(Html.Kendo().DropDownListFor(m => m.CategoriaId).DataTextField("Nombre").DataValueField("Id").HtmlAttributes(new { @class = "form-control", style = "width:100%;", tabindex = "3" })
-                                    .BindTo(Model.CategoriasItems)
+                                    .BindTo(Model.CategoriasProducto)
                                         .Template("# var marginLeft = (Index*15) + 'px'; # " +
                                                   "<div style='margin-left: #= marginLeft #'>#= Nombre #</div>"))
                             @Html.ValidationMessageFor(m => m.CategoriaId)
@@ -182,7 +182,7 @@
                             <label>Categoría</label>
                             @(Html.Kendo().DropDownList().Name("ddlCategoryId").DataTextField("Nombre").DataValueField("Id").HtmlAttributes(new { @class = "form-control", style = "width:100%;", tabindex = "5" })
                                         .Filter(FilterType.Contains)
-                                        .BindTo(Model.CategoriasProducto)
+                                        .BindTo(Model.CategoriasItems)
                                             .Template("# var marginLeft = (Index*15) + 'px'; # " +
                                                       "<div style='margin-left: #= marginLeft #'>#= Nombre #</div>"))
                         </div>

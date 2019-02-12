@@ -40,8 +40,6 @@ namespace DS.Motel.Data.Items
             tarjetaDescuentoActualizar.Costo = tarjetaDescuento.Costo;
             tarjetaDescuentoActualizar.Activado = tarjetaDescuento.Activado;
 
-            
-
             _context.TarjetaDescuento.Attach(tarjetaDescuentoActualizar);
             _context.Entry(tarjetaDescuentoActualizar).State = System.Data.Entity.EntityState.Modified;
             _context.SaveChanges();
@@ -53,7 +51,36 @@ namespace DS.Motel.Data.Items
             _context.TarjetaDescuento.Remove(tarjetaDescuento);
             _context.SaveChanges();
         }
-#endregion
+
+        public void Vender(Guid tarjetaDescuentoId)
+        {
+            CajaBanco cajaBanco = _context.CajaBanco.FirstOrDefault(f => f.CajaBancoId == new Guid("11111111-2222-3333-4444-555555555555"));
+            TarjetaDescuento tarjetaDescuentoActualizar = _context.TarjetaDescuento.SingleOrDefault(s => s.TarjetaDescuentoId == tarjetaDescuentoId);
+            Transaccion _transaccion = _context.Transaccion.Where(w => w.Cuenta.Tipo == CajaBancoTipo.Caja).OrderByDescending(o => o.Fecha_Transaccion).FirstOrDefault();
+            decimal saldo = _transaccion == null ? 0 : _transaccion.Saldo;
+            DateTime _dateNow = DateTime.Now;
+
+            Transaccion transaccion = new Transaccion();
+            transaccion.CajaBancoId = new Guid("11111111-2222-3333-4444-555555555555");
+            transaccion.Tipo = TransaccionTipo.Deposito;
+            transaccion.Fecha_Ini = _dateNow;
+            transaccion.Fecha_Fin = _dateNow;
+            transaccion.Fecha_Transaccion = _dateNow;
+            transaccion.Concepto = "Venta de tarjeta de descuento: " + tarjetaDescuentoActualizar.Codigo;
+            transaccion.Deposito = tarjetaDescuentoActualizar.Costo;
+            transaccion.Retiro = 0;
+            transaccion.Saldo = tarjetaDescuentoActualizar.Costo + saldo;
+
+            _context.Transaccion.Add(transaccion);
+            
+            tarjetaDescuentoActualizar.TransaccionId = transaccion.TransaccionId;
+
+            _context.TarjetaDescuento.Attach(tarjetaDescuentoActualizar);
+            _context.Entry(tarjetaDescuentoActualizar).State = System.Data.Entity.EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        #endregion
 
 
 

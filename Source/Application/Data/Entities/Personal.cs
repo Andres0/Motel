@@ -25,7 +25,6 @@ namespace DS.Motel.Data.Entities
         public Guid CargoId { get; set; }
         public virtual UserType TipoUsuario { get; set; }
         public virtual Cargo Cargo { get; set; }
-        public virtual Personal Creado_Por { get; set; }
 
         #endregion
 

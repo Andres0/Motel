@@ -27,9 +27,12 @@ namespace DS.Motel.Clients.Web
                       "~/Scripts/kendo/2018.3.1017/jszip.min.js",
                       "~/Scripts/kendo/2018.3.1017/kendo.all.min.js",
                       "~/Scripts/kendo/2018.3.1017/kendo.aspnetmvc.min.js",
-                      "~/Scripts/kendo/2018.3.1017/cultures/kendo.culture.es-BO.min.js"));
+                      "~/Scripts/kendo/2018.3.1017/cultures/kendo.culture.es-BO.min.js",
+                      "~/Scripts/telerikReportViewer-{version}.js"));
 
 
+            bundles.Add(new StyleBundle("~/Content/bootstrapcss").Include(
+                      "~/Content/bootstrap.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       //"~/Content/bootstrap.min.css",

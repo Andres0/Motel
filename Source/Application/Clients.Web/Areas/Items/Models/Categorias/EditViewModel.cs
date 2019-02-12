@@ -15,7 +15,7 @@ namespace DS.Motel.Clients.Web.Areas.Items.Models.Categorias
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public ItemCategoriaTipo Tipo { get; set; }
-        public Guid? PadreId { get; set; }
+        public Guid? EditPadreId { get; set; }
         public List<DropDownListHierarchyViewModel> Categorias { get; set; }
     }
 }

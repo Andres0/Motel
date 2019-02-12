@@ -1,0 +1,62 @@
+﻿@model DS.Motel.Clients.Web.Areas.Inventario.Models.Almacen.AddViewModel
+
+
+<script type="text/javascript">
+
+    function Add_callOnBegin() {
+        $("#btnAdd").attr("disabled", "disabled")
+        $("#btnAdd").text("Guardando...");
+    }
+
+    function Add_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("El almacen se guardó con exito", { globalPosition: "top center", className: "success" });
+                    $("#GridAlmacen").data("kendoGrid").dataSource.read();
+                    $('#AddModal').modal('hide');
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+</script>
+
+
+@Html.AntiForgeryToken()
+<div class="modal-header">
+    <h1 class="modal-title">Nuevo Almacen</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Nombre</label>
+            @Html.TextBoxFor(m => m.Nombre, new { maxlength = "50", @class = "form-control", tabindex = "1" })
+            @Html.ValidationMessageFor(m => m.Nombre)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Descripción</label>
+            @Html.TextAreaFor(m => m.Descripcion, new { maxlength = "5000", @class = "form-control", tabindex = "2" })
+            @Html.ValidationMessageFor(m => m.Descripcion)
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnAdd" type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+</div>

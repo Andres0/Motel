@@ -14,10 +14,10 @@ namespace DS.Motel.Clients.Web.Areas.Items.Models.TarjetaDescuento
         public int NroUsadas { get; set; }
         public decimal Costo { get; set; }
         public decimal Porcentaje { get; set; }
-        public DateTime FechaCreacion { get; set; }
+        public string FechaCreacion { get; set; }
 
-        public DateTime? FechaUltimoUso { get; set; }
-        public bool Activado { get; set; }
-       
+        public string FechaUltimoUso { get; set; }
+        public string Activado { get; set; }
+        public string EsVendido { get; set; }
     }
 }

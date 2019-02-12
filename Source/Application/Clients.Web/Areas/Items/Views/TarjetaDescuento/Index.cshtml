@@ -30,6 +30,12 @@
         });
     }
 
+    function btnVender_onClick(tarjetaDescuentoId) {
+        $("#divContentSaleTarjetaDescuento").load('@Url.Action("Sale", "TarjetaDescuento", new { area = "Items" })?tarjetaDescuentoId=' + tarjetaDescuentoId, function () {
+            $('#SaleModal').modal('show');
+        });
+    }
+
 </script>
 <div class="row">
     <div class="col-md-12">
@@ -50,29 +56,32 @@
             <div class="row">
                 <div class="col-md-12">
                     @(
-                                    Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.Items.Models.TarjetaDescuento.NavegadorViewModel>().Name("GridTarjetaDescuento")
-                                    .Columns(column =>
-                                    {
-                                        column.Bound(c => c.Codigo).Title("Codigo").Width("20%");
-                                        column.Bound(c => c.Activado).Title("Activado").Width("calc(40%-120px)");
-                                        column.Bound(c => c.Costo).Title("Costo").Width("15%");
-                                        column.Bound(c => c.FechaCreacion).Title("Fecha Creacion").Width("15%");
-                                        column.Bound(c => c.FechaUltimoUso).Title("Fecha Ultimo uso").Width("10%");
-                                        column.Bound(c => c.Porcentaje).Title("% Descuento").Width("10%");
-                                        column.Bound(c => c).Title("Acciones").Width("120px").Sortable(false).Filterable(false).ClientTemplate(
-                                            "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:TarjetaDescuentoId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
-                                            "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:TarjetaDescuentoId#\");' ><span class='glyphicon glyphicon-remove' ></span></button>"
-                                            );
-                                    })
-                                    .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
-                                    .Filterable(filterable => filterable.Enabled(true))
-                                    .Sortable(sortable => sortable.Enabled(true))
-                                    .NoRecords(norecords => norecords.Template("No hay Tarjetas para mostrar"))
-                                    .DataSource(datasourse => datasourse
-                                        .Ajax()
-                                        .PageSize(10)
-                                        .Read(read => read.Action("LoadGrid", "TarjetaDescuento"))
-                                        .ServerOperation(false))
+                    Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.Items.Models.TarjetaDescuento.NavegadorViewModel>().Name("GridTarjetaDescuento")
+                    .Columns(column =>
+                    {
+                        column.Bound(c => c.Codigo).Title("Codigo").Width("calc(40%-180px)");
+                        column.Bound(c => c.Activado).Title("Activado").Width("10%");
+                        column.Bound(c => c.Costo).Title("Costo").Width("15%");
+                        column.Bound(c => c.FechaCreacion).Title("Fecha Creacion").Width("15%");
+                        column.Bound(c => c.FechaUltimoUso).Title("Fecha Ultimo uso").Width("10%");
+                        column.Bound(c => c.Porcentaje).Title("% Descuento").Width("10%");
+                        column.Bound(c => c).Title("Acciones").Width("180px").Sortable(false).Filterable(false).ClientTemplate(
+                            "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:TarjetaDescuentoId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
+                            "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:TarjetaDescuentoId#\");' ><span class='glyphicon glyphicon-remove' ></span></button>" +
+                            "# if (Activado == 'Si' && EsVendido == 'No') { #" +
+                                "<button class='btn btn-info' title='Vender' onclick='btnVender_onClick(\"#:TarjetaDescuentoId#\");' style='margin-left:10px;' ><span class='glyphicon glyphicon-usd' ></span></button>" +
+                            "# } #"
+                            );
+                    })
+                    .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
+                    .Filterable(filterable => filterable.Enabled(true))
+                    .Sortable(sortable => sortable.Enabled(true))
+                    .NoRecords(norecords => norecords.Template("No hay Tarjetas para mostrar"))
+                    .DataSource(datasourse => datasourse
+                        .Ajax()
+                        .PageSize(10)
+                        .Read(read => read.Action("LoadGrid", "TarjetaDescuento"))
+                        .ServerOperation(false))
                     )
                 </div>
             </div>
@@ -106,6 +115,16 @@
     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div id="divContentDeleteTarjetaDescuento" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Sale", "TarjetaDescuento", new { area = "Items" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentSaleTarjetaDescuento", OnSuccess = "Sale_onSuccess", OnBegin = "Sale_callOnBegin" }))
+{
+    <div class="modal fade" id="SaleModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentSaleTarjetaDescuento" class="modal-content">
             </div>
         </div>
     </div>

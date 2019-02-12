@@ -15,12 +15,17 @@ namespace DS.Motel.Data.Entities
         public decimal Costo { get; set; }
         public decimal Porcentaje { get; set; }
         public DateTime FechaCreacion { get; set; }
-
         public DateTime? FechaUltimoUso { get; set; }
         public bool Activado { get; set; }
         public TarjetaEstados Estados { get; set; }
-        public TarjetaDescuento() { TarjetaDescuentoId = Guid.NewGuid(); }
+        public Guid? TransaccionId { get; set; }
+        public virtual Transaccion Transaccion { get; set; }
 
+
+        public TarjetaDescuento()
+        {
+            TarjetaDescuentoId = Guid.NewGuid();
+        }
     }
     public enum TarjetaEstados {
 

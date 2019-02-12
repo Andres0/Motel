@@ -94,11 +94,13 @@
     <link href="@Url.Content("~/Content/kendo/2018.3.1017/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2018.3.1017/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/2018.3.1017/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/telerikReportViewer.css")" rel="stylesheet" type="text/css" />
     @*<script src="@Url.Content("~/Scripts/kendo/2018.3.1017/jquery.min.js")"></script>*@
     <script src="@Url.Content("~/Scripts/kendo/2018.3.1017/jszip.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2018.3.1017/kendo.all.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2018.3.1017/kendo.aspnetmvc.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2018.3.1017/cultures/kendo.culture.es-BO.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/telerikReportViewer-12.2.18.1017.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
 
     <script src="@Url.Content("~/Scripts/Motel.js")"></script>
@@ -394,7 +396,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                             <ul class="treeview-menu">
-                                <li><a href="@Url.Action("Index", "Personal", new { area="AddressBook" })" style="margin-right:20px;">Usuarios</a></li>
+                                <li><a href="@Url.Action("Index", "Personal", new { area="AddressBook" })" style="margin-right:20px;">Personal</a></li>
 
                                 <li><a href="@Url.Action("Index", "Cargos", new { area="AddressBook" })" style="margin-right:20px;">Cargos</a></li>
 
@@ -412,7 +414,8 @@
                             </span>
                             <ul class="treeview-menu">
                                 <li><a href="@Url.Action("Index", "CajaBanco", new { area="Finances" })" style="margin-right:20px;">Cuentas</a></li>
-                                <li><a href="@Url.Action("Index", "Transaccion", new { area="Finances" })" style="margin-right:20px;">Movimientos</a></li>
+                                <li><a href="@Url.Action("Index", "Transaccion", new { area="Finances" })" style="margin-right:20px;">Transacciones</a></li>
+                                <li><a href="@Url.Action("Index", "CajaChica", new { area="Finances" })" style="margin-right:20px;">Caja Chica</a></li>
                             </ul>
                         </a>
                     </li>
@@ -454,6 +457,43 @@
                             <ul class="treeview-menu">
                                 <li><a href="@Url.Action("Index", "Categorias", new { area="Items" })?tipo=2" style="margin-right:20px;">Categoría de Productos</a></li>
                                 <li><a href="@Url.Action("Index", "Producto", new { area="Items" })" style="margin-right:20px;">Productos</a></li>
+                            </ul>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cog"></i>
+                            <span>Inventario</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("Index", "Almacen", new { area="Inventario" })" style="margin-right:20px;">Almacen</a></li>
+                                <li><a href="@Url.Action("Index", "Inventario", new { area="Inventario" })" style="margin-right:20px;">Inventario</a></li>
+                            </ul>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cog"></i>
+                            <span>Tarjetas</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                            <ul class="treeview-menu">
+                                <li><a href="@Url.Action("Index", "TarjetaDescuento", new { area="Items" })" style="margin-right:20px;">Tarjeta Descuento</a></li>
+                            </ul>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-cog"></i>
+                            <span>Reportes</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                            <ul class="treeview-menu">
+                                @*<li><a href="@Url.Action("Index", "TarjetaDescuento", new { area="Items" })" style="margin-right:20px;">Tarjeta Descuento</a></li>*@
                             </ul>
                         </a>
                     </li>

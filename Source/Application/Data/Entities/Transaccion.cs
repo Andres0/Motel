@@ -13,8 +13,8 @@ namespace DS.Motel.Data.Entities
         public Guid TransaccionId { get; set; }
         public Guid CajaBancoId { get; set; }
         public TransaccionTipo Tipo { get; set; }
-        public DateTime Fecha_Ini { get; set; }
-        public DateTime Fecha_Fin { get; set; }
+        public DateTime? Fecha_Ini { get; set; }
+        public DateTime? Fecha_Fin { get; set; }
         public DateTime Fecha_Transaccion { get; set; }
         public string Concepto { get; set; }
         public decimal Deposito { get; set; }

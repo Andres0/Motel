@@ -77,6 +77,19 @@ namespace DS.Motel.Clients.Web.Areas.Inventario.Controllers
             }
             return toReturn;
         }
+
+        private List<Tuple<string, string>> GetErroresDelete(DeleteViewModel model)
+        {
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+            InventarioRepository inventarioRepository = container.Resolve<InventarioRepository>();
+
+            if (inventarioRepository.ObtenerTodo().Where(w => w.AAlmacenId == model.AlmacenId || w.DeAlmacenId == model.AlmacenId).Count() > 0)
+            {
+                toReturn.Add(new Tuple<string, string>("ErrorMessage", "No se pudo borrar el almacen porque se encuentra asociado a un inventario"));
+            }
+            return toReturn;
+        }
+
         #endregion
 
 
@@ -202,7 +215,11 @@ namespace DS.Motel.Clients.Web.Areas.Inventario.Controllers
             AlmacenRepository almacenRepository = container.Resolve<AlmacenRepository>();
 
             ModelState.Clear();
-            //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
+            List<Tuple<string, string>> errores = GetErroresDelete(model);
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
 
             if (ModelState.IsValid)
             {

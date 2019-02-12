@@ -44,8 +44,6 @@ namespace DS.Motel.Data.AddressBook
             parametrosActualizar.Numero_Inicio_Boleta = parametros.Numero_Inicio_Boleta;
             parametrosActualizar.Numero_Fin_Boleta = parametros.Numero_Fin_Boleta;
             parametrosActualizar.Fecha_Modificado = parametros.Fecha_Modificado;
-            parametrosActualizar.PersonalId = parametros.PersonalId;
-           
 
             _context.Parametros.Attach(parametrosActualizar);
             _context.Entry(parametrosActualizar).State = System.Data.Entity.EntityState.Modified;

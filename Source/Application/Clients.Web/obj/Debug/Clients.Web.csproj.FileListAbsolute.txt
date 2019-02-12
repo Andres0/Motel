@@ -839,6 +839,8 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\CommonServiceLocator.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.AddressBook.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Finances.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Inventarios.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Security.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\EntityFramework.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\EntityFramework.SqlServer.dll
@@ -857,7 +859,12 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Microsoft.Web.Infrastruct
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Newtonsoft.Json.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Configuration.ConfigurationManager.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Net.Http.Formatting.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Cors.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Helpers.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Http.Cors.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Http.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Http.WebHost.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Mvc.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Optimization.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Razor.dll
@@ -865,6 +872,10 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.WebPages.Deplo
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.WebPages.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.WebPages.Razor.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.Documents.SpreadsheetStreaming.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.Reporting.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.Reporting.Services.WebApi.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.Reporting.XpsRendering.dll
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.ReportViewer.Mvc.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.Web.Spreadsheet.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.Windows.Documents.Core.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.Windows.Documents.Fixed.dll
@@ -886,6 +897,8 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Unity.ServiceLocation.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\WebGrease.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.AddressBook.pdb
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Finances.pdb
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Inventarios.pdb
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.pdb
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Security.pdb
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Security.dll.config
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.pdb
@@ -895,7 +908,11 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\EntityFramework.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\EntityFramework.SqlServer.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Kendo.Mvc.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Kendo.Mvc.Export.xml
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Net.Http.Formatting.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Helpers.xml
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Http.xml
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Http.Cors.xml
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Http.WebHost.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Mvc.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.Razor.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\System.Web.WebPages.xml
@@ -928,6 +945,8 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Microsoft.AI.DependencyCo
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Microsoft.AI.WindowsServer.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Microsoft.AI.Web.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.Reporting.pdb
+C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\Telerik.Reporting.xml
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\bg-BG\Kendo.Mvc.resources.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\cs-CZ\Kendo.Mvc.resources.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\da-DK\Kendo.Mvc.resources.dll
@@ -956,11 +975,10 @@ C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\es\System.Web.WebPages.De
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\es\System.Web.WebPages.Razor.resources.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\es\System.Web.Optimization.resources.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csprojAssemblyReference.cache
+C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.Areas.Reportes.Diseños.Transaccion.RptListadoTransacciones.resources
+C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.GenerateResource.cache
+C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.dll.licenses
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.CoreCompileInputs.cache
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\Clients.Web.csproj.CopyComplete
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.dll
 C:\Proyectos\Motel2\Source\Application\Clients.Web\obj\Debug\DS.Motel.Clients.Web.pdb
-C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.dll
-C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Items.pdb
-C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Inventarios.dll
-C:\Proyectos\Motel2\Source\Application\Clients.Web\bin\DS.Motel.Data.Inventarios.pdb

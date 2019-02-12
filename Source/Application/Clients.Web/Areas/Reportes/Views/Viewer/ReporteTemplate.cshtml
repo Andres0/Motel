@@ -1,0 +1,35 @@
+﻿@model DS.Motel.Clients.Web.Areas.Reportes.Models.Viewer.ReportViewModel
+
+@using Telerik.Reporting
+@using Telerik.ReportViewer.Mvc
+
+<style>
+    #trReportViewer1 {
+        height: 800px;
+        left: 5px;
+        right: 5px;
+        top: 5px;
+        bottom: 5px;
+        overflow: hidden;
+        font-family: Verdana, Arial;
+    }
+</style>
+
+@*<style>
+        #reportViewer1 {
+            position: absolute;
+            top: 125px;
+            bottom: 10px;
+            left: 5px;
+            right: 5px;
+            font-family: 'segoe ui', 'ms sans serif';
+            overflow: hidden;
+        }
+    </style>*@
+@(Html.TelerikReporting().ReportViewer()
+            .Id("trReportViewer1")
+            .ServiceUrl(Url.Content("~/api/Reports/"))
+            .TemplateUrl(Url.Content("~/Areas/Reportes/Templates/telerikReportViewerTemplate.html"))
+            .ReportSource(Model.ReportGenerate)
+            .Scale(1.0)
+)

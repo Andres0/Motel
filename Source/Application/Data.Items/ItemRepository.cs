@@ -34,11 +34,11 @@ namespace DS.Motel.Data.Items
             itemAActualizar.Codigo = item.Codigo;
             itemAActualizar.Nombre = item.Nombre;
             itemAActualizar.Descripcion = item.Descripcion;
-            itemAActualizar.Cantidad_Stock = item.Cantidad_Stock;
-            itemAActualizar.Costo_Total = item.Costo_Total;
-            itemAActualizar.Costo_Unitario = item.Costo_Unitario;
+            itemAActualizar.Precio = item.Precio;
             itemAActualizar.Proporcion = item.Proporcion;
+            itemAActualizar.Proporcion_Usada = item.Proporcion_Usada;
             itemAActualizar.Stock_Minimo = item.Stock_Minimo;
+            itemAActualizar.Cantidad_Stock = item.Cantidad_Stock;
             itemAActualizar.EsVendible = item.EsVendible;
             itemAActualizar.ItemCategoriaId = item.ItemCategoriaId;
 

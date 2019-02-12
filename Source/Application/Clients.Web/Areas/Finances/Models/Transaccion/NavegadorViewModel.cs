@@ -12,7 +12,7 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Models.Transaccion
         public string Tipo { get; set; }
         public string Fecha_Ini { get; set; }
         public string Fecha_Fin { get; set; }
-        public DateTime Fecha_Transaccion { get; set; }
+        public string Fecha_Transaccion { get; set; }
         public string Concepto { get; set; }
         public string Saldo { get; set; }
     }

@@ -45,13 +45,24 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
         {
             List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
 
-            if (model.IngresoOEgreso == 0)
+            if (model.CuentaId == Guid.Empty)
             {
-                toReturn.Add(new Tuple<string, string>("IngresoOEgreso", "Por favor seleccione una opción"));
+                toReturn.Add(new Tuple<string, string>("CuentaId", "Por favor seleccione una cuenta"));
             }
-            if (model.Fecha_Inicio != null && model.Fecha_Fin != null && model.Fecha_Fin < model.Fecha_Inicio)
+            if (model.Tipo == TransaccionTipo.Deposito)
             {
-                toReturn.Add(new Tuple<string, string>("Fecha_Inicio", "Por favor ingrese un intervalo de fechas valido"));
+                if (model.Fecha_Inicio == null)
+                {
+                    toReturn.Add(new Tuple<string, string>("Fecha_Inicio", "Por favor ingrese una fecha valida"));
+                }
+                if (model.Fecha_Fin == null)
+                {
+                    toReturn.Add(new Tuple<string, string>("Fecha_Fin", "Por favor ingrese una fecha valida"));
+                }
+                if (model.Fecha_Inicio != null && model.Fecha_Fin != null && model.Fecha_Fin < model.Fecha_Inicio)
+                {
+                    toReturn.Add(new Tuple<string, string>("Fecha_Inicio", "Por favor ingrese un intervalo de fechas valido"));
+                }
             }
             if (string.IsNullOrEmpty(model.Concepto))
             {
@@ -60,10 +71,6 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
             if (model.Monto == 0)
             {
                 toReturn.Add(new Tuple<string, string>("Monto", "Por favor ingrese un monto"));
-            }
-            if (model.CuentaId == Guid.Empty)
-            {
-                toReturn.Add(new Tuple<string, string>("CuentaId", "Por favor seleccione una cuenta"));
             }
             return toReturn;
         }
@@ -72,13 +79,24 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
         {
             List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
 
-            if (model.IngresoOEgreso == 0)
+            if (model.CuentaId == Guid.Empty)
             {
-                toReturn.Add(new Tuple<string, string>("IngresoOEgreso", "Por favor seleccione una opción"));
+                toReturn.Add(new Tuple<string, string>("CuentaId", "Por favor seleccione una cuenta"));
             }
-            if (model.Fecha_Inicio != null && model.Fecha_Fin != null && model.Fecha_Fin < model.Fecha_Inicio)
+            if (model.Tipo == TransaccionTipo.Deposito)
             {
-                toReturn.Add(new Tuple<string, string>("Fecha_Inicio", "Por favor ingrese un intervalo de fechas valido"));
+                if (model.Fecha_Inicio == null)
+                {
+                    toReturn.Add(new Tuple<string, string>("Fecha_Inicio", "Por favor ingrese una fecha valida"));
+                }
+                if (model.Fecha_Fin == null)
+                {
+                    toReturn.Add(new Tuple<string, string>("Fecha_Fin", "Por favor ingrese una fecha valida"));
+                }
+                if (model.Fecha_Inicio != null && model.Fecha_Fin != null && model.Fecha_Fin < model.Fecha_Inicio)
+                {
+                    toReturn.Add(new Tuple<string, string>("Fecha_Inicio", "Por favor ingrese un intervalo de fechas valido"));
+                }
             }
             if (string.IsNullOrEmpty(model.Concepto))
             {
@@ -87,10 +105,6 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
             if (model.Monto == 0)
             {
                 toReturn.Add(new Tuple<string, string>("Monto", "Por favor ingrese un monto"));
-            }
-            if (model.CuentaId == Guid.Empty)
-            {
-                toReturn.Add(new Tuple<string, string>("CuentaId", "Por favor seleccione una cuenta"));
             }
             return toReturn;
         }
@@ -104,15 +118,15 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
 
         #region Interface
 
-        public ActionResult Index(bool? masterload = true)
+        public ActionResult Index()
         {
-            ViewData["MasterLoad"] = masterload;
             return View();
         }
 
-        public ActionResult Add()
+        public ActionResult Add(TransaccionTipo tipo)
         {
             AddViewModel addViewModel = new AddViewModel();
+            addViewModel.Tipo = tipo;
             addViewModel.Fecha_Inicio = DateTime.Now;
             addViewModel.Fecha_Fin = DateTime.Now;
             addViewModel.Cuentas = ObtenerCuentas();
@@ -125,13 +139,8 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
         {
             TransaccionRepository transaccionRepository = container.Resolve<TransaccionRepository>();
 
-            //LIMPIA EL MODEO DE ERRORES
             ModelState.Clear();
-
-            //OBTENGO LOS POSIBLES ERRORES
             List<Tuple<string, string>> errores = GetErroresAdd(model);
-
-            //CARGO LOS ERRORES AL MODELSTATE
             foreach (Tuple<string, string> item in errores)
             {
                 ModelState.AddModelError(item.Item1, item.Item2);
@@ -141,13 +150,13 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
             {
                 Transaccion transaccion = new Transaccion();
                 transaccion.CajaBancoId = model.CuentaId;
-                transaccion.Tipo = (TransaccionTipo)model.IngresoOEgreso;
+                transaccion.Tipo = model.Tipo;
                 transaccion.Fecha_Ini = model.Fecha_Inicio;
                 transaccion.Fecha_Fin = model.Fecha_Fin;
                 transaccion.Fecha_Transaccion = DateTime.Now;
                 transaccion.Concepto = model.Concepto;
-                transaccion.Deposito = model.IngresoOEgreso == (int)TransaccionTipo.Deposito ? model.Monto : 0;
-                transaccion.Retiro = model.IngresoOEgreso == (int)TransaccionTipo.Retiro ? model.Monto : 0;
+                transaccion.Deposito = model.Tipo == TransaccionTipo.Deposito ? model.Monto : 0;
+                transaccion.Retiro = model.Tipo == TransaccionTipo.Retiro ? model.Monto : 0;
                 transaccion.Saldo = 0;
                 
                 try
@@ -178,7 +187,7 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
             EditViewModel editViewModel = new EditViewModel();
             editViewModel.TransaccionId = transaccion.TransaccionId;
             editViewModel.CuentaId = transaccion.CajaBancoId;
-            editViewModel.IngresoOEgreso = (int)transaccion.Tipo;
+            editViewModel.Tipo = transaccion.Tipo;
             editViewModel.Fecha_Inicio = transaccion.Fecha_Ini;
             editViewModel.Fecha_Fin = transaccion.Fecha_Fin;
             editViewModel.Concepto = transaccion.Concepto;
@@ -198,8 +207,6 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
             ModelState.Clear();
 
             List<Tuple<string, string>> errores = GetErrorEdit(model);
-
-            //CARGO LOS ERRORES AL MODELSTATE
             foreach (Tuple<string, string> item in errores)
             {
                 ModelState.AddModelError(item.Item1, item.Item2);
@@ -210,13 +217,13 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
                 Transaccion transaccion = new Transaccion();
                 transaccion.TransaccionId = model.TransaccionId;
                 transaccion.CajaBancoId = model.CuentaId;
-                transaccion.Tipo = (TransaccionTipo)model.IngresoOEgreso;
+                transaccion.Tipo = model.Tipo;
                 transaccion.Fecha_Ini = model.Fecha_Inicio;
                 transaccion.Fecha_Fin = model.Fecha_Fin;
                 transaccion.Fecha_Transaccion = DateTime.Now;
                 transaccion.Concepto = model.Concepto;
-                transaccion.Deposito = model.IngresoOEgreso == (int)TransaccionTipo.Deposito ? model.Monto : 0;
-                transaccion.Retiro = model.IngresoOEgreso == (int)TransaccionTipo.Retiro ? model.Monto : 0;
+                transaccion.Deposito = model.Tipo == TransaccionTipo.Deposito ? model.Monto : 0;
+                transaccion.Retiro = model.Tipo == TransaccionTipo.Retiro ? model.Monto : 0;
                 transaccion.Saldo = 0;
 
                 try
@@ -288,47 +295,39 @@ namespace DS.Motel.Clients.Web.Areas.Finances.Controllers
         public ActionResult LoadGrid([DataSourceRequest]DataSourceRequest request)
         {
             TransaccionRepository transaccionRepository = container.Resolve<TransaccionRepository>();
-            List<NavegadorViewModel> toReturn = transaccionRepository.ObtenerTodo().ToList().Select(t => new NavegadorViewModel()
+            List<NavegadorViewModel> toReturn = transaccionRepository.ObtenerTodo().Where(w => w.Cuenta.Tipo == CajaBancoTipo.Banco)
+                .OrderByDescending(o => o.Fecha_Transaccion).ToList().Select(t => new NavegadorViewModel()
             {
                 TransaccionId = t.TransaccionId,
                 Nro_Cuenta = t.Cuenta.Nombre,
                 Tipo = t.Tipo.ToString(),
-                Fecha_Ini = t.Fecha_Ini.ToString("dd/MM/yyyy"),
-                Fecha_Fin = t.Fecha_Fin.ToString("dd/MM/yyyy"),
-                Fecha_Transaccion = t.Fecha_Transaccion,
+                Fecha_Ini = t.Fecha_Ini != null ? t.Fecha_Ini.Value.ToString("dd/MM/yyyy") : string.Empty,
+                Fecha_Fin = t.Fecha_Fin != null ? t.Fecha_Fin.Value.ToString("dd/MM/yyyy") : string.Empty,
+                Fecha_Transaccion = t.Fecha_Transaccion.ToString("dd/MM/yyyy"),
                 Concepto = t.Concepto,
                 Saldo = t.Tipo == TransaccionTipo.Retiro ? t.Retiro.ToString() : t.Deposito.ToString(),
-            }).OrderBy(y => y.Fecha_Transaccion).ToList();
+            }).ToList();
 
             return Json(toReturn.ToDataSourceResult(request));
         }
 
         public List<DropdownListViewModel> ObtenerCuentas()
         {
-            List<DropdownListViewModel> ToReturn = new List<DropdownListViewModel>();
             CajaBancoRepository cuentaRepository = container.Resolve<CajaBancoRepository>();
-            ToReturn = cuentaRepository.ObtenerTodo().Select(x => new DropdownListViewModel()
+            List<DropdownListViewModel> toReturn = cuentaRepository.ObtenerTodo().Where(w => w.Tipo == CajaBancoTipo.Banco).Select(x => new DropdownListViewModel()
             {
                 Id = x.CajaBancoId,
                 Nombre = x.Nombre
             }).OrderBy(y => y.Nombre).ToList();
-            if (ToReturn.Count() > 0)
+            if (toReturn.Count() > 0)
             {
-                ToReturn.Insert(0, new DropdownListViewModel()
-                {
-                    Id = Guid.Empty,
-                    Nombre = "Seleccione una cuenta"
-                });
+                toReturn.Insert(0, new DropdownListViewModel() { Id = Guid.Empty, Nombre = "Seleccione una cuenta" });
             }
             else
             {
-                ToReturn.Add(new DropdownListViewModel()
-                {
-                    Id = Guid.Empty,
-                    Nombre = "No hay datos"
-                });
+                toReturn.Add(new DropdownListViewModel() { Id = Guid.Empty, Nombre = "No hay datos" });
             }
-            return ToReturn;
+            return toReturn;
         }
         
         #endregion

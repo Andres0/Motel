@@ -1,0 +1,94 @@
+﻿@model DS.Motel.Clients.Web.Areas.Finances.Models.CajaChica.EditViewModel
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".custom-decimal").each(function () {
+            $(this).ForceDecimalCulture();
+        });
+
+        $(".custom-decimal").on("focus", function () {
+            var valText = $(this).val();
+            var valTextParse = kendo.parseFloat(valText);
+            if (valTextParse == 0)
+                $(this).val("");
+            else
+                $(this).val(valText);
+        });
+        $(".custom-decimal").on("blur", function () {
+            var valText = $(this).val();
+            var valTextParse = kendo.parseFloat(valText);
+            if (valTextParse != "" && valTextParse != null)
+                $(this).val(valText);
+            else
+                $(this).val(0);
+        });
+
+        $("#btnCancel").click(function () {
+            $("#divMasterOperationAreaContent").load('@Url.Action("Index", "Transaccion", new { area = "Finances" })?masterload=false');
+            $(document).scrollTop(0);
+        });
+    });
+
+    function Edit_callOnBegin() {
+        $("#btnEdit").attr("disabled", "disabled")
+        $("#btnEdit").text("Guardando...");
+    }
+
+    function Edit_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("La transacción se guardó con exito", { globalPosition: "top center", className: "success" });
+                    $("#GridTransaccion").data("kendoGrid").dataSource.read();
+                    $('#EditModal').modal('hide');
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+        $(document).scrollTop(0);
+    }
+
+</script>
+
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(m => m.TransaccionId)
+@Html.HiddenFor(h => h.Tipo)
+<div class="modal-header">
+    <h1 class="modal-title">Editar Transacción</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Monto</label>
+            @Html.TextBoxFor(m => m.Monto, new { maxlength = "10", @class = "form-control custom-decimal", tabindex = "1" })
+            @Html.ValidationMessageFor(m => m.Monto)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Descripción</label>
+            @Html.TextAreaFor(m => m.Concepto, new { maxlength = "5000", @class = "form-control", tabindex = "2" })
+            @Html.ValidationMessageFor(m => m.Concepto)
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnAdd" type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+</div>

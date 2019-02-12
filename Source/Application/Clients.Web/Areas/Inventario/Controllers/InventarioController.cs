@@ -204,11 +204,7 @@ namespace DS.Motel.Clients.Web.Areas.Inventario.Controllers
 
             //LIMPIA EL MODEO DE ERRORES
             ModelState.Clear();
-
-            //OBTENGO LOS POSIBLES ERRORES
             List<Tuple<string, string>> errores = GetErroresAdd(model);
-
-            //CARGO LOS ERRORES AL MODELSTATE
             foreach (Tuple<string, string> item in errores)
             {
                 ModelState.AddModelError(item.Item1, item.Item2);
@@ -298,11 +294,7 @@ namespace DS.Motel.Clients.Web.Areas.Inventario.Controllers
 
             //LIMPIA EL MODEO DE ERRORES
             ModelState.Clear();
-
-            //OBTENGO LOS POSIBLES ERRORES
             List<Tuple<string, string>> errores = GetErroresEdit(model);
-
-            //CARGO LOS ERRORES AL MODELSTATE
             foreach (Tuple<string, string> item in errores)
             {
                 ModelState.AddModelError(item.Item1, item.Item2);
