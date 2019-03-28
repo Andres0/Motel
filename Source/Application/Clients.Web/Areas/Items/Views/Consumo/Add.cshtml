@@ -1,0 +1,289 @@
+﻿@model DS.Motel.Clients.Web.Areas.Items.Models.Consumo.AddViewModel
+@using Kendo.Mvc.UI
+
+@{ 
+    Layout = null;
+}
+
+<script type="text/javascript">
+
+    function AddConsumo_callOnBegin() {
+        $("#btnAddConsumo1").attr("disabled", "disabled")
+        $("#btnAddConsumo1").text("Guardando...");
+    }
+
+    function AddConsumo_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("El consumo se guardó con exito", { globalPosition: "top center", className: "success" });
+                    $("#GridConsumoDetalle").data("kendoGrid").dataSource.read();
+                    $('#AddConsumoModal').modal('hide');
+                    UpdateCostTota();
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+        $(document).scrollTop(0);
+    }
+
+    function Cantidad_onfocus(id) {
+        var valText = $("#" + id).val();
+        var valTextParse = kendo.parseFloat(valText);
+        if (valTextParse == 0)
+            $("#" + id).val("");
+        else
+            $("#" + id).val(valText);
+    }
+    function Cantidad_onblur(id) {
+        var valText = $("#" + id).val();
+        var valTextParse = kendo.parseFloat(valText);
+        if (valTextParse != "" && valTextParse != null)
+            $("#" + id).val(valText);
+        else
+            $("#" + id).val(0);
+    }
+
+    function GridAddConsumo_onDataBound(e) {
+        $(".custom-decimal").each(function () {
+            $(this).ForceDecimalCulture();
+        });
+        $(".templateCell").each(function () {
+            eval($(this).children("script").last().html());
+        });
+
+        $(".item_autocomplete").autocomplete({
+            delay: 400,
+            source: '@Url.Action("LoadItem", "Consumo", new { area = "Items" })',
+            minLength: 0,
+            change: function (event, ui) {
+                var index = event.target.id.substr(9);
+                index = index.substr(0, index.indexOf('_'));
+                if ($("#Detalles_" + index + "__ItemName").val() != $("#Detalles_" + index + "__ItemNameSelected").val()) {
+                    $("#Detalles_" + index + "__ItemName").val("");
+                    $("#Detalles_" + index + "__ItemNameSelected").val("");
+                    $("#Detalles_" + index + "__ItemId").val("");
+                    $("#Detalles_" + index + "__Cantidad").val("");
+                    $("#Detalles_" + index + "__Borrar").val(true);
+                }
+                $("#Detalles_" + index + "__ProductoName").val("");
+                $("#Detalles_" + index + "__ProductoNameSelected").val("");
+                $("#Detalles_" + index + "__ProductoId").val("");
+            },
+            select: function (event, ui) {
+                var index = event.target.id.substr(9);
+                index = index.substr(0, index.indexOf('_'));
+
+                if (ui.item.value != '@Guid.Empty') {
+                    $("#Detalles_" + index + "__ItemName").val(ui.item.label);
+                    $("#Detalles_" + index + "__ItemNameSelected").val(ui.item.label);
+                    $("#Detalles_" + index + "__ItemId").val(ui.item.value);
+                    $("#Detalles_" + index + "__Cantidad").val("");
+                    $("#Detalles_" + index + "__Borrar").val(true);
+
+                    var gridCount = $("#GridAddConsumo").data("kendoGrid").dataSource.data().length;
+                    if (index == (gridCount - 1)) {
+                        saveValuesInGrid();
+                        $("#GridAddConsumo").data("kendoGrid").dataSource.add({
+                            Indice: gridCount, ItemId: "", ItemName: "", ProductoId: "", ProductoName: "", Cantidad: "", ItemIdError: "", ProductoIdError: "", CantidadError: "", Borrar: true, ConsumoId: null
+                        });
+                    }
+                }
+                else {
+                    $("#Detalles_" + index + "__ItemName").val("");
+                    $("#Detalles_" + index + "__ItemNameSelected").val("");
+                    $("#Detalles_" + index + "__ItemId").val("");
+                    $("#Detalles_" + index + "__Cantidad").val("");
+                    $("#Detalles_" + index + "__Borrar").val(true);
+                }
+                return false;
+            }
+        });
+
+        $(".producto_autocomplete").autocomplete({
+            delay: 400,
+            source: '@Url.Action("LoadProducto", "Consumo", new { area = "Items" })',
+            minLength: 0,
+            change: function (event, ui) {
+                var index = event.target.id.substr(9);
+                index = index.substr(0, index.indexOf('_'));
+                if ($("#Detalles_" + index + "__ProductoName").val() != $("#Detalles_" + index + "__ProductoNameSelected").val()) {
+                    $("#Detalles_" + index + "__ProductoName").val("");
+                    $("#Detalles_" + index + "__ProductoNameSelected").val("");
+                    $("#Detalles_" + index + "__ProductoId").val("");
+                    $("#Detalles_" + index + "__Cantidad").val("");
+                    $("#Detalles_" + index + "__Borrar").val(true);
+                }
+                $("#Detalles_" + index + "__ItemName").val("");
+                $("#Detalles_" + index + "__ItemNameSelected").val("");
+                $("#Detalles_" + index + "__ItemId").val("");
+            },
+            select: function (event, ui) {
+                var index = event.target.id.substr(9);
+                index = index.substr(0, index.indexOf('_'));
+                if (ui.item.value != '@Guid.Empty') {
+                    $("#Detalles_" + index + "__ProductoName").val(ui.item.label);
+                    $("#Detalles_" + index + "__ProductoNameSelected").val(ui.item.label);
+                    $("#Detalles_" + index + "__ProductoId").val(ui.item.value);
+                    $("#Detalles_" + index + "__Cantidad").val("");
+                    $("#Detalles_" + index + "__Borrar").val(true);
+
+                    var gridCount = $("#GridAddConsumo").data("kendoGrid").dataSource.data().length;
+                    if (index == (gridCount - 1)) {
+                        saveValuesInGrid();
+                        $("#GridAddConsumo").data("kendoGrid").dataSource.add({
+                            Indice: gridCount, ItemId: "", ItemName: "", ProductoId: "", ProductoName: "", Cantidad: "", ItemIdError: "", ProductoIdError: "", CantidadError: "", Borrar: true, ConsumoId: null
+                        });
+                    }
+                }
+                else {
+                    $("#Detalles_" + index + "__ProductoName").val("");
+                    $("#Detalles_" + index + "__ProductoNameSelected").val("");
+                    $("#Detalles_" + index + "__ProductoId").val("");
+                    $("#Detalles_" + index + "__Cantidad").val("");
+                    $("#Detalles_" + index + "__Borrar").val(true);
+                }
+                return false;
+            }
+        });
+    }
+
+    function RemoveLineMovement(index) {
+        var grid = $("#GridAddConsumo").data("kendoGrid");
+
+        //Save Lines
+        saveValuesInGrid();
+
+        //Remove Line
+        if ((grid.dataSource.data().length - 1) == index)
+        {
+            $.notify("El ultimo registro sirve como ingreso de items o productos", { globalPosition: "top center", className: "warn" });
+            return;
+        }
+        
+        var gridData = grid.dataSource.at(index);
+        grid.dataSource.remove(gridData);
+
+        //Update Index
+        for (var j = 0; j < grid.dataSource.data().length; j++) {
+            var gridDataSource = grid.dataSource.data();
+            gridDataSource[j].Indice = j;
+        }
+        grid.refresh();
+    }
+
+    function saveValuesInGrid() {
+        var grid = $("#GridAddConsumo").data("kendoGrid");
+        var datasourceLenght = grid.dataSource.data().length;
+        for (var i = 0; i < datasourceLenght; i++) {
+            var dsToUpdate = grid.dataSource.at(i);
+            dsToUpdate.Indice = $("#Detalles_" + i + "__Indice").val();
+            dsToUpdate.ItemId = $("#Detalles_" + i + "__ItemId").val();
+            dsToUpdate.ItemName = $("#Detalles_" + i + "__ItemName").val();
+            dsToUpdate.ProductoId = $("#Detalles_" + i + "__ProductoId").val();
+            dsToUpdate.ProductoName = $("#Detalles_" + i + "__ProductoName").val();
+            dsToUpdate.Cantidad = $("#Detalles_" + i + "__Cantidad").val();
+            dsToUpdate.Borrar = $("#Detalles_" + i + "__Borrar").val();
+        }
+    }
+
+</script>
+
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(m => m.UsoHabitacionId)
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @(Html.Kendo().Grid(Model.Detalles).Name("GridAddConsumo")
+                    .TableHtmlAttributes(new { @class = "" })
+                    .Columns(columns =>
+                    {
+                        columns.Bound(m => m.ItemId).Width("40%").Title("Item")
+                            .HeaderHtmlAttributes(new { @class = "" }).HtmlAttributes(new { @class = "" })
+                            .ClientTemplate(
+                            "<input id='Detalles_#=Indice#__ConsumoId' name='Detalles[#=Indice#].ConsumoId' type='hidden' value='#=ConsumoId#' />" +
+                            "<input id='Detalles_#=Indice#__Indice' name='Detalles[#=Indice#].Indice' type='hidden' value='#=Indice#' />" +
+
+                            "# if (Borrar == true || Borrar == 'true') { #" +
+                                "<input id='Detalles_#=Indice#__ItemName' name='Detalles[#=Indice#].ItemName' value='#=ItemName#' class='form-control box_sizing_border_box item_autocomplete' />" +
+                            "# } else { #" +
+                                "<input id='Detalles_#=Indice#__ItemName' name='Detalles[#=Indice#].ItemName' value='#=ItemName#' class='form-control box_sizing_border_box item_autocomplete' readonly/>" +
+                            "# } #" +
+                            "<input id='Detalles_#=Indice#__ItemNameSelected' type='hidden' />" +
+                            "<input id='Detalles_#=Indice#__ItemId' name='Detalles[#=Indice#].ItemId' type='hidden' value='#=ItemId#' />" +
+                            "<span class='field-validation-error'>#=ItemIdError#</span>"
+                            );
+
+                        columns.Bound(m => m.ItemId).Width("40%").Title("Producto")
+                            .HeaderHtmlAttributes(new { @class = "" }).HtmlAttributes(new { @class = "" })
+                            .ClientTemplate(
+                            "# if (Borrar == true || Borrar == 'true') { #" +
+                                "<input id='Detalles_#=Indice#__ProductoName' name='Detalles[#=Indice#].ProductoName' value='#=ProductoName#' class='form-control box_sizing_border_box producto_autocomplete' />" +
+                            "# } else { #" +
+                                "<input id='Detalles_#=Indice#__ProductoName' name='Detalles[#=Indice#].ProductoName' value='#=ProductoName#' class='form-control box_sizing_border_box producto_autocomplete' readonly/>" +
+                            "# } #" +
+                            "<input id='Detalles_#=Indice#__ProductoNameSelected' type='hidden' />" +
+                            "<input id='Detalles_#=Indice#__ProductoId' name='Detalles[#=Indice#].ProductoId' type='hidden' value='#=ProductoId#' />" +
+                            "<span class='field-validation-error'>#=ProductoIdError#</span>"
+                            );
+
+                        columns.Bound(m => m.Cantidad).Width("calc(20%)").Title("Cantidad")
+                            .HeaderHtmlAttributes(new { @class = "", style = "text-align:right" }).HtmlAttributes(new { @class = "custom-decimal templateCell" })
+                            .ClientTemplate(
+                            "# if (Borrar == true || Borrar == 'true') { #" +
+                                "<input id='Detalles_#=Indice#__Cantidad' name='Detalles[#=Indice#].Cantidad' value='#=Cantidad#' class='form-control box_sizing_border_box text-right' maxlength='10' onfocus='Cantidad_onfocus(this.id);' onblur='Cantidad_onblur(this.id);' />" +
+                            "# } else { #" +
+                                "<input id='Detalles_#=Indice#__Cantidad' name='Detalles[#=Indice#].Cantidad' value='#=Cantidad#' class='form-control box_sizing_border_box text-right' maxlength='10' onfocus='Cantidad_onfocus(this.id);' onblur='Cantidad_onblur(this.id);'  readonly/>" +
+                            "# } #" +
+
+                            "<span class='field-validation-error'>#=CantidadError#</span>"
+                            );
+
+                        columns.Bound(m => m.Indice).Title("Acciones").Width("80px").HeaderHtmlAttributes(new { @class = "" }).HtmlAttributes(new { @class = "" })
+                            .ClientTemplate(
+
+                            "<input id='Detalles_#=Indice#__Borrar' name='Detalles[#=Indice#].Borrar' type='hidden' value='#=Borrar#' />" +
+                            "# if (Borrar == true || Borrar == 'true') { #" +
+                                "<button id='Detalles_#=Indice#' class='btn btn-danger' onclick='RemoveLineMovement(#=Indice#);return false;' ><span class='glyphicon glyphicon-remove' ></span></button>" +
+                            "# } #"
+                        );
+                    })
+                    .Events(ev => ev.DataBound("GridAddConsumo_onDataBound"))
+                    .Resizable(resizable => resizable.Columns(false))
+                    .Scrollable(scrollable => scrollable.Enabled(false))
+                    .Pageable(pageable => pageable.Enabled(false))
+                    .Sortable(sortable => sortable.Enabled(false))
+                    .Selectable(selectable => selectable.Enabled(false))
+                    .Filterable(filtrable => filtrable.Enabled(false))
+                    .DataSource(datasource => datasource
+                        .Ajax()
+                        .Model(model =>
+                        {
+                            model.Id(m => m.Indice);
+                        })
+                        .ServerOperation(false))
+                    )
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <button id="btnCancel" type="button" class="btn btn-secondary pull-right" data-dismiss="modal">Cancelar</button>
+            <button id="btnAddConsumo1" type="submit" class="btn btn-success pull-right" style="margin-right:15px;">Guardar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Listado de Transacciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#Fecha_Inicio').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+        });
+        $('#Fecha_Fin').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        });
+        Generar();
+
+        $("#btn-add").click(function () {
+            Generar();
+        });
+    });
+
+    function Generar() {
+        var start = $("#Fecha_Inicio").val();
+        start = $.datepicker.parseDate("dd/mm/yy", start);
+        var end = $("#Fecha_Fin").val();
+        end = $.datepicker.parseDate("dd/mm/yy", end);
+        $("#divReportArea").load('@Url.Action("RefreshListadoTransaccionesCaja", "Reporte", new { area = "Reportes" })?start=' + start.toISOString() + "&end=" + end.toISOString());
+    }
+
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Transacciones de Caja Chica</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label>Fecha Inicio</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        @Html.TextBox("Fecha_Inicio", DateTime.Now.ToString("dd/MM/yyyy"), new { maxlength = "10", @class = "form-control pull-right", tabindex = "2" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label>Fecha Fin</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        @Html.TextBox("Fecha_Fin", DateTime.Now.ToString("dd/MM/yyyy"), new { maxlength = "10", @class = "form-control pull-right", tabindex = "3" })
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <button type="button" id="btn-add" class="btn btn-success pull-right" style="margin-top:24px;">Generar</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="divReportArea"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

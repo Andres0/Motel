@@ -33,6 +33,7 @@ namespace DS.Motel.Data.AddressBook
             Suite suiteActualizar = _context.Suite.SingleOrDefault(s => s.SuiteId == suite.SuiteId);
             suiteActualizar.Nombre = suite.Nombre;
             suiteActualizar.Estado = suite.Estado;
+            suiteActualizar.Tipo = suite.Tipo;
             suiteActualizar.ParametroId = suite.ParametroId;
 
             _context.Suite.Attach(suiteActualizar);

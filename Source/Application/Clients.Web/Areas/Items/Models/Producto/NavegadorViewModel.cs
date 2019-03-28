@@ -11,5 +11,6 @@ namespace DS.Motel.Clients.Web.Areas.Items.Models.Producto
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Categoria { get; set; }
+        public decimal Cantidad_Stock { get; set; }
     }
 }

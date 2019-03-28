@@ -14,5 +14,6 @@ namespace DS.Motel.Clients.Web.Models.Home
         public decimal Tiempo_Anular { get; set; }
         public DateTime Ingreso { get; set; }
         public TipoIngreso TipoIngreso { get; set; }
+        public decimal Costo_Total { get; set; }
     }
 }

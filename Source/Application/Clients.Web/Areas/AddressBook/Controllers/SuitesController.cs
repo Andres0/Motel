@@ -54,9 +54,13 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             {
                 toReturn.Add(new Tuple<string, string>("EstadoId", "Por favor seleccione un Estado"));
             }
+            if (model.TipoId == 0)
+            {
+                toReturn.Add(new Tuple<string, string>("TipoId", "Por favor seleccione un Tipo"));
+            }
             if (string.IsNullOrEmpty(model.Nombre))
             {
-                toReturn.Add(new Tuple<string, string>("Nombre", "Por favor ingrese un nombre"));
+                toReturn.Add(new Tuple<string, string>("Nombre", "Por favor ingrese un Nombre"));
             }
             else
             {
@@ -80,6 +84,10 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             if (model.EstadoId == 0)
             {
                 toReturn.Add(new Tuple<string, string>("EstadoId", "Por favor seleccione un Estado"));
+            }
+            if (model.TipoId == 0)
+            {
+                toReturn.Add(new Tuple<string, string>("TipoId", "Por favor seleccione un Tipo"));
             }
             if (string.IsNullOrEmpty(model.Nombre))
             {
@@ -131,6 +139,8 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             AddViewModel addViewModel = new AddViewModel();
             addViewModel.ListaParametros = ObtenerParametros();
             addViewModel.ListaEstado = ObtenerEstados();
+            addViewModel.ListaTipo = ObtenerTipo();
+            
             return PartialView(addViewModel);
         }
         
@@ -152,6 +162,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
                 Suite suite = new Suite();
                 suite.Nombre = model.Nombre;
                 suite.Estado = (SuiteEstado)model.EstadoId;
+                suite.Tipo = (SuiteTipo)model.TipoId;
                 suite.ParametroId = model.ParametroId;
 
                 try
@@ -171,6 +182,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             }
             model.ListaParametros = ObtenerParametros();
             model.ListaEstado = ObtenerEstados();
+            model.ListaTipo = ObtenerTipo();
             return PartialView(model);
         }
 
@@ -183,10 +195,13 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             editViewModel.SuiteId = suite.SuiteId;
             editViewModel.Nombre = suite.Nombre;
             editViewModel.EstadoId = suite.Estado == SuiteEstado.Habilitado || suite.Estado == SuiteEstado.Deshabilitado || suite.Estado == SuiteEstado.Mantenimiento ? (int)suite.Estado : (int)SuiteEstado.Habilitado;
+            editViewModel.TipoId = (int)suite.Tipo;
             editViewModel.ParametroId = suite.ParametroId;
 
             editViewModel.ListaParametros = ObtenerParametros();
             editViewModel.ListaEstado = ObtenerEstados();
+            editViewModel.ListaTipo = ObtenerTipo();
+
             return PartialView(editViewModel);
         }
 
@@ -209,6 +224,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
                 suite.SuiteId = model.SuiteId;
                 suite.Nombre = model.Nombre;
                 suite.Estado = (SuiteEstado)model.EstadoId;
+                suite.Tipo = (SuiteTipo)model.TipoId;
                 suite.ParametroId = model.ParametroId;
 
                 try
@@ -228,6 +244,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
             }
             model.ListaParametros = ObtenerParametros();
             model.ListaEstado = ObtenerEstados();
+            model.ListaTipo = ObtenerTipo();
             return PartialView(model);
         }
 
@@ -289,6 +306,7 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
                 SuiteId = t.SuiteId,
                 Nombre = t.Nombre,
                 Estado = t.Estado.ToString(),
+                Tipo = t.Tipo.ToString(),
                 ParametroNombre = t.Parametros.Nombre
             }).OrderBy(y => y.Nombre).ToList();
 
@@ -337,6 +355,26 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Controllers
                 });
             }
           
+            return ToReturn;
+        }
+
+        public List<DropdownListEnumViewModel> ObtenerTipo()
+        {
+            List<DropdownListEnumViewModel> ToReturn = new List<DropdownListEnumViewModel>();
+            ToReturn.Add(new DropdownListEnumViewModel() { Id = (int)SuiteTipo.Especial, Nombre = SuiteTipo.Especial.ToString() });
+            ToReturn.Add(new DropdownListEnumViewModel() { Id = (int)SuiteTipo.Platinum, Nombre = SuiteTipo.Platinum.ToString() });
+            ToReturn.Add(new DropdownListEnumViewModel() { Id = (int)SuiteTipo.Gold, Nombre = SuiteTipo.Gold.ToString() });
+            ToReturn.Add(new DropdownListEnumViewModel() { Id = (int)SuiteTipo.Silver, Nombre = SuiteTipo.Silver.ToString() });
+
+            if (ToReturn.Count() > 0)
+            {
+                ToReturn.Insert(0, new DropdownListEnumViewModel()
+                {
+                    Id = 0,
+                    Nombre = "Seleccione un tipo"
+                });
+            }
+
             return ToReturn;
         }
         #endregion

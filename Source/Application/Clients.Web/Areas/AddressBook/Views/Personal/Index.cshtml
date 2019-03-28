@@ -65,6 +65,11 @@
                         .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
                         .Filterable(filterable => filterable.Enabled(true))
                         .Sortable(sortable => sortable.Enabled(true))
+                        //.Scrollable(s => s.Enabled(true))
+                        //.Scrollable(s => s.Endless(true).Enabled(true))
+                        //.Reorderable(reorderable => reorderable.Columns(true))
+                        //.Resizable(resizable => resizable.Columns(true))
+                        .ColumnMenu()
                         .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
                         .DataSource(datasourse => datasourse
                             .Ajax()

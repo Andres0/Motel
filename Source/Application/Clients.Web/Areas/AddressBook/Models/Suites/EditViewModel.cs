@@ -12,8 +12,10 @@ namespace DS.Motel.Clients.Web.Areas.AddressBook.Models.Suites
         public Guid SuiteId { get; set; }
         public string Nombre { get; set; }
         public int EstadoId { get; set; }
+        public int TipoId { get; set; }
         public Guid ParametroId { get; set; }
         public List<DropdownListViewModel> ListaParametros { get; set; }
         public List<DropdownListEnumViewModel> ListaEstado { get; set; }
+        public List<DropdownListEnumViewModel> ListaTipo { get; set; }
     }
 }

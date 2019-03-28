@@ -16,11 +16,19 @@
             Telerik.Reporting.TableGroup tableGroup5 = new Telerik.Reporting.TableGroup();
             Telerik.Reporting.TableGroup tableGroup6 = new Telerik.Reporting.TableGroup();
             Telerik.Reporting.TableGroup tableGroup7 = new Telerik.Reporting.TableGroup();
+            Telerik.Reporting.TableGroup tableGroup8 = new Telerik.Reporting.TableGroup();
+            Telerik.Reporting.TableGroup tableGroup9 = new Telerik.Reporting.TableGroup();
+            Telerik.Reporting.TableGroup tableGroup10 = new Telerik.Reporting.TableGroup();
+            Telerik.Reporting.TableGroup tableGroup11 = new Telerik.Reporting.TableGroup();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RptListadoTransacciones));
             Telerik.Reporting.ReportParameter reportParameter1 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.ReportParameter reportParameter2 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.ReportParameter reportParameter3 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.ReportParameter reportParameter4 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.ReportParameter reportParameter5 = new Telerik.Reporting.ReportParameter();
+            Telerik.Reporting.ReportParameter reportParameter6 = new Telerik.Reporting.ReportParameter();
+            Telerik.Reporting.ReportParameter reportParameter7 = new Telerik.Reporting.ReportParameter();
+            Telerik.Reporting.ReportParameter reportParameter8 = new Telerik.Reporting.ReportParameter();
             this.textBox1 = new Telerik.Reporting.TextBox();
             this.textBox2 = new Telerik.Reporting.TextBox();
             this.textBox3 = new Telerik.Reporting.TextBox();
@@ -37,6 +45,7 @@
             this.textBox17 = new Telerik.Reporting.TextBox();
             this.textBox18 = new Telerik.Reporting.TextBox();
             this.textBox14 = new Telerik.Reporting.TextBox();
+            this.sdsListadoTransaccionesBanco = new Telerik.Reporting.SqlDataSource();
             this.pageHeaderSection1 = new Telerik.Reporting.PageHeaderSection();
             this.textBox12 = new Telerik.Reporting.TextBox();
             this.pageFooterSection1 = new Telerik.Reporting.PageFooterSection();
@@ -48,7 +57,10 @@
             this.textBox20 = new Telerik.Reporting.TextBox();
             this.textBox21 = new Telerik.Reporting.TextBox();
             this.reportFooterSection1 = new Telerik.Reporting.ReportFooterSection();
-            this.odsRptListadoTransacciones = new Telerik.Reporting.ObjectDataSource();
+            this.textBox24 = new Telerik.Reporting.TextBox();
+            this.textBox25 = new Telerik.Reporting.TextBox();
+            this.textBox26 = new Telerik.Reporting.TextBox();
+            this.textBox28 = new Telerik.Reporting.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // textBox1
@@ -88,7 +100,7 @@
             // 
             // detailSection1
             // 
-            this.detailSection1.Height = Telerik.Reporting.Drawing.Unit.Cm(1.5D);
+            this.detailSection1.Height = Telerik.Reporting.Drawing.Unit.Cm(2.1D);
             this.detailSection1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.table1});
             this.detailSection1.Name = "detailSection1";
@@ -111,22 +123,34 @@
             this.table1.Body.SetCellContent(1, 3, this.textBox17);
             this.table1.Body.SetCellContent(1, 4, this.textBox18);
             this.table1.Body.SetCellContent(1, 0, this.textBox14, 1, 2);
+            tableGroup2.Name = "group1";
+            tableGroup2.ReportItem = this.textBox1;
+            tableGroup1.ChildGroups.Add(tableGroup2);
             tableGroup1.Name = "concepto";
-            tableGroup1.ReportItem = this.textBox1;
-            tableGroup2.Name = "deposito";
-            tableGroup2.ReportItem = this.textBox2;
-            tableGroup3.Name = "fecha";
-            tableGroup3.ReportItem = this.textBox3;
-            tableGroup4.Name = "retiro";
-            tableGroup4.ReportItem = this.textBox4;
-            tableGroup5.Name = "saldo";
-            tableGroup5.ReportItem = this.textBox5;
+            tableGroup1.ReportItem = this.textBox24;
+            tableGroup4.Name = "group2";
+            tableGroup4.ReportItem = this.textBox2;
+            tableGroup3.ChildGroups.Add(tableGroup4);
+            tableGroup3.Name = "deposito";
+            tableGroup3.ReportItem = this.textBox25;
+            tableGroup6.Name = "group3";
+            tableGroup6.ReportItem = this.textBox3;
+            tableGroup7.Name = "group4";
+            tableGroup7.ReportItem = this.textBox4;
+            tableGroup5.ChildGroups.Add(tableGroup6);
+            tableGroup5.ChildGroups.Add(tableGroup7);
+            tableGroup5.Name = "fecha";
+            tableGroup5.ReportItem = this.textBox26;
+            tableGroup9.Name = "group5";
+            tableGroup9.ReportItem = this.textBox5;
+            tableGroup8.ChildGroups.Add(tableGroup9);
+            tableGroup8.Name = "saldo";
+            tableGroup8.ReportItem = this.textBox28;
             this.table1.ColumnGroups.Add(tableGroup1);
-            this.table1.ColumnGroups.Add(tableGroup2);
             this.table1.ColumnGroups.Add(tableGroup3);
-            this.table1.ColumnGroups.Add(tableGroup4);
             this.table1.ColumnGroups.Add(tableGroup5);
-            this.table1.DataSource = this.odsRptListadoTransacciones;
+            this.table1.ColumnGroups.Add(tableGroup8);
+            this.table1.DataSource = this.sdsListadoTransaccionesBanco;
             this.table1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.textBox6,
             this.textBox7,
@@ -137,19 +161,23 @@
             this.textBox16,
             this.textBox17,
             this.textBox18,
+            this.textBox24,
             this.textBox1,
+            this.textBox25,
             this.textBox2,
+            this.textBox26,
             this.textBox3,
             this.textBox4,
+            this.textBox28,
             this.textBox5});
             this.table1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0D), Telerik.Reporting.Drawing.Unit.Cm(0D));
             this.table1.Name = "table1";
-            tableGroup6.Groupings.Add(new Telerik.Reporting.Grouping(null));
-            tableGroup6.Name = "detail";
-            tableGroup7.Name = "group";
-            this.table1.RowGroups.Add(tableGroup6);
-            this.table1.RowGroups.Add(tableGroup7);
-            this.table1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(17D), Telerik.Reporting.Drawing.Unit.Cm(1.5D));
+            tableGroup10.Groupings.Add(new Telerik.Reporting.Grouping(null));
+            tableGroup10.Name = "detail";
+            tableGroup11.Name = "group";
+            this.table1.RowGroups.Add(tableGroup10);
+            this.table1.RowGroups.Add(tableGroup11);
+            this.table1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(17D), Telerik.Reporting.Drawing.Unit.Cm(2D));
             this.table1.StyleName = "Normal.TableNormal";
             // 
             // textBox6
@@ -215,6 +243,16 @@
             this.textBox14.StyleName = "TableFooter";
             this.textBox14.Value = "";
             // 
+            // sdsListadoTransaccionesBanco
+            // 
+            this.sdsListadoTransaccionesBanco.ConnectionString = "MotelDB";
+            this.sdsListadoTransaccionesBanco.Name = "sdsListadoTransaccionesBanco";
+            this.sdsListadoTransaccionesBanco.Parameters.AddRange(new Telerik.Reporting.SqlDataSourceParameter[] {
+            new Telerik.Reporting.SqlDataSourceParameter("@CuentaId", System.Data.DbType.String, "= Parameters.CuentaId.Value"),
+            new Telerik.Reporting.SqlDataSourceParameter("@Start", System.Data.DbType.String, "= Parameters.Start.Value"),
+            new Telerik.Reporting.SqlDataSourceParameter("@End", System.Data.DbType.String, "= Parameters.End.Value")});
+            this.sdsListadoTransaccionesBanco.SelectCommand = resources.GetString("sdsListadoTransaccionesBanco.SelectCommand");
+            // 
             // pageHeaderSection1
             // 
             this.pageHeaderSection1.Height = Telerik.Reporting.Drawing.Unit.Cm(0.5D);
@@ -239,7 +277,7 @@
             // 
             // reportHeaderSection1
             // 
-            this.reportHeaderSection1.Height = Telerik.Reporting.Drawing.Unit.Cm(4D);
+            this.reportHeaderSection1.Height = Telerik.Reporting.Drawing.Unit.Cm(4.1D);
             this.reportHeaderSection1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.textBox11,
             this.textBox13,
@@ -287,7 +325,7 @@
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(12.7D), Telerik.Reporting.Drawing.Unit.Cm(0.6D));
             this.textBox20.StyleName = "Title4";
-            this.textBox20.Value = "= Parameters.ContactName.Value";
+            this.textBox20.Value = "= Parameters.CuentaNombre.Value";
             // 
             // textBox21
             // 
@@ -302,18 +340,36 @@
             this.reportFooterSection1.Height = Telerik.Reporting.Drawing.Unit.Cm(0.5D);
             this.reportFooterSection1.Name = "reportFooterSection1";
             // 
-            // odsRptListadoTransacciones
+            // textBox24
             // 
-            this.odsRptListadoTransacciones.DataMember = "ListadoTransaccionesDatos";
-            this.odsRptListadoTransacciones.DataSource = typeof(DS.Motel.Clients.Web.Areas.Reportes.Diseños.Transaccion.RptListadoTransacciones_Q);
-            this.odsRptListadoTransacciones.Name = "odsRptListadoTransacciones";
-            this.odsRptListadoTransacciones.Parameters.AddRange(new Telerik.Reporting.ObjectDataSourceParameter[] {
-            new Telerik.Reporting.ObjectDataSourceParameter("cuentaId", typeof(string), "= Parameters.CuentaId.Value")});
+            this.textBox24.Name = "textBox24";
+            this.textBox24.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(2D), Telerik.Reporting.Drawing.Unit.Cm(0.5D));
+            this.textBox24.StyleName = "";
+            // 
+            // textBox25
+            // 
+            this.textBox25.Name = "textBox25";
+            this.textBox25.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(9D), Telerik.Reporting.Drawing.Unit.Cm(0.5D));
+            this.textBox25.StyleName = "";
+            // 
+            // textBox26
+            // 
+            this.textBox26.Name = "textBox26";
+            this.textBox26.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(4D), Telerik.Reporting.Drawing.Unit.Cm(0.5D));
+            this.textBox26.StyleName = "TableHeaderPreviousRight";
+            this.textBox26.Value = "Saldo Anterior:";
+            // 
+            // textBox28
+            // 
+            this.textBox28.Format = "{0:N2}";
+            this.textBox28.Name = "textBox28";
+            this.textBox28.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(2D), Telerik.Reporting.Drawing.Unit.Cm(0.5D));
+            this.textBox28.StyleName = "TableHeaderPreviousRightValue";
+            this.textBox28.Value = "= Parameters.SaldoAnterior.Value";
             // 
             // RptListadoTransacciones
             // 
-            this.ExternalStyleSheets.Add(new Telerik.Reporting.Drawing.ExternalStyleSheet("C:\\Proyectos\\Motel2\\Source\\Application\\Clients.Web\\Content\\Report\\ReportStyle.xml" +
-            ""));
+            this.ExternalStyleSheets.Add(new Telerik.Reporting.Drawing.ExternalStyleSheet("\\Content\\Report\\ReportStyle.xml"));
             this.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.detailSection1,
             this.pageHeaderSection1,
@@ -323,18 +379,27 @@
             this.Name = "RptListadoTransacciones";
             this.PageSettings.ContinuousPaper = false;
             this.PageSettings.Landscape = false;
-            this.PageSettings.Margins = new Telerik.Reporting.Drawing.MarginsU(Telerik.Reporting.Drawing.Unit.Mm(20D), Telerik.Reporting.Drawing.Unit.Mm(20D), Telerik.Reporting.Drawing.Unit.Mm(20D), Telerik.Reporting.Drawing.Unit.Mm(20D));
+            this.PageSettings.Margins = new Telerik.Reporting.Drawing.MarginsU(Telerik.Reporting.Drawing.Unit.Cm(2D), Telerik.Reporting.Drawing.Unit.Cm(2D), Telerik.Reporting.Drawing.Unit.Cm(2D), Telerik.Reporting.Drawing.Unit.Cm(2D));
             this.PageSettings.PaperKind = System.Drawing.Printing.PaperKind.Letter;
             reportParameter1.Name = "CuentaId";
             reportParameter2.Name = "ContactName";
             reportParameter3.Name = "DateTime";
             reportParameter4.Name = "CuentaNombre";
             reportParameter5.Name = "CuentaDetalle";
+            reportParameter6.Name = "Start";
+            reportParameter6.Type = Telerik.Reporting.ReportParameterType.DateTime;
+            reportParameter7.Name = "End";
+            reportParameter7.Type = Telerik.Reporting.ReportParameterType.DateTime;
+            reportParameter8.Name = "SaldoAnterior";
+            reportParameter8.Type = Telerik.Reporting.ReportParameterType.Float;
             this.ReportParameters.Add(reportParameter1);
             this.ReportParameters.Add(reportParameter2);
             this.ReportParameters.Add(reportParameter3);
             this.ReportParameters.Add(reportParameter4);
             this.ReportParameters.Add(reportParameter5);
+            this.ReportParameters.Add(reportParameter6);
+            this.ReportParameters.Add(reportParameter7);
+            this.ReportParameters.Add(reportParameter8);
             this.Width = Telerik.Reporting.Drawing.Unit.Cm(17D);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
@@ -353,7 +418,6 @@
         private Telerik.Reporting.TextBox textBox3;
         private Telerik.Reporting.TextBox textBox4;
         private Telerik.Reporting.TextBox textBox5;
-        private Telerik.Reporting.ObjectDataSource odsRptListadoTransacciones;
         private Telerik.Reporting.PageHeaderSection pageHeaderSection1;
         private Telerik.Reporting.TextBox textBox12;
         private Telerik.Reporting.PageFooterSection pageFooterSection1;
@@ -369,5 +433,10 @@
         private Telerik.Reporting.TextBox textBox19;
         private Telerik.Reporting.TextBox textBox20;
         private Telerik.Reporting.TextBox textBox21;
+        private Telerik.Reporting.SqlDataSource sdsListadoTransaccionesBanco;
+        private Telerik.Reporting.TextBox textBox24;
+        private Telerik.Reporting.TextBox textBox25;
+        private Telerik.Reporting.TextBox textBox26;
+        private Telerik.Reporting.TextBox textBox28;
     }
 }

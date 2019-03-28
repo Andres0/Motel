@@ -31,5 +31,6 @@
             .ServiceUrl(Url.Content("~/api/Reports/"))
             .TemplateUrl(Url.Content("~/Areas/Reportes/Templates/telerikReportViewerTemplate.html"))
             .ReportSource(Model.ReportGenerate)
+            .ScaleMode(ScaleModes.FIT_PAGE)
             .Scale(1.0)
 )

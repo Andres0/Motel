@@ -1,0 +1,176 @@
+﻿@model DS.Motel.Clients.Web.Models.Home.SuiteDetalleViewModel
+@{
+    ViewBag.Title = "Suite Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var isChecked = Model.CostoTV > 0 ? 1 : 0;
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn-add-Cliente").click(function () {
+            $("#divContentAddCliente").load('@Url.Action("Add", "Clientes", new { area = "AddressBook" })?suiteId=@Model.SuiteId', function () {
+                $('#AddClienteModal').modal('show');
+            });
+        });
+        $("#btnAddConsumo").click(function () {
+            $("#divContentAddConsumo").load('@Url.Action("Add", "Consumo", new { area = "Items" })?suiteId=@Model.SuiteId', function () {
+                $('#AddConsumoModal').modal('show');
+            });
+        });
+
+        $("#btnVolver").click(function () {
+            $("#divMasterOperationAreaContent").load('@Url.Action("Index", "Home", new { area = "" })?masterload=false');
+        });
+
+        if ('@isChecked' == 1) {
+            $("#chkExistePagoACuenta").attr('checked', 'checked')
+        }
+
+        $("#chkExistePagoACuenta").click(function () {
+            var isChecked = false;
+            if ($("#chkExistePagoACuenta").is(":checked")) {
+                isChecked = true;
+            }
+            else {
+                isChecked = false;
+            }
+
+            $.ajax({
+                url: '@Url.Action("UsoTv", "Home", new { area = "" })?usoTv=' + isChecked + "&suiteId=@Model.SuiteId",
+            }).done(function (data) {
+                $("#divCostoTotal").text(data);
+            });
+        });
+    });
+
+    function btnEliminarConsumo_onClick(consumoId) {
+        $("#divContentDeleteConsumo").load('@Url.Action("Delete", "Consumo", new { area = "Items" })?consumoId=' + consumoId, function () {
+            $('#DeleteConsumoModal').modal('show');
+        });
+    }
+
+    function UpdateCostTota() {
+        $.ajax({
+                url: '@Url.Action("GetCostTotal", "Home", new { area = "" })?suiteId=@Model.SuiteId',
+            }).done(function (data) {
+                $("#divCostoTotal").text(data);
+            });
+    }
+
+</script>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">@Model.SuiteNombre</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" id="btn-add-Cliente" class="btn btn-success">Agregar Cliente</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12"><label>Nro Uso:</label> @Model.NroUso</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><label>Estado:</label> @Model.Estado</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><label>Tiempo:</label> @Model.Tiempo</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><label>Hora Ingreso:</label> @Model.HoraIngreso.ToString("HH:mm:ss")</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><label>Tipo Ingreso:</label> @Model.TipoIngreso</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><label>Costo Suite:</label> @Model.CostoSuite</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><label>Costo Total: </label><div id="divCostoTotal" style="display:inline-block; margin-left:5px;"> @Model.CostoTotal</div> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.CheckBox("chkExistePagoACuenta", new { @class = "iCheck-helper", id = "chkExistePagoACuenta" }) Uso de la TV
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.CheckBox("chkExistePagoACuenta") Existe Pago a Cuenta:  @Html.TextBox("chkPagoACuenta", "0", new { maxlength = "10", style = "width:50px;" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    @(
+                            Html.Kendo().Grid<DS.Motel.Clients.Web.Areas.Items.Models.Consumo.NavegadorViewModel>().Name("GridConsumoDetalle")
+                            .Columns(column =>
+                            {
+                                column.Bound(c => c.ItemNombre).Title("Item").Width("30%");
+                                column.Bound(c => c.ProductoNombre).Title("Producto").Width("30%");
+                                column.Bound(c => c.Cantidad).Title("Cantidad").Width("calc(20%-60px)");
+                                column.Bound(c => c.Total).Title("Total").Width("20%");
+                                column.Bound(c => c).Title("Acciones").Width("60px").Filterable(false).Sortable(false).ClientTemplate(
+                                    "<button class='btn btn-danger' title='Eliminar' onclick='btnEliminarConsumo_onClick(\"#:ConsumoId#\");'><span class='glyphicon glyphicon-remove' ></span></button>"
+                                );
+                            })
+                            .Pageable(pageable => pageable.Enabled(true).ButtonCount(5))
+                            .Filterable(filterable => filterable.Enabled(true))
+                            .Sortable(sortable => sortable.Enabled(true))
+                            .NoRecords(norecords => norecords.Template("No hay items para mostrar"))
+                            .DataSource(datasourse => datasourse
+                                .Ajax()
+                                .PageSize(10)
+                                .Read(read => read.Action("LoadGrid", "Consumo", new { suiteId = Model.SuiteId }))
+                                .ServerOperation(false))
+                    )
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="btnAddConsumo" type="button" class="btn btn-primary">Agregar Consumo</button>
+            <button id="btnVolver" type="button" class="btn btn-secondary">Volver</button>
+        </div>
+    </div>
+</div>
+
+
+@using (@Ajax.BeginForm("Add", "Clientes", new { area = "AddressBook" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentAddCliente", OnSuccess = "AddCliente_onSuccess", OnBegin = "AddCliente_callOnBegin" }))
+{
+    <div class="modal fade" id="AddClienteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentAddCliente" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+@using (@Ajax.BeginForm("Add", "Consumo", new { area = "Items" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentAddConsumo", OnSuccess = "AddConsumo_onSuccess", OnBegin = "AddConsumo_callOnBegin" }))
+{
+    <div class="modal fade" id="AddConsumoModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentAddConsumo" class="modal-content">
+            </div>
+        </div>
+    </div>
+}
+
+
+@using (@Ajax.BeginForm("Delete", "Consumo", new { area = "Items" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentDeleteConsumo", OnSuccess = "Delete_onSuccess", OnBegin = "Delete_callOnBegin" }))
+{
+    <div class="modal fade" id="DeleteConsumoModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="divContentDeleteConsumo" class="modal-content">
+            </div>
+        </div>
+    </div>
+}

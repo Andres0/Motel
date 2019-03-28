@@ -201,6 +201,14 @@ namespace DS.Motel.Data.Inventarios
             return _context.InventarioDetalle.Where(w => w.ItemId == itemId).Count() > 0 ? true : false;
         }
 
+        public decimal ObtenerSaldoAnteriorItemIdAndAlmacenId(Guid itemId, Guid almacenId, DateTime date)
+        {
+            decimal ingreso = _context.InventarioDetalle.Where(w => w.ItemId == itemId && w.Inventario.AAlmacenId == almacenId && w.Inventario.Fecha < date).Sum(c => (decimal?)c.Cantidad) ?? 0;
+            decimal egreso = _context.InventarioDetalle.Where(w => w.ItemId == itemId && w.Inventario.DeAlmacenId == almacenId && w.Inventario.Fecha < date).Sum(c => (decimal?)c.Cantidad) ?? 0;
+
+            return ingreso - egreso;
+        }
+
         #endregion
     }
 }

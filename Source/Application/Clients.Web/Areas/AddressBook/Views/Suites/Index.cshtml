@@ -52,8 +52,9 @@
                                 .Columns(column =>
                                 {
                                     column.Bound(c => c.Nombre).Title("Nombre").Width("30%");
-                                    column.Bound(c => c.Estado).Title("Estado").Width("30%");
-                                    column.Bound(c => c.ParametroNombre).Title("Parametro").Width("calc(40%-120px)");
+                                    column.Bound(c => c.Estado).Title("Estado").Width("20%");
+                                    column.Bound(c => c.Tipo).Title("Tipo").Width("20%");
+                                    column.Bound(c => c.ParametroNombre).Title("Parametro").Width("calc(30%-120px)");
                                     column.Bound(c => c).Title("Acciones").Width("120px").Filterable(false).Sortable(false).ClientTemplate(
                                         "<button class='btn btn-warning' title='Editar' onclick='btnEdit_onClick(\"#:SuiteId#\");' style='margin-right:10px;'><span class='glyphicon glyphicon-pencil'></span></button>" +
                                         "<button class='btn btn-danger' title='Eliminar' onclick='btnDelete_onClick(\"#:SuiteId#\");'><span class='glyphicon glyphicon-remove' ></span></button>"

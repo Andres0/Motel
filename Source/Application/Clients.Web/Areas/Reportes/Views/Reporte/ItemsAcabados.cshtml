@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Items Acabados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#divReportArea").load('@Url.Action("RefreshItemsAcabados", "Reporte", new { area = "Reportes" })');
+    });
+
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Listado de Items acabados</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="divReportArea"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,16 +15,22 @@
 
 <script type="text/javascript">
     function btn_onClick(estado, suiteId) {
-        if (estado == '@DS.Motel.Data.Entities.SuiteEstado.Habilitado') {
+        if (estado == '@DS.Motel.Data.Entities.SuiteEstado.Habilitado' || estado == '@DS.Motel.Data.Entities.SuiteEstado.Libre') {
             $("#divIngresar").load('@Url.Action("Ingresar", "Home", new { area = "" })?suiteId=' + suiteId, function () {
                 $('#mIngresar').modal('show');
             });
         }
     }
 
-    function SuiteDetalle_onClick(SuiteId) {
-        $("#divSuiteDetalle").load('@Url.Action("SuiteDetalle")', function () {
-            $("#mSuiteDetalle").model('show');
+    function SuiteDetalle_onClick(suiteId, estado) {
+        if (estado == '@DS.Motel.Data.Entities.SuiteEstado.Ocupado') {
+            window.location = '@Url.Action("SuiteDetalle", "Home", new { area = "" })?suiteId=' + suiteId;
+        }
+    }
+
+    function btnAnular_onClick(suiteId) {
+        $("#divContentAnular").load('@Url.Action("Anular", "Home", new { area = "" })?suiteId=' + suiteId, function () {
+            $('#AnularModal').modal('show');
         });
     }
 
@@ -40,7 +46,7 @@
                         @{
                             var background = item.Estado == DS.Motel.Data.Entities.SuiteEstado.Mantenimiento ? "bg-yellow" : item.Estado == DS.Motel.Data.Entities.SuiteEstado.Deshabilitado ? "bg-red" : "bg-green";
                         }
-                        <div class="small-box @background" style="margin-bottom:5px;" onclick="SuiteDetalle_onClick('@item.SuiteId');">
+                        <div class="small-box @background" style="margin-bottom:5px; cursor:pointer;" onclick="SuiteDetalle_onClick('@item.SuiteId', '@item.Estado');">
                             <div class="inner">
                                 <h3>@item.Nombre</h3>
                                 <p>@item.Estado.ToString()</p>
@@ -48,7 +54,7 @@
                         </div>
                         @if (item.Estado == DS.Motel.Data.Entities.SuiteEstado.Ocupado)
                         {
-                            <label>Costo: Bs.</label>
+                            <label>Costo: @item.Costo_Total Bs.</label>
                         }
                     </div>
 
@@ -98,7 +104,7 @@
                             </script>
                             <div class="row"><div class="col-md-12"><button class="btn btn-primary" onclick="btn_onClick('@item.Estado', '@item.SuiteId')">Cobrar</button></div></div>
                             <div class="row"><div class="col-md-12"><b id="@item.SuiteId"></b></div></div>
-                            <div class="row"><div class="col-md-12"><button id='btnAnular_@item.SuiteId' class="btn btn-primary" onclick="btn_onClick('@item.Estado', '@item.SuiteId')" style="display:none;">Anular</button></div></div>
+                            <div class="row"><div class="col-md-12"><button id='btnAnular_@item.SuiteId' class="btn btn-primary" onclick="btnAnular_onClick('@item.SuiteId')" style="display:none;">Anular</button></div></div>
                         }
                         else if (item.Estado != DS.Motel.Data.Entities.SuiteEstado.Mantenimiento && item.Estado != DS.Motel.Data.Entities.SuiteEstado.Deshabilitado)
                         {
@@ -127,11 +133,12 @@
     </div>
 }
 
-@using (@Ajax.BeginForm("SuiteDetalle", "Home", new { area = "" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divSuiteDetalle", OnSuccess = "SuiteDetalle_onSuccess", OnBegin = "SuiteDetalle_callOnBegin" }))
+
+@using (@Ajax.BeginForm("Anular", "Home", new { area = "" }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "divContentAnular", OnSuccess = "Anular_onSuccess", OnBegin = "Anular_callOnBegin" }))
 {
-    <div class="modal fade" id="mSuiteDetalle" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="AnularModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div id="divSuiteDetalle" class="modal-content">
+            <div id="divContentAnular" class="modal-content">
             </div>
         </div>
     </div>

@@ -228,7 +228,11 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             TarjetaDescuentoRepository tarjetaDescuentoRepository = container.Resolve<TarjetaDescuentoRepository>();
 
             ModelState.Clear();
-            //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
+            List<Tuple<string, string>> errores = GetErroresDelete(model);
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
 
             if (ModelState.IsValid)
             {

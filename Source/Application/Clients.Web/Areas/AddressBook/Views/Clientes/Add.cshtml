@@ -1,0 +1,97 @@
+﻿@model DS.Motel.Clients.Web.Areas.AddressBook.Models.Clientes.AddViewModel
+
+
+<script type="text/javascript">
+
+    function AddCliente_callOnBegin() {
+        $("#btnAddCliente").attr("disabled", "disabled")
+        $("#btnAddCliente").text("Guardando...");
+    }
+
+    function AddCliente_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("El cliente se guardó con exito", { globalPosition: "top center", className: "success" });
+                    $('#AddClienteModal').modal('hide');
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: Información no válida", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    function txtPlaca_onBlur() {
+        var placa = $("#Placa").val();
+        if (placa != "") {
+            $.ajax({
+                url: '@Url.Action("BuscarPlaca", "Clientes", new { area = "AddressBook" })',
+                data: { placa: placa },
+                success: function (data) {
+                    if (data != null && data != "") {
+                        $("#Nombre").val(data.Nombre);
+                        $("#Color").val(data.Color);
+                        $("#Tipo").val(data.TipoVehiculo);
+                        $("#Descripcion").val(data.Descripcion);
+                    }
+                },
+            });
+        }
+    }
+
+</script>
+
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(h => h.SuiteId)
+<div class="modal-header">
+    <h1 class="modal-title">Nuevo Cliente</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Placa</label>
+            @Html.TextBoxFor(m => m.Placa, new { maxlength = "50", @class = "form-control", tabindex = "1", onblur="txtPlaca_onBlur();" })
+            @Html.ValidationMessageFor(m => m.Placa)
+        </div>
+        <div class="form-group col-md-6">
+            <label>Nombre a Recordar</label>
+            @Html.TextBoxFor(m => m.Nombre, new { maxlength = "50", @class = "form-control", tabindex = "2" })
+            @Html.ValidationMessageFor(m => m.Nombre)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Color</label>
+            @Html.TextBoxFor(m => m.Color, new { maxlength = "50", @class = "form-control", tabindex = "3" })
+            @Html.ValidationMessageFor(m => m.Color)
+        </div>
+        <div class="form-group col-md-6">
+            <label>Tipo de Vehículo</label>
+            @Html.TextBoxFor(m => m.Tipo, new { maxlength = "50", @class = "form-control", tabindex = "4" })
+            @Html.ValidationMessageFor(m => m.Tipo)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Descripción</label>
+            @Html.TextAreaFor(m => m.Descripcion, new { maxlength = "5000", @class = "form-control", tabindex = "5" })
+            @Html.ValidationMessageFor(m => m.Descripcion)
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnAddCliente" type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+</div>

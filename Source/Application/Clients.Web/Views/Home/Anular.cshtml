@@ -1,0 +1,63 @@
+﻿@model DS.Motel.Clients.Web.Models.Home.AnularViewModel
+
+<script type="text/javascript">
+
+    function Anular_callOnBegin() {
+        $("#btnAnular").attr("disabled", "disabled")
+    }
+
+    function Anular_onSuccess() {
+        switch ('@Model.Result')
+        {
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Saved':
+                {
+                    $.notify("El uso de la suite se anulo correctamente", { globalPosition: "top center", className: "success" });
+                    $('#AnularModal').modal('hide');
+                    setTimeout(function () {
+                        $("#divMasterOperationAreaContent").load('@Url.Action("Index", "Home", new { area = "" })?masterload=false');
+                    }, 1000);
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Validation':
+                {
+                    $.notify("Error: El uso de la suite no se puedo anular", { globalPosition: "top center", className: "warn" });
+                }
+                break;
+            case '@DS.Motel.Clients.Web.Models.EnumActionResult.Error':
+                {
+                    $.notify("Lo sentimos, un error desconocido ha ocurrido en la aplicación.", { globalPosition: "top center", className: "error" });
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+</script>
+
+
+@Html.AntiForgeryToken()
+@Html.HiddenFor(m => m.SuiteId)
+<div class="modal-header">
+    <h1 class="modal-title">Anular Suite</h1>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>¿Está seguro que desea anular el uso de la Suite?</label>
+            <br />
+            @Html.ValidationMessageFor(m => m.ErrorMessage)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Motivo</label>
+            @Html.TextAreaFor(m => m.Descripcion, new { maxlength = "5000", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Descripcion)
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnAnular" type="submit" class="btn btn-primary">Si</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+</div>

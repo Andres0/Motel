@@ -57,8 +57,15 @@
     </div>
     <div class="row">
         <div class="form-group col-md-12">
+            <label>Tipo</label>
+            @Html.DropDownListFor(m => m.TipoId, new SelectList(@Model.ListaTipo, "Id", "Nombre"), new { @class = "form-control", tabindex = "3" })
+            @Html.ValidationMessageFor(m => m.TipoId)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
             <label>Parametro</label>
-            @Html.DropDownListFor(m => m.ParametroId, new SelectList(@Model.ListaParametros, "Id", "Nombre"), new { @class = "form-control", tabindex = "3" })
+            @Html.DropDownListFor(m => m.ParametroId, new SelectList(@Model.ListaParametros, "Id", "Nombre"), new { @class = "form-control", tabindex = "4" })
             @Html.ValidationMessageFor(m => m.ParametroId)
         </div>
     </div>

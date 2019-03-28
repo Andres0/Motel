@@ -13,16 +13,16 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
     <style>
-        html, body { height:100%; }
+        body { min-height:100vh; }
     </style>
 </head>
 <body class="login_body text-center">
     @RenderBody()
-    
+
     <!--footer-->
-    <div class="login_footer">
+    @*<div class="login_footer">
         © 2018 DrecoSoft. All rights reserved | Design by <a href="#">DrecoSoft</a>
-    </div>
+    </div>*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

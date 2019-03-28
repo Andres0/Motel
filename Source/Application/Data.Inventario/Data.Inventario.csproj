@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlmacenRepository.cs" />
+    <Compile Include="InventarioProductoRepository.cs" />
     <Compile Include="InventarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

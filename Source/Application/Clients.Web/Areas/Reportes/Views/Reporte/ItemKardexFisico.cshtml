@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Kardex Fisico";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var almacen = ViewData["Almacen"] as List<DS.Motel.Clients.Web.Models.DropdownListViewModel>;
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#Fecha_Inicio').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+        });
+        $('#Fecha_Fin').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        });
+        Generar();
+
+        $("#btn-add").click(function () {
+            Generar();
+        });
+
+        $(".custom_autocomplete").autocomplete({
+            delay: 400,
+            source: '@Url.Action("LoadItem", "Reporte", new { area = "Reportes" })',
+            minLength: 0,
+            change: function (event, ui) {
+                if ($("#ItemName").val() != $("#ItemNameSelected").val()) {
+                    $("#ItemName").val("");
+                    $("#ItemNameSelected").val("");
+                    $("#ItemId").val("");
+                }
+            },
+            select: function (event, ui) {
+                if (ui.item.value != '@Guid.Empty') {
+                    $("#ItemName").val(ui.item.label);
+                    $("#ItemNameSelected").val(ui.item.label);
+                    $("#ItemId").val(ui.item.value);
+                }
+                else {
+                    $("#ItemName").val("");
+                    $("#ItemNameSelected").val("");
+                    $("#ItemId").val("");
+                }
+                return false;
+            }
+        });
+    });
+
+    function Generar() {
+        var itemId = $("#ItemId").val();
+        var almacenId = $("#AlmacenId").val();
+        var start = $("#Fecha_Inicio").val();
+        start = $.datepicker.parseDate("dd/mm/yy", start);
+        var end = $("#Fecha_Fin").val();
+        end = $.datepicker.parseDate("dd/mm/yy", end);
+        $("#divReportArea").load('@Url.Action("RefreshItemKardexFisico", "Reporte", new { area = "Reportes" })?itemId=' + itemId + '&almacenId=' + almacenId + "&start=" + start.toISOString() + "&end=" + end.toISOString());
+    }
+
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Kardex Fisico de Items</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <div class="row form-group">
+                <div class="col-md-2">
+                    <label>Item</label>
+                    <input id="ItemName" class="form-control box_sizing_border_box custom_autocomplete" />
+                    <input id="ItemNameSelected" type="hidden" />
+                    <input id="ItemId" type="hidden" />
+                </div>
+                <div class="col-md-2">
+                    <label>Cuenta</label>
+                    @Html.DropDownList("AlmacenId", new SelectList(@almacen, "Id", "Nombre"), new { @class = "form-control", tabindex = "1" })
+                </div>
+                <div class="col-md-2">
+                    <label>Fecha Inicio</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        @Html.TextBox("Fecha_Inicio", DateTime.Now.ToString("dd/MM/yyyy"), new { maxlength = "10", @class = "form-control pull-right", tabindex = "2" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label>Fecha Fin</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        @Html.TextBox("Fecha_Fin", DateTime.Now.ToString("dd/MM/yyyy"), new { maxlength = "10", @class = "form-control pull-right", tabindex = "3" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <button type="button" id="btn-add" class="btn btn-success pull-right" style="margin-top:24px;">Generar</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="divReportArea"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

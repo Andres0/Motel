@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Listado de Cuentas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#divReportArea").load('@Url.Action("RefreshListadoCuentas", "Reporte", new { area = "Reportes" })');
+    });
+
+</script>
+<div class="row">
+    <div class="col-md-12">
+        <h1 style="margin:15px;">Listado de Cuentas</h1>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="box box-default">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="divReportArea"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,7 +11,7 @@
 
         $('#Fecha').datepicker({
             autoclose: true,
-            dateFormat: 'dd/MM/yyyy'
+            format: 'dd/mm/yyyy',
         });
     });
 
@@ -182,7 +182,7 @@
         @Html.HiddenFor(h => h.Tipo)
         <div class="row">
             <div class="col-md-12">
-                <h1 style="margin:15px;">Editar @Model.Tipo.ToString()</h1>
+                <h1 style="margin:15px;">Editar @Model.Tipo.ToString() de Item</h1>
             </div>
         </div>
         <div class="col-md-12">

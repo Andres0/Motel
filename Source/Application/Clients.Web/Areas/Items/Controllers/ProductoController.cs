@@ -1,6 +1,7 @@
 ﻿using DS.Motel.Clients.Web.Areas.Items.Models.Producto;
 using DS.Motel.Clients.Web.Models;
 using DS.Motel.Data.Entities;
+using DS.Motel.Data.Inventarios;
 using DS.Motel.Data.Items;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -103,6 +104,19 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             }
             return toReturn;
         }
+
+        private List<Tuple<string, string>> GetErroresDelete(DeleteViewModel model)
+        {
+            List<Tuple<string, string>> toReturn = new List<Tuple<string, string>>();
+            InventarioProductoRepository inventarioProductoRepository = container.Resolve<InventarioProductoRepository>();
+
+            if (inventarioProductoRepository.Existe(model.ProductoId))
+            {
+                toReturn.Add(new Tuple<string, string>("ErrorMessage", "No se pudo borrar el producto porque tiene registros de inventario"));
+            }
+            return toReturn;
+        }
+
         #endregion
 
 
@@ -267,7 +281,11 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
             ProductoRepository productoRepository = container.Resolve<ProductoRepository>();
 
             ModelState.Clear();
-            //Se debe validar que no tenga relaciones con otras entidades caso contrario se mostrara un mensaje
+            List<Tuple<string, string>> errores = GetErroresDelete(model);
+            foreach (Tuple<string, string> item in errores)
+            {
+                ModelState.AddModelError(item.Item1, item.Item2);
+            }
 
             if (ModelState.IsValid)
             {
@@ -307,6 +325,7 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
                 Nombre = t.Nombre,
                 Descripcion = t.Descripcion,
                 Categoria = t.Categoria.Nombre,
+                Cantidad_Stock = t.Cantidad_Stock,
             }).OrderBy(y => y.Nombre).ToList();
 
             return Json(toReturn.ToDataSourceResult(request));
@@ -366,9 +385,9 @@ namespace DS.Motel.Clients.Web.Areas.Items.Controllers
 
             IQueryable<Item> query = Enumerable.Empty<Item>().AsQueryable();
             if (categoriaId == Guid.Empty)
-                query = itemRepository.ObtenerTodo();
+                query = itemRepository.ObtenerTodo().Where(w => w.EsVendible == true);
             else
-                query = itemRepository.ObtenerTodo().Where(w => subcategorias.Contains(w.ItemCategoriaId));
+                query = itemRepository.ObtenerTodo().Where(w => w.EsVendible == true && subcategorias.Contains(w.ItemCategoriaId));
 
             List<DropdownListViewModel> toReturn = query.Select(s => new DropdownListViewModel()
                 {

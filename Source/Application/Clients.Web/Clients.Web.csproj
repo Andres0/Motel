@@ -323,6 +323,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AuthorizeActionFilterAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -331,6 +332,7 @@
     <Compile Include="App_Start\RouteApiConfig.cs" />
     <Compile Include="Areas\AddressBook\AddressBookAreaRegistration.cs" />
     <Compile Include="Areas\AddressBook\Controllers\CargosController.cs" />
+    <Compile Include="Areas\AddressBook\Controllers\ClientesController.cs" />
     <Compile Include="Areas\AddressBook\Controllers\ParametrosController.cs" />
     <Compile Include="Areas\AddressBook\Controllers\PersonalController.cs" />
     <Compile Include="Areas\AddressBook\Controllers\SuitesController.cs" />
@@ -338,6 +340,7 @@
     <Compile Include="Areas\AddressBook\Models\Cargos\DeleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\EditViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Cargos\NavegadorViewModel.cs" />
+    <Compile Include="Areas\AddressBook\Models\Clientes\AddViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Parametros\AddViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Parametros\DeleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Models\Parametros\EditViewModel.cs" />
@@ -369,11 +372,16 @@
     <Compile Include="Areas\Finances\Models\Transaccion\NavegadorViewModel.cs" />
     <Compile Include="Areas\Inventario\Controllers\AlmacenController.cs" />
     <Compile Include="Areas\Inventario\Controllers\InventarioController.cs" />
+    <Compile Include="Areas\Inventario\Controllers\InventarioProductoController.cs" />
     <Compile Include="Areas\Inventario\InventarioAreaRegistration.cs" />
     <Compile Include="Areas\Inventario\Models\Almacen\AddViewModel.cs" />
     <Compile Include="Areas\Inventario\Models\Almacen\DeleteViewModel.cs" />
     <Compile Include="Areas\Inventario\Models\Almacen\EditViewModel.cs" />
     <Compile Include="Areas\Inventario\Models\Almacen\NavegadorViewModel.cs" />
+    <Compile Include="Areas\Inventario\Models\InventarioProducto\AddViewModel.cs" />
+    <Compile Include="Areas\Inventario\Models\InventarioProducto\DeleteViewModel.cs" />
+    <Compile Include="Areas\Inventario\Models\InventarioProducto\EditViewModel.cs" />
+    <Compile Include="Areas\Inventario\Models\InventarioProducto\NavegadorViewModel.cs" />
     <Compile Include="Areas\Inventario\Models\Inventario\AddViewModel.cs" />
     <Compile Include="Areas\Inventario\Models\Inventario\DeleteViewModel.cs" />
     <Compile Include="Areas\Inventario\Models\Inventario\EditViewModel.cs" />
@@ -382,11 +390,15 @@
     <Compile Include="Areas\Items\Controllers\ItemController.cs" />
     <Compile Include="Areas\Items\Controllers\ProductoController.cs" />
     <Compile Include="Areas\Items\Controllers\TarjetaDescuentoController.cs" />
+    <Compile Include="Areas\Items\Controllers\ConsumoController.cs" />
     <Compile Include="Areas\Items\ItemsAreaRegistration.cs" />
     <Compile Include="Areas\Items\Models\Categorias\AddViewModel.cs" />
     <Compile Include="Areas\Items\Models\Categorias\DeleteViewModel.cs" />
     <Compile Include="Areas\Items\Models\Categorias\EditViewModel.cs" />
     <Compile Include="Areas\Items\Models\Categorias\NavegadorViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Consumo\AddViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Consumo\DeleteViewModel.cs" />
+    <Compile Include="Areas\Items\Models\Consumo\NavegadorViewModel.cs" />
     <Compile Include="Areas\Items\Models\Items\AddViewModel.cs" />
     <Compile Include="Areas\Items\Models\Items\DeleteViewModel.cs" />
     <Compile Include="Areas\Items\Models\Items\EditViewModel.cs" />
@@ -401,14 +413,48 @@
     <Compile Include="Areas\Items\Models\TarjetaDescuento\NavegadorViewModel.cs" />
     <Compile Include="Areas\Items\Models\TarjetaDescuento\SaleViewModel.cs" />
     <Compile Include="Areas\Reportes\Controllers\ReporteController.cs" />
+    <Compile Include="Areas\Reportes\Diseños\Items\RptItemKardexFisico.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Items\RptItemKardexFisico.Designer.cs">
+      <DependentUpon>RptItemKardexFisico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Items\RptItemsAcabados.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Items\RptItemsAcabados.Designer.cs">
+      <DependentUpon>RptItemsAcabados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Items\RptItemStock.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Items\RptItemStock.Designer.cs">
+      <DependentUpon>RptItemStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Items\RptTarjetaDescuentoListado.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Items\RptTarjetaDescuentoListado.Designer.cs">
+      <DependentUpon>RptTarjetaDescuentoListado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Transaccion\RptListadoCuentas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Transaccion\RptListadoCuentas.Designer.cs">
+      <DependentUpon>RptListadoCuentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Reportes\Diseños\Transaccion\RptListadoTransacciones.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Areas\Reportes\Diseños\Transaccion\RptListadoTransacciones.Designer.cs">
       <DependentUpon>RptListadoTransacciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Reportes\Diseños\Transaccion\RptListadoTransacciones_Q.cs" />
-    <Compile Include="Areas\Reportes\Models\Transaccion\ReportListadoTransacciones.cs" />
+    <Compile Include="Areas\Reportes\Diseños\Transaccion\RptListadoTransaccionesCaja.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Areas\Reportes\Diseños\Transaccion\RptListadoTransaccionesCaja.Designer.cs">
+      <DependentUpon>RptListadoTransaccionesCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Reportes\Models\Viewer\ReportViewModel.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\Security\Controllers\UserTypeController.cs" />
@@ -426,9 +472,11 @@
     <Compile Include="Models\DropDownListHierarchyViewModel.cs" />
     <Compile Include="Models\DropdownListViewModel.cs" />
     <Compile Include="Models\EnumActionResult.cs" />
+    <Compile Include="Models\Home\AnularViewModel.cs" />
     <Compile Include="Models\Home\IndexViewModel.cs" />
     <Compile Include="Models\Home\IngresarViewModel.cs" />
     <Compile Include="Models\Home\LoginViewModel.cs" />
+    <Compile Include="Models\Home\SuiteDetalleViewModel.cs" />
     <Compile Include="Models\SessionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -440,6 +488,26 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\background.jpg" />
+    <Content Include="Content\images\cabeza4.png" />
+    <Content Include="Content\images\especial\1.jpeg" />
+    <Content Include="Content\images\especial\2.jpeg" />
+    <Content Include="Content\images\especial\3.jpeg" />
+    <Content Include="Content\images\especial\4.jpeg" />
+    <Content Include="Content\images\gold\1.jpeg" />
+    <Content Include="Content\images\gold\2.jpeg" />
+    <Content Include="Content\images\gold\3.jpeg" />
+    <Content Include="Content\images\gold\4.jpeg" />
+    <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\images\Logo_big.jpg" />
+    <Content Include="Content\images\platinun\1.jpeg" />
+    <Content Include="Content\images\platinun\2.jpeg" />
+    <Content Include="Content\images\platinun\3.jpeg" />
+    <Content Include="Content\images\platinun\4.jpeg" />
+    <Content Include="Content\images\silver\1.jpeg" />
+    <Content Include="Content\images\silver\2.jpeg" />
+    <Content Include="Content\images\silver\3.jpeg" />
+    <Content Include="Content\images\silver\4.jpeg" />
     <Content Include="Content\images\ui-anim_basic_16x16.gif" />
     <Content Include="Content\kendo\2018.3.1017\Black\editor.png" />
     <Content Include="Content\kendo\2018.3.1017\Black\imagebrowser.png" />
@@ -7570,6 +7638,7 @@
     <Content Include="Content\Menu\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\Menu\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Content\Report\ReportStyle.xml" />
+    <Content Include="Content\responsiveslides.css" />
     <Content Include="Content\telerikReportViewer.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -8453,13 +8522,26 @@
     <Content Include="Areas\Reportes\Views\web.config" />
     <Content Include="Areas\Reportes\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Reportes\Views\Reporte\ListadoPersonal.cshtml" />
-    <Content Include="Areas\Reportes\Views\Reporte\ListadoTransacciones.cshtml" />
+    <Content Include="Areas\Reportes\Views\Reporte\ListadoTransaccionesBanco.cshtml" />
     <Content Include="Areas\Reportes\Views\Viewer\ReporteTemplate.cshtml" />
     <Content Include="Areas\Finances\Views\CajaChica\Index.cshtml" />
     <Content Include="Areas\Finances\Views\CajaChica\Add.cshtml" />
     <Content Include="Areas\Finances\Views\CajaChica\Edit.cshtml" />
     <Content Include="Areas\Finances\Views\CajaChica\Delete.cshtml" />
     <Content Include="Areas\Items\Views\TarjetaDescuento\Sale.cshtml" />
+    <Content Include="Areas\Inventario\Views\InventarioProducto\Index.cshtml" />
+    <Content Include="Areas\Inventario\Views\InventarioProducto\Add.cshtml" />
+    <Content Include="Areas\Inventario\Views\InventarioProducto\Delete.cshtml" />
+    <Content Include="Areas\Inventario\Views\InventarioProducto\Edit.cshtml" />
+    <Content Include="Areas\Reportes\Views\Reporte\ListadoCuentas.cshtml" />
+    <Content Include="Areas\Reportes\Views\Reporte\ListadoTransaccionesCaja.cshtml" />
+    <Content Include="Areas\Reportes\Views\Reporte\ItemsAcabados.cshtml" />
+    <Content Include="Areas\Reportes\Views\Reporte\ItemKardexFisico.cshtml" />
+    <Content Include="Areas\Reportes\Views\Reporte\ItemStock.cshtml" />
+    <Content Include="Areas\Reportes\Views\Reporte\ListadoTarjetas.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Clientes\Add.cshtml" />
+    <Content Include="Areas\Items\Views\Consumo\Add.cshtml" />
+    <Content Include="Areas\Items\Views\Consumo\Delete.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -10354,6 +10436,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\responsiveslides.min.js" />
     <Content Include="Scripts\telerikReportViewer-12.2.18.1017.js" />
     <Content Include="Scripts\telerikReportViewer-12.2.18.1017.min.js" />
     <Content Include="Scripts\telerikReportViewer.kendo-12.2.18.1017.min.js" />
@@ -10596,6 +10679,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Ingresar.cshtml" />
+    <Content Include="Views\Home\SuiteDetalle.cshtml" />
+    <Content Include="Views\Home\Anular.cshtml" />
+    <Content Include="Views\Shared\_LayoutPresentacion.cshtml" />
+    <Content Include="Views\Home\Presentacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -10603,8 +10690,8 @@
     <Folder Include="Areas\Finances\Views\Shared\" />
     <Folder Include="Areas\Inventario\Views\Shared\" />
     <Folder Include="Areas\Items\Views\Shared\" />
+    <Folder Include="Areas\Items\Views\Ventas\" />
     <Folder Include="Areas\Reportes\Diseños\Personal\" />
-    <Folder Include="Areas\Reportes\Models\Personal\" />
     <Folder Include="Areas\Reportes\Views\Shared\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
@@ -10647,8 +10734,26 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\Reportes\Diseños\Items\RptItemKardexFisico.resx">
+      <DependentUpon>RptItemKardexFisico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reportes\Diseños\Items\RptItemsAcabados.resx">
+      <DependentUpon>RptItemsAcabados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reportes\Diseños\Items\RptItemStock.resx">
+      <DependentUpon>RptItemStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reportes\Diseños\Items\RptTarjetaDescuentoListado.resx">
+      <DependentUpon>RptTarjetaDescuentoListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reportes\Diseños\Transaccion\RptListadoCuentas.resx">
+      <DependentUpon>RptListadoCuentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reportes\Diseños\Transaccion\RptListadoTransacciones.resx">
       <DependentUpon>RptListadoTransacciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reportes\Diseños\Transaccion\RptListadoTransaccionesCaja.resx">
+      <DependentUpon>RptListadoTransaccionesCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
@@ -10674,7 +10779,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51306</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51306/</IISUrl>
+          <IISUrl>http://localhost:51309/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

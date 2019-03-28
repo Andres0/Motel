@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="sdsListadoTransaccionesBanco.SelectCommand" xml:space="preserve">
+    <value>Select Format(Fecha_Transaccion, 'dd/MM/yyyy')  Fecha, Concepto Concepto, Deposito Deposito, Retiro Retiro, Saldo Saldo
+From Transaccion 
+Where CajaBancoId = @CuentaId and Fecha_Transaccion &gt;= @Start and Fecha_Transaccion &lt; @End
+Order by Fecha_Transaccion ASC</value>
+  </data>
   <metadata name="$this.SnapGridSize" type="Telerik.Reporting.Drawing.Unit, Telerik.Reporting, Version=12.2.18.1017, Culture=neutral, PublicKeyToken=a9d7983dfcc261be">
     <value>0.1cm</value>
   </metadata>

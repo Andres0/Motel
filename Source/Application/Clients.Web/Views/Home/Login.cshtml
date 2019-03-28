@@ -13,7 +13,7 @@
             <h1 class='text-white'>Happy Hour</h1>
             <div class="form-login">
                 <h4 class="mt-2 mb-4">Ingresar</h4>
-                
+
                 <div class="row">
                     <div class="form-group col-md-12 text-left">
                         @Html.TextBoxFor(m => m.Username, new { maxlength = "50", @class = "form-control", tabindex = "1", placeholder = "Usuario" })
@@ -22,7 +22,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12 text-left">
-                        @Html.TextBoxFor(m => m.Password, new { maxlength = "50", @class = "form-control", tabindex = "2", placeholder = "Contraseña" })
+                        @Html.PasswordFor(m => m.Password, new { maxlength = "50", @class = "form-control", tabindex = "2", placeholder = "Contraseña" })
                         @Html.ValidationMessageFor(m => m.Password)
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-12" >
+                    <div class="form-group col-md-12">
                         <div class="wrapper">
                             <span class="group-btn">
                                 <button type="submit" class="btn btn-primary btn-md mt-3" tabindex="4">login <i class="fa fa-sign-in"></i></button>
@@ -44,4 +44,7 @@
             </div>
         </div>
     }
+    <div class="login_footer">
+        © 2018 DrecoSoft. All rights reserved | Design by <a href="#">DrecoSoft</a>
+    </div>
 </div>

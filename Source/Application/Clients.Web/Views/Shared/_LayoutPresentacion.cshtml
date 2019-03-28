@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>HAPPY HOUR</title>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/responsiveslides.min.js"></script>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/responsiveslides.css" rel="stylesheet" >
+
+    <style>
+        .rslides {
+            position: relative;
+            list-style: none;
+            overflow: hidden;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+            .rslides li {
+                -webkit-backface-visibility: hidden;
+                position: absolute;
+                display: none;
+                width: 100%;
+                left: 0;
+                top: 0;
+            }
+
+                .rslides li:first-child {
+                    position: relative;
+                    display: block;
+                    float: left;
+                }
+
+            .rslides img {
+                display: block;
+                height: auto;
+                float: left;
+                width: 100%;
+                border: 0;
+            }
+
+        .numerohab {
+            position: absolute;
+            z-index: 25;
+            padding: 113% 0 0 72%;
+            color: #FFF;
+            font-size: 5em;
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+        }
+    </style>
+    <script>
+            $(document).ready(function() {
+                $("#resultadoBusqueda1").html('<p></p>');
+	            $("#resultadoBusqueda2").html('<p></p>');
+    	        $("#resultadoBusqueda3").html('<p></p>');
+				$("#resultadoBusqueda4").html('<p></p>');
+            });
+
+   //         var int = self.setInterval("buscar1()",3000);
+   //         var int = self.setInterval("buscar2()",3000);
+   //         var int = self.setInterval("buscar3()",3000);
+			//var int = self.setInterval("buscar4()",3000);
+
+
+    </script>
+
+
+    <!-------------------------- IMAGENES --------------------------------------------------------->
+
+    <script>
+            // You can also use "$(window).load(function() {"
+            $(function () {
+
+                // Slideshow 1
+                $("#slider1").responsiveSlides({
+                    speed: 800
+                });
+
+                // Slideshow 2
+                $("#slider2").responsiveSlides({
+                    speed: 1600
+                });
+
+                // Slideshow 3
+                $("#slider3").responsiveSlides({
+                    speed: 2400
+                });
+
+                // Slideshow 4
+                $("#slider4").responsiveSlides({
+                    speed: 2400
+                });
+            });
+
+    </script>
+
+</head>
+<body style=" background-image: url('../content/images/background.jpg')">
+
+    <table width="100%" style="margin-top:30px">
+        <tr>
+            <td align="center">
+                <img src="../Content/images/cabeza4.png">
+            </td>
+            <td align="right">
+                <img src="../Content/images/logo2.png" width="32%" style="z-index:15; margin-right:15% ">
+            </td>
+        </tr>
+    </table>
+
+    <div class="container" style="padding-top:30px; max-width:85%;">
+        <div class="row">
+            <div class="col-sm-3" style="padding:0px;">
+                <div id="resultadoBusqueda4" class="numerohab">0</div>
+
+                <ul id="slider1" class="rslides" style="padding:0px !important;">
+                    <li><img src="../Content/images/especial/1.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/especial/2.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/especial/3.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/especial/4.jpeg" class="img-responsive" /></li>
+
+                </ul>
+            </div>
+            <div class="col-sm-3" style="padding:0px;">
+                <div id="resultadoBusqueda2" class="numerohab">NINGUNA HABITACION DISPONIBLE</div>
+                <ul id="slider2" class="rslides" style="padding:0px !important;">
+                    <li><img src="../Content/images/platinun/1.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/platinun/2.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/platinun/3.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/platinun/4.jpeg" class="img-responsive" /></li>
+                </ul>
+            </div>
+            <div class="col-sm-3" style="padding:0px;">
+                <div id="resultadoBusqueda1" class="numerohab">NINGUNA HABITACION DISPONIBLE</div>
+
+                <ul id="slider3" class="rslides" style="padding:0px !important;">
+                    <li><img src="../Content/images/gold/1.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/gold/2.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/gold/3.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/gold/4.jpeg" class="img-responsive" /></li>
+                </ul>
+            </div>
+            <div class="col-sm-3" style="padding:0px;">
+                <div id="resultadoBusqueda3" class="numerohab">NINGUNA HABITACION DISPONIBLE</div>
+                <ul id="slider4" class="rslides" style="padding:0px !important;">
+                    <li><img src="../Content/images/silver/1.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/silver/2.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/silver/3.jpeg" class="img-responsive" /></li>
+                    <li><img src="../Content/images/silver/4.jpeg" class="img-responsive" /></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    <div style="clear:both"></div>
+</body>
+</html>

@@ -13,6 +13,7 @@ namespace DS.Motel.Data.Entities
         public Guid SuiteId { get; set; }
         public string Nombre { get; set; }
         public SuiteEstado Estado { get; set; }
+        public SuiteTipo Tipo { get; set; }
         public Guid ParametroId { get; set; }
         public virtual Parametros Parametros { get; set; }
 

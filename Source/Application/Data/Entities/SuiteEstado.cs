@@ -19,4 +19,13 @@ namespace DS.Motel.Data.Entities
         Deshabilitado = 9,
         Mantenimiento = 10
     }
+
+
+    public enum SuiteTipo
+    {
+        Especial = 1,
+        Platinum = 2,
+        Gold = 3,
+        Silver = 4,
+    }
 }

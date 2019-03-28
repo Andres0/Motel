@@ -14,6 +14,7 @@ namespace DS.Motel.Data.Entities
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public decimal Costo_venta { get; set; }
+        public decimal Cantidad_Stock { get; set; }
         public Guid ItemCategoriaId { get; set; }
         public virtual ItemCategoria Categoria { get; set; }
         public virtual List<ProductoDetalle> Detalle { get; set; }

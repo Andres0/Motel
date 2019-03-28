@@ -68,9 +68,35 @@
       </DescendantSelector>
     </Selectors>
   </StyleRule>
+
+
   
-  
-  
+  <StyleRule>
+    <Style VerticalAlign="Top" TextAlign="Right">
+      <BorderColor Default="Black" Bottom="Black" />
+      <Font Name="Arial" Size="12pt" Bold="True" />
+    </Style>
+    <Selectors>
+      <DescendantSelector>
+        <Selectors>
+          <StyleSelector Type="ReportItem" StyleName="TableHeaderPreviousRight" />
+        </Selectors>
+      </DescendantSelector>
+    </Selectors>
+  </StyleRule>
+  <StyleRule>
+    <Style VerticalAlign="Top" TextAlign="Right">
+      <BorderColor Default="Black" Bottom="Black" />
+      <Font Name="Arial" Size="10pt" />
+    </Style>
+    <Selectors>
+      <DescendantSelector>
+        <Selectors>
+          <StyleSelector Type="ReportItem" StyleName="TableHeaderPreviousRightValue" />
+        </Selectors>
+      </DescendantSelector>
+    </Selectors>
+  </StyleRule>
   <StyleRule>
     <Style VerticalAlign="Top">
       <BorderStyle Default="Solid" Top="None" Bottom="Solid" Left="None" Right="None" />

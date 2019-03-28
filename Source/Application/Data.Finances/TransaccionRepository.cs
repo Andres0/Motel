@@ -23,7 +23,7 @@ namespace DS.Motel.Data.Finances
         {
             CajaBanco cajaBanco = _context.CajaBanco.FirstOrDefault(f => f.CajaBancoId == transaccion.CajaBancoId);
 
-            Transaccion _transaccion = _context.Transaccion.Where(w => w.Cuenta.Tipo == cajaBanco.Tipo).OrderByDescending(o => o.Fecha_Transaccion).FirstOrDefault();
+            Transaccion _transaccion = _context.Transaccion.Where(w => w.CajaBancoId == cajaBanco.CajaBancoId).OrderByDescending(o => o.Fecha_Transaccion).FirstOrDefault();
             if (_transaccion == null)
                 transaccion.Saldo = transaccion.Deposito - transaccion.Retiro;
             else
@@ -37,11 +37,11 @@ namespace DS.Motel.Data.Finances
             Transaccion transaccionAActualizar = _context.Transaccion.SingleOrDefault(s => s.TransaccionId == transaccion.TransaccionId);
             DateTime fechaRegistro = transaccionAActualizar.Fecha_Transaccion;
 
-            Transaccion _anterior = _context.Transaccion.Where(w => w.Fecha_Transaccion < fechaRegistro && w.Cuenta.Tipo == transaccionAActualizar.Cuenta.Tipo)
+            Transaccion _anterior = _context.Transaccion.Where(w => w.Fecha_Transaccion < fechaRegistro && w.CajaBancoId == transaccion.CajaBancoId)
                 .OrderByDescending(o => o.Fecha_Transaccion).FirstOrDefault();
             decimal saldoAnterior = _anterior != null ? _anterior.Saldo : 0;
 
-            foreach (Transaccion _transaccion in _context.Transaccion.Where(w => w.Fecha_Transaccion > fechaRegistro && w.Cuenta.Tipo == transaccionAActualizar.Cuenta.Tipo)
+            foreach (Transaccion _transaccion in _context.Transaccion.Where(w => w.Fecha_Transaccion > fechaRegistro && w.CajaBancoId == transaccion.CajaBancoId)
                 .OrderBy(o => o.Fecha_Transaccion))
             {
                 _transaccion.Saldo = saldoAnterior + _transaccion.Deposito - _transaccion.Retiro;
@@ -70,11 +70,11 @@ namespace DS.Motel.Data.Finances
         {
             Transaccion transaccion = ObtenerPorId(transaccionId);
 
-            Transaccion _anterior = _context.Transaccion.Where(w => w.Fecha_Transaccion < transaccion.Fecha_Transaccion && w.Cuenta.Tipo == transaccion.Cuenta.Tipo)
+            Transaccion _anterior = _context.Transaccion.Where(w => w.Fecha_Transaccion < transaccion.Fecha_Transaccion && w.CajaBancoId == transaccion.CajaBancoId)
                 .OrderByDescending(o => o.Fecha_Transaccion).FirstOrDefault();
             decimal saldoAnterior = _anterior != null ? _anterior.Saldo : 0;
 
-            foreach (Transaccion _transaccion in _context.Transaccion.Where(w => w.Fecha_Transaccion > transaccion.Fecha_Transaccion && w.Cuenta.Tipo == transaccion.Cuenta.Tipo)
+            foreach (Transaccion _transaccion in _context.Transaccion.Where(w => w.Fecha_Transaccion > transaccion.Fecha_Transaccion && w.CajaBancoId == transaccion.CajaBancoId)
                 .OrderBy(o => o.Fecha_Transaccion))
             {
                 _transaccion.Saldo = saldoAnterior + _transaccion.Deposito - _transaccion.Retiro;
